@@ -19,7 +19,7 @@
 		
 		public function comments()
 		{
-		    return $this->hasMany('\Models\Package');
+		    return $this->hasMany('\Models\Comment');
 		}
 		
 	    // CHILD OF (user, state [many to one])

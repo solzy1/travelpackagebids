@@ -1,0 +1,116 @@
+.page-content {
+    padding: 0px;
+}
+nav.page-header {
+    padding-right: 50px !important;
+    padding-left: 50px !important;
+    background-color: #141424 !important;
+}
+.page-content-intro {
+    padding-right: 100px !important;
+    padding-left: 100px !important;
+    background-color: #141424 !important;
+}
+.intro-title {
+    /*font-size: 20px !important;*/
+    font-weight: bold !important;
+    width: inherit;
+    max-width: 700px !important;
+    word-wrap: break-word !important;
+}
+.intro-others {
+    font-size: 13px;
+}
+.main-body {
+    padding-right: 110px !important;
+    padding-left: 110px !important;
+}
+.package-details {
+    padding: 10px 12px 10px 12px !important;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.package-details:hover {
+    background-color: white !important;
+    box-shadow: 2px 2px 1px #ECF0F1;
+}
+.package-items {
+    padding: 0px;
+    color: grey;
+    font-size: 12px;
+    word-wrap: break-word;
+    height: 40px;
+    white-space: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.package-items span {
+    margin-right: 8px;
+}
+.package-items span i {
+    margin-right: 3px;
+}
+.package-details-container {
+    /*padding-left: 0px !important;*/
+    margin-bottom: 13px;
+}
+.package-details-container:hover {
+    /*background-color: white !important;*/
+    /*box-shadow: 3px 3px 1px #aaaaaa;*/
+}
+.place-bid {
+    background-color: inherit;
+    color: #03C6C1;
+    border-color: #03C6C1;
+}
+.place-bid:hover {
+    background-color: #03C6C1;
+    color: white;
+}
+.view-listing {
+    background-color: #3498DB;
+    color: white !important;
+}
+.view-listing:hover {
+    background-color: #2874A6;
+} 
+#create-a-package {
+    width: 100%;
+    height: 100%;
+}
+#create-a-package i {
+    font-size: 50px;
+}
+#create-a-package:hover {
+    color: #03C6C1 !important;
+    transition: width 2s;
+    transition-timing-function: ease-in;
+}
+.edit-package, .delete-package, .view-listing {
+    margin-bottom: 5px;
+}
+.package-description {
+    font-size: 15px;
+    height: 91px !important;
+    white-space: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.package-description a {
+    text-decoration: none;
+    color: inherit;
+}
+.package-header {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0px 0px 10px 0px;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+.page-header-item {
+    color: white !important;
+}
+.website-title {
+    color: white !important;
+}

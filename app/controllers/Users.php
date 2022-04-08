@@ -6,8 +6,8 @@
 	// CRUD (CREATE, READ, UPDATE, DELETE)
 	class Users{
 		// CREATE
-	    public static function create($email, $password, $userrole_id){
-	    	$created = User::firstOrCreate(['email' => $email, 'password' => $password, 'userrole_id' => $userrole_id]);
+	    public static function create($email, $userrole_id){
+	    	$created = User::firstOrCreate(['email' => $email, 'userrole_id' => $userrole_id]);
 
 	    	return $created;
 	    }

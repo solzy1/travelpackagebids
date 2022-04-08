@@ -15,11 +15,6 @@
 		    return $this->hasMany('\Models\Package');
 		}
 		
-		public function thecountry()
-		{
-		    return $this->hasOne('\Models\Country');
-		}
-		
 	    // CHILD TO (countries) 
 	    public function country()
 		{

@@ -19,6 +19,18 @@
 	        return $get;
 	    }
 
+	    public static function find_byreply($comment_id){
+	        $get = Reply::where('reply_id', $comment_id)->first();
+
+	        return $get;
+	    }
+
+	    public static function find_bycomment($comment_id){
+	        $get = Reply::where('comment_id', $comment_id)->get();
+
+	        return $get;
+	    }
+
 	    // UPDATE
 	    public static function update($id, $comment_id, $reply_id){
 	        $_update = Reply::find($id);

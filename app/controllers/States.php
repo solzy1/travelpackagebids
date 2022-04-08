@@ -26,7 +26,7 @@
 	    }
 
 	    public static function find_bystate($state){
-	        $found = State::where('name', 'like', $state)->first();
+	        $found = State::where('name', $state)->first();
 
 	        return $found;
 	    }

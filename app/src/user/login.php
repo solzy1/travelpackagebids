@@ -1,6 +1,6 @@
  <?php 
 	// start up eloquent
-	// require $_SERVER['DOCUMENT_ROOT'] . '/travelpackagebids/start.php';
+	// require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
 	require_once '_user.php';
 
 	use Controllers\Users; 
@@ -36,7 +36,7 @@
 						// assign session values
 					    $this->profile_access($user);
 
-						$this->gotopage('/travelpackagebids/user/profile.php');
+						$this->gotopage('https://travelpackagebids.com/user/profile.php');
 					}
 					else{
 						$this->reportfailure('Wrong Email or Password. Please try again.');

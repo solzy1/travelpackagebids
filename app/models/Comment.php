@@ -15,7 +15,7 @@
 		}
 		
 	    // CHILD TO (user [one to many]) 
-	    public function users()
+	    public function user()
 		{
 		    return $this->belongsTo('\Models\User');
 		}

@@ -19,6 +19,30 @@
 	        return $get;
 	    }
 
+		public static function index_orderbydate($order){
+	        $get = Package::orderBy('created_at', $order)->get();
+
+	        return $get;
+	    }
+
+	    public static function find($package_id){
+	        $get = Package::find($package_id);
+
+	        return $get;
+	    }
+
+	    public static function find_byuser($user_id){
+	        $get = Package::where('user_id', $user_id)->get();
+
+	        return $get;
+	    }
+
+	    public static function find_bypackage($package_id, $state_id){
+	        $get = Package::where('package_id', $package_id)->where('state_id', $state_id)->first();
+
+	        return $get;
+	    }
+
 	    // UPDATE
 	    public static function update($id, $user_id, $state_id, $people, $from_date, $to_date, $description){
 	        $_update = Package::find($id);

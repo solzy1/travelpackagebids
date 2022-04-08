@@ -19,7 +19,7 @@
 		// SET & GET FUNCTIONS
 		function set_country(){
 			// validate userinput
-			$this->validate('country', $this->country);
+			$this->validate('string', $this->country);
 		}
 
 		function set_state(){

@@ -19,6 +19,18 @@
 	        return $get;
 	    }
 
+	    public static function find_bypackage($package_id){
+	        $get = Bid::where('package_id', $package_id)->get();
+
+	        return $get;
+	    }
+
+	    public static function find_byuser($package_id, $user_id){
+	        $get = Bid::where('bidder_id', $user_id)->where('package_id', $package_id)->first();
+
+	        return $get;
+	    }
+
 	    // UPDATE
 	    public static function update($id, $package_id, $bidder_id, $offer){
 	        $_update = Bid::find($id);

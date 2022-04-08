@@ -19,6 +19,18 @@
 	        return $get;
 	    }
 
+	    public static function find($comment_id){
+	        $get = Comment::find($comment_id);
+
+	        return $get;
+	    }
+
+	    public static function find_bypackage($package_id){
+	        $get = Comment::where('package_id', $package_id)->get();
+
+	        return $get;
+	    }
+
 	    // UPDATE
 	    public static function update($id, $package_id, $user_id, $comment){
 	        $_update = Comment::find($id);

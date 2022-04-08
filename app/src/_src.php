@@ -19,7 +19,7 @@
 		// set response, to be shown to the user after page failure
 		setresponse($statusmessage);
 
-		gotopage('/travelpackagebids/user/'.$page.'.php');
+		gotopage('https://travelpackagebids.com/user/'.$page.'.php');
 	}
 
 	function setresponse($response){
@@ -45,5 +45,29 @@
 	function unset_responsevalues(){
 		unset($_SESSION['travelpackagebids.com']['status']);
         unset($_SESSION['travelpackagebids.com']['status_issuccess']);
+	}
+
+	function get_userid(){
+		return isset($_SESSION['travelpackagebids.com']['user_id']) ? 
+			$_SESSION['travelpackagebids.com']['user_id'] : 0;
+	}
+
+	function format_date($format, $date){
+		return date($format, strtotime($date));
+	}
+
+	function is_userloggedin(){
+		$user_id = get_userid();
+		$user_loggedin = $user_id > 0 && loggedin() ? 'yes' : 'no'; // check if userid is set and loggedin is set to true
+
+		return $user_loggedin;
+	}
+
+	// check if the session value loggedin, is set to true
+	function loggedin(){
+		if(isset($_SESSION['travelpackagebids.com']['loggedin']))
+			return $_SESSION['travelpackagebids.com']['loggedin'];
+
+		return false;
 	}
 ?>

@@ -7,7 +7,7 @@
 	// use User\User;
 
 	// pass the validated values to the receiving class (check if they're correct)
-	if($_GET['form-type']=="Forgot Password")
+	if($_GET['form-type']!="Sign In")
 		$_GET['pass'] = $_GET['form-type'].'-allow';
 
 	$user = new User($_GET['email'], $_GET['pass']);

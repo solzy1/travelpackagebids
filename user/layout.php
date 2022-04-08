@@ -1,6 +1,6 @@
 <?php
 	// include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT']."/travelpackagebids/app/src/user/_user.php";
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/user/_user.php';
 
 	$user = new _User($title);
 
@@ -42,17 +42,21 @@
 					<img src="../images/img-01.png" alt="IMG">
 				</div>
 
-				<form action="/travelpackagebids/app/src/user/receive.php" class="login100-form validate-form">
-					<span class="login100-form-title">
+				<form action="https://travelpackagebids.com/app/src/user/receive.php" class="login100-form validate-form">
+					<p class="login100-form-title">
+						<span style="padding-bottom: 20px;">Travelpackagebids</span>
+						<br><br>
+						<small style="font-weight: lighter !important;">
 						<?php 
 							if($title=="Sign In")
-								echo 'User Login';
+								echo 'Login';
 							else if($title=="Sign Up")
-								echo 'User Sign up';
+								echo 'Sign up';
 							else
 								echo 'Forgot Password';
 						?>
-					</span>
+						</small>
+					</p>
 					<!-- display status -->
 					<p style="color: red;text-align: center;"><?php echo $status; ?></p>
 
@@ -65,8 +69,8 @@
 					</div>
 					
 					<?php 
-						// only show the password input, if title is not  forgot password
-						if($title!="Forgot Password"){
+						// only show the password input, if title is 'sign in'
+						if($title=="Sign In"){
 					?>
 							<div class="wrap-input100 validate-input" data-validate = "Password is required">
 								<input class="input100" type="password" name="pass" placeholder="Password">
@@ -103,7 +107,7 @@
 						<span class="txt1">
 							Forgot
 						</span>
-						<a class="txt2" href="/travelpackagebids/user/forgot-password.php">
+						<a class="txt2" href="https://travelpackagebids.com/user/forgot-password.php">
 							Email / Password?
 						</a>
 					</div>

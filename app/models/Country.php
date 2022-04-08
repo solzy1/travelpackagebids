@@ -13,5 +13,10 @@
 		{
 		    return $this->hasMany('\Models\State');
 		}
+
+		public function profiles()
+		{
+		    return $this->hasMany('\Models\Profile');
+		}
 	}
 ?>

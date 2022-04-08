@@ -1,9 +1,9 @@
 <?php
 	// namespace Admin;
 	
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/travelpackagebids/start.php'; // start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/travelpackagebids/app/src/validation/validation.php'; // include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/travelpackagebids/app/src/_src.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php'; // start up eloquent
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php'; // include the validation file that holds the class Validation
 
 	// use User\Validation; // call the validation class
 
@@ -19,6 +19,8 @@
 			// validate userinput
 			$validation = new Validation($inputtype, $value);
 			$value = $validation->validateinput();
+
+			return $value;
 		}
 
 		// to be removed (to _src.php)
@@ -58,10 +60,10 @@
 			$useraction = [];
 
 			if($page_title=="Sign In"){
-				$useraction = array('question' => '','action' => 'Create your Account', 'link' => '/travelpackagebids/user/sign-up.php');
+				$useraction = array('question' => '','action' => 'Create your Account', 'link' => 'https://travelpackagebids.com/user/sign-up.php');
 			}
 			else{
-				$useraction = array('question' => 'Already have an account? ','action' => 'Sign In', 'link' => '/travelpackagebids/user/sign-in.php');
+				$useraction = array('question' => 'Already have an account? ','action' => 'Sign In', 'link' => 'https://travelpackagebids.com/user/sign-in.php');
 			}
 
 			echo '<small>'.$useraction['question'].'</small>
@@ -75,6 +77,12 @@
         function profile_access($user){
             $_SESSION['travelpackagebids.com']['loggedin'] = true;
             $_SESSION['travelpackagebids.com']['user_id'] = $user->id;
+        }
+
+        public function logout(){
+        	unset($_SESSION['travelpackagebids.com']);
+
+        	echo 'success';
         }
 	}
 ?>

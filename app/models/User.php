@@ -32,6 +32,11 @@
 		    return $this->hasMany('\Models\Package');
 		}
 		
+		public function profile()
+		{
+		    return $this->hasOne('\Models\Profile');
+		}
+
 	    // CHILD OF (userrole [many to one])
 	    public function userrole()
 		{

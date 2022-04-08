@@ -1,8 +1,8 @@
 <?php
 	
 	require_once '_package.php'; // start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/travelpackagebids/app/src/validation/validation.php'; // include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/travelpackagebids/app/src/_src.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php'; // include the validation file that holds the class Validation
 
 	use Controllers\Packages; 
 
@@ -14,7 +14,7 @@
 			$this->package = $package;
 
 			start_session();
-			$this->user_id = $this->get_userid(); // get logged in user_id
+			$this->user_id = get_userid(); // get logged in user_id
 		}
 
 		public function create(){
@@ -58,11 +58,7 @@
 			}
 			
 			// GO TO profile PAGE
-			gotopage('/travelpackagebids/user/profile.php');
-		}
-
-		private function get_userid(){
-			return isset($_SESSION['travelpackagebids.com']['user_id']) ? $_SESSION['travelpackagebids.com']['user_id'] : 0;
+			gotopage('https://travelpackagebids.com/user/profile.php');
 		}
 	}
 ?>

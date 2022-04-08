@@ -1,6 +1,6 @@
 <?php
-    require $_SERVER['DOCUMENT_ROOT'] . '/travelpackagebids/config.php';
-    require $_SERVER['DOCUMENT_ROOT'] . '/travelpackagebids/vendor/autoload.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/config.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
 
 	use Illuminate\Database\Capsule\Manager as Capsule;
      

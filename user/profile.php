@@ -1,7 +1,13 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/travelpackagebids/app/src/profile/_profile.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/_profile.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/package/list.php';
 
     $title = "TravelPackaeBids | Home";
+
+    // prevent access to profile page, without logging in
+    $user_id = get_userid();
+    if($user_id<=0)
+        gotopage('https://travelpackagebids.com');
 
     $profile = new _Profile();
     $response_msg = '';
@@ -28,74 +34,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <!--<link rel="stylesheet" href="css/layout.css">-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="../css/profile.css">
         
         <style>
             body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
-            .page-content {
-                padding: 0px;
-            }
-            nav.page-header {
-                padding-right: 50px !important;
-                padding-left: 50px !important;
-            }
-            .page-content-intro {
-                padding-right: 100px !important;
-                padding-left: 100px !important;
-                background-color: #141424 !important;
-            }
-            .intro-title {
-                /*font-size: 20px !important;*/
-                font-weight: bold !important;
-                width: inherit;
-                max-width: 700px !important;
-                word-wrap: break-word !important;
-            }
-            .intro-others {
-                font-size: 13px;
-            }
-            .main-body {
-                padding-right: 110px !important;
-                padding-left: 110px !important;
-            }
-            .package-details {
-                padding: 10px 12px 10px 12px !important;
-                cursor: pointer;
-                border-radius: 3px;
-            }
-            .package-details:hover {
-                background-color: white !important;
-                box-shadow: 2px 2px 1px #ECF0F1;
-            }
-            .package-items span {
-                margin-right: 8px;
-            }
-            .package-items span i {
-                margin-right: 3px;
-            }
-            .package-details-container {
-                padding-left: 0px !important;
-                margin-bottom: 13px;
-            }
-            .package-details-container:hover {
-                /*background-color: white !important;*/
-                /*box-shadow: 3px 3px 1px #aaaaaa;*/
-            }
-            .place-bid {
-                background-color: inherit;
-                color: #03C6C1;
-                border-color: #03C6C1;
-            }
-            .place-bid:hover {
-                background-color: #03C6C1;
-                color: white;
-            }
-            .view-listing {
-                background-color: #3498DB;
-                color: white !important;
-            }
-            .view-listing:hover {
-                background-color: #2874A6;
-            }
         </style>
     </head>
     <body>
@@ -103,33 +45,38 @@
         <div class="container-fluid page-content">
             
             <!-- header -->
-            <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light page-header" style="background-color: #141424 !important;">
-                <a class="navbar-brand" href="#" style="color: white !important">TravelPackageBids</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation" style="background-color: white !important">
-                    <span class="navbar-toggler-icon"></span>
+            <nav class="navbar navbar-expand-md sticky-top navbar-light bg-light page-header">
+              <div class="container-fluid">
+                <a class="navbar-brand website-title" href="https://travelpackagebids.com">TravelPackageBids</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-header" aria-controls="nav-header" aria-expanded="false" aria-label="Toggle navigation" style="background-color: white !important">
+                  <span class="navbar-toggler-icon"></span>
                 </button>
-                
-                <div class="collapse navbar-collapse" id="navbarToggler">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0 navbar-right">
-                        <!--<li class="nav-item active">-->
-                        <!--    <a class="nav-link" href="https://travelpackagebids.com">TravelPackageBids <span class="sr-only">(current)</span></a>-->
-                        <!--</li>-->
+                <div class="collapse navbar-collapse" id="nav-header">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-right">
+                        <li class="nav-item">
+                          <a class="nav-link active page-header-item" aria-current="page" href="https://travelpackagebids.com">Home</a>
+                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#profile" id="userdropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;font-size: 20px;">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;font-size: 20px;">
                                 <i class="fa-solid fa-circle-user"></i>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="userdropdown">
-                                <a class="dropdown-item" href="https://travelpackagebids.com/user/profile.php">
-                                    <i class="fa-solid fa-user"></i> Profile
-                                </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>
+                                    <a class="dropdown-item" href="https://travelpackagebids.com/user/profile.php">
+                                        <i class="fa-solid fa-user"></i> Profile
+                                    </a>
+                                </li>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="https://travelpackagebids.com/user/log-out.php">
-                                    <i class="fa-solid fa-right-from-bracket"></i> Log Out
-                                </a>
-                            </div>
+                                <li>
+                                    <a class="dropdown-item" id="logout" href="#log-out">
+                                        <i class="fa-solid fa-right-from-bracket"></i> Log Out
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
+              </div>
             </nav>
 
             <div class="status-report text-center" style="color: white;background-color: <?php echo $success ? 'green' : 'red'; ?>;opacity: <?php echo empty($response_msg) ? '0' : '1'; ?>;padding: 5px;">
@@ -156,14 +103,28 @@
                 </div>
                 <!-- header (end) -->
                 
-                <!-- body -->
-                
-                <div class="main-body-content">
-                    <!-- content -->
-                    <button data-bs-toggle="modal" data-bs-target="#create-package" class="btn bg-light text-center" style="width: 150px;height: 150px;">
-                        <i class="fa-solid fa-plus" style="font-size: 50px"></i>
-                    </button>
-                    <!-- content (end) -->
+                <!-- body -->   
+                <div class="main-body-content container-fluid" style="padding: 0;">
+
+                    <!-- main body -->
+                    <div class="row">
+
+                        <!-- content -->
+                        <div class="col-sm-6 col-md-4 col-lg-4" style="margin-bottom: 10px;min-height: 200px">
+                            <button data-bs-toggle="modal" data-bs-target="#create-package" id="create-a-package" class="btn bg-light text-center">
+                                <i class="fa-solid fa-plus"></i>
+                            </button>
+                        </div>
+                        <!-- content (end) -->
+
+                        <?php 
+                            $list = new Package_List();
+
+                            $list->show_userpackages(); 
+                        ?>
+
+                    </div>
+                    <!-- main body (end) -->
 
                     <!-- pagination -->
                     <nav aria-label="Page navigation" style="margin-top: 20px;">
@@ -211,7 +172,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form action="/travelpackagebids/app/src/profile/package/receivepackage.php" method="POST" target="_blank" autocomplete="off">
+                        <form action="https://travelpackagebids.com/app/src/profile/package/receivepackage.php" method="POST" target="_blank" autocomplete="off">
                             <!-- country -->
                             <div class="mb-3">
                                 <label for="package-country" class="form-label fw-bold">Country</label>
@@ -254,6 +215,9 @@
                                 <textarea class="form-control" id="package-description" rows="3" style="resize: none;" name="description"></textarea>
                             </div>
 
+                            <!-- if user wants to edit -->
+                            <input type="hidden" name="package_id" id="package-id">
+
                             <div class="submit-package" style="margin-top: 20px;float: right;">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
                                 <button type="submit" class="btn btn-primary">Submit <i class="fa-solid fa-arrow-right"></i></button>
@@ -269,14 +233,16 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         
         <!-- Latest compiled JavaScript -->
-        <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
         <script src="https://kit.fontawesome.com/6030f7206a.js" crossorigin="anonymous"></script>
         
+        <!-- my scripts -->
         <script src="../js/countries.js"></script>
-        <script src="../js/layout.js"></script>
+        <script src="../js/packages.js"></script>
+        <script src="../js/confirm-email.js"></script>
+        <script src="../js/user.js"></script>
+        <script src="../js/profile.js"></script>
     </body>
 
 </html>

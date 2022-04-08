@@ -1,10 +1,7 @@
 <?php 
-	// namespace Admin;
-	ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
-	
 	// start up eloquent
 	// require '_user.php';
-	require_once $_SERVER['DOCUMENT_ROOT'] . '/travelpackagebids/app/src/email/_email.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/email/_email.php';
 
 	use Controllers\Users;
 	use Controllers\Userroles;
@@ -31,7 +28,7 @@
                 
                 if(isset($finduser_role->id)){
     				$userrole_id = $finduser_role->id;
-    				$user = Users::create($email, $pass, $userrole_id);
+    				$user = Users::create($email, $userrole_id);
     
     				// check if user was successfully created
     				if(isset($user->id)){
@@ -43,7 +40,7 @@
         					$_SESSION['travelpackagebids.com']['new_email'] = $email;
         					
         					$this->sendemail_confirmation($user->email, $key);
-        					$this->gotopage("/travelpackagebids/user/confirm-email.php");
+        					$this->gotopage("https://travelpackagebids.com/user/confirm-email.php");
     				    }
     				}
     				else
