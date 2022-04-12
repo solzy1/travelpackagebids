@@ -1,7 +1,6 @@
 <?php
 	
 	require_once '_package.php'; // start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php'; // include the validation file that holds the class Validation
 	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php'; // include the validation file that holds the class Validation
 
 	use Controllers\Packages; 
@@ -20,6 +19,7 @@
 		public function create(){
 			$package = $this->package;
 			$country = $package->get_country();
+			$phone_code = $package->get_phone_code();
 			$state = $package->get_state();
 			$people = $package->get_people();
 			$from_date = $package->get_from_date();
@@ -32,10 +32,10 @@
 
 				// if user is logged in
 				if($user_id > 0){
-					$state_id = $this->create_state($state, $country);
+					$state_id = $this->create_state($state, $country, $phone_code);
 
 					// configure date, switch dates
-					$date = $this->configure_date(strtotime($from_date), strtotime($to_date), 'Y-m-d h:i:s');
+					$date = $this->configure_date(strtotime($from_date), strtotime($to_date), 'Y-m-d');
 					$from_date = $date['from_date'];
 					$to_date = $date['to_date'];
 

@@ -14,7 +14,7 @@ class Comments{
             '<p>Kindly <a href="/user/sign-up.php" class="btn-link" '+
             'style="color: #03C6C1;" target="_blank">Sign up</a> now, to post your comment.</p>';
 
-    	$('#sign-up-first').html(sign_up_first);
+    	$signupfirst = $('#sign-up-first').html(sign_up_first);
 	}
 
 	prevent_reply(_this){
@@ -75,7 +75,7 @@ class Comments{
 	post_comment(comment, comment_id, package_id){
 		let user_comment = {comment: comment, package_id: package_id, comment_id: comment_id};
 
-        $.post("/app/src/comments/receive.php", user_comment, function(result){
+        $.post("https://travelpackagebids.com/app/src/comments/receive.php", user_comment, function(result){
         	// console.log($.trim(result));
         	// const _comments = new Comments();
 
@@ -100,7 +100,7 @@ class Comments{
 	load_comments(package_id){
 		let load = {package_id: package_id, allow: 'yes'};
 
-        $.post("/app/src/package/get_comments.php", load, function(result){
+        $.post("https://travelpackagebids.com/app/src/package/get_comments.php", load, function(result){
             // const _comments = new Comments();
 
             $('.loading-comments').html(''); // hide loading

@@ -14,6 +14,9 @@
         <title><?php echo $title; ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv='cache-control' content='no-cache'>
+        <meta http-equiv='expires' content='0'>
+        <meta http-equiv='pragma' content='no-cache'>
         <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
         
         <!-- Latest compiled and minified CSS -->
@@ -32,63 +35,60 @@
         <!-- page content -->
         <div class="container-fluid page-content">
             
-            <!-- header -->
-            <nav class="navbar navbar-expand-md sticky-top navbar-light bg-light page-header">
-              <div class="container-fluid">
-                <a class="navbar-brand website-title" href="https://travelpackagebids.com">TravelPackageBids</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-header" aria-controls="nav-header" aria-expanded="false" aria-label="Toggle navigation" style="background-color: white !important">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="nav-header">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-right">
-                        <li class="nav-item">
-                          <a class="nav-link active page-header-item" aria-current="page" href="https://travelpackagebids.com">Home</a>
+            <!-- main-header -->
+            <div class="container-fluid sticky-top page-header">
+                <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="margin-bottom: 0px !important;">
+                  <a href="https://travelpackagebids.com" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-4">Travelpackagebids</span>
+                  </a>
+
+                  <ul class="nav nav-pills justify-content-center">
+                    <li class="nav-item"><a href="https://travelpackagebids.com" class="nav-link text-white">Home</a></li>
+                    <?php 
+                        if($user_id <= 0) {
+                    ?>
+                        <li class="nav-item"><a href="https://travelpackagebids.com/user/sign-in.php" class="nav-link text-white user-login">Log In</a></li>
+                        <li class="nav-item"><a href="https://travelpackagebids.com/user/sign-up.php" class="nav-link text-white user-signup">Sign Up</a></li>
+                    <?php
+                        } 
+                        else {
+                    ?>
+                        <li class="nav-item dropdown" style="padding-top: 9px">
+                          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+
+                            <!-- <img src="https://github.com/mdo.png" alt=""  class="rounded-circle me-2"> -->
+                            <strong>
+                                <i class="fas fa-circle-user" style="font-size: 20px;"></i> 
+                                <?php 
+                                    $profile = $packages->get_profile();
+                                    $name = $profile->name;
+
+                                    echo $name;
+                                ?>
+                            </strong>
+                          </a>
+                          <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
+                            <li><a class="dropdown-item" href="https://travelpackagebids.com/user/profile.php?user=member"><i class="fa-solid fa-user"></i> My profile</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item btn" href="https://travelpackagebids.com/user/profile.php"><i class="fa-solid fa-box"></i> My packages</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item btn logout" role="button"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a></li>
+                          </ul>
                         </li>
-                        <?php 
-                            if($user_id <= 0) { 
-                        ?>
-                                <li class="nav-item">
-                                  <a class="nav-link page-header-item" href="https://travelpackagebids.com/user/sign-in.php">Log In</a>
-                                </li>
-                                <li class="nav-item">
-                                  <a class="nav-link page-header-item" href="https://travelpackagebids.com/user/sign-up.php">Sign Up</a>
-                                </li>
-                        <?php 
-                            }
-                            else {
-                        ?>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;font-size: 20px;">
-                                        <i class="fa-solid fa-circle-user"></i>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                        <li>
-                                            <a class="dropdown-item" href="https://travelpackagebids.com/user/profile.php">
-                                                <i class="fa-solid fa-user"></i> Profile
-                                            </a>
-                                        </li>
-                                        <div class="dropdown-divider"></div>
-                                        <li>
-                                            <a class="dropdown-item" id="logout" href="#log-out">
-                                                <i class="fa-solid fa-right-from-bracket"></i> Log Out
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                        <?php 
-                            }
-                        ?>
-                    </ul>
-                </div>
-              </div>
-            </nav>
-            
+                    <?php 
+                        } 
+                    ?>
+                  </ul>
+                </header>
+            </div>
+            <!-- end main-header -->
+
             <?php 
             	if($title=="TravelPackaeBids | Home"){
             ?>
 
 		            <!-- jumbotron -->
-		            <div class="jumbotron jumbotron-fluid bg-light page-content-intro">
+		            <div class="jumbotron jumbotron-fluid bg-light page-content-intro" style="padding-top: 20px;">
 		                <div class="container-fluid" style="color: white">
 		                    <h1 class="display-4 intro-title">
 		                        #1 marketplace to buy and sell <span style="color: #03C6C1">travel packages</span>
@@ -127,7 +127,7 @@
         
         <!-- make offer (modal) -->
         <div class="modal fade" id="create-package-bid" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title text-center fw-bold" id="staticBackdropLabel"><span class="bid-action">Make an</span> Offer</h5>
@@ -135,36 +135,50 @@
                     </div>
 
                     <div class="modal-body" style="margin-top: 0;padding-top: 0">
-                        <div class="create-bid-status text-center" style="color: white;padding: 5px;opacity: 0">
+                        <!-- create bid section-->
+                        <div class="create-bid-section">
+                            <div class="create-bid-status text-center" style="color: white;padding: 5px;opacity: 0">
+                                
+                            </div>
+                            
+                            <!-- action="https://travelpackagebids.com/app/src/bids/receive.php" method="POST" autocomplete="off" -->
+                            <div id="bid-form" style="margin-top: 15px;">
+                                <!-- make an offer -->
+                                <!-- <label for="package-bid" class="form-label fw-bold">Make an Offer</label> -->
+    
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control" id="bid-offer" name="offer" placeholder="Make Offer Here" required>
+                                </div>
+    
+                                <!-- description -->
+                                <!-- <div class="mb-3">
+                                    <label for="package-description" class="form-label fw-bold">Description</label>
+                                    <textarea class="form-control" id="package-description" rows="3" style="resize: none;" name="description"></textarea>
+                                </div> -->
+    
+                                <!-- if user wants to edit -->
+                                <input type="hidden" name="package_id" id="package-id">
+    
+                                <div class="submit-package" style="margin-top: 20px;float: right;">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                    <button type="submit" class="btn btn-primary" id="bid-submit" style="background-color: #03C6C1;border-color: #03C6C1;">Send Offer <i class="fa-solid fa-send"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end create bid section-->
+                    </div>
+
+                    <!-- list of bids -->
+                    <div class="border-top" style="padding: 15px">
+                        <!-- bids -->
+                        <div id="package-bids" class="container-fluid">
                             
                         </div>
-                        
-                        <!-- action="https://travelpackagebids.com/app/src/bids/receive.php" method="POST" autocomplete="off" -->
-                        <div id="bid-form" style="margin-top: 15px">
-                            <!-- make an offer -->
-                            <!-- <label for="package-bid" class="form-label fw-bold">Make an Offer</label> -->
-
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">$</span>
-                                <input type="number" class="form-control" id="bid-offer" name="offer" placeholder="Make Offer Here" required>
-                            </div>
-
-                            <!-- description -->
-                            <!-- <div class="mb-3">
-                                <label for="package-description" class="form-label fw-bold">Description</label>
-                                <textarea class="form-control" id="package-description" rows="3" style="resize: none;" name="description"></textarea>
-                            </div> -->
-
-                            <!-- if user wants to edit -->
-                            <input type="hidden" name="package_id" id="package-id">
-
-                            <div class="submit-package" style="margin-top: 20px;float: right;">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
-                                <button type="submit" class="btn btn-primary" id="bid-submit" style="background-color: #03C6C1;border-color: #03C6C1;">     Send Offer <i class="fa-solid fa-send"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <!-- END bids -->
                     </div>
+                    <!-- END list of bids -->
                 </div>
             </div>
         </div>

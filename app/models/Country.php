@@ -6,7 +6,7 @@
 	class Country extends Model {
 	    protected $table = 'countries';
 
-	    protected $fillable = ['name'];
+	    protected $fillable = ['name', 'phone_code'];
 
 	    // PARENT TO (states) 
 	    public function states()

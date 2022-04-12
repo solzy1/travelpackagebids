@@ -20,9 +20,18 @@
 			  		$filteredvalue = filter_var($this->value, FILTER_VALIDATE_EMAIL);
 			  	else if($this->type=="int")
 			  		$filteredvalue = filter_var($this->value,  FILTER_VALIDATE_INT);
+			  	else if($this->type=="phone")
+			  		$filteredvalue = $this->validate_phone($this->value);
 			}
 
 			return $this->type=="string" ? addslashes($filteredvalue) : $filteredvalue;
+		}
+
+		function validate_phone($phone){
+			if(preg_match('/^[0-9]+$/', $phone))
+				return $phone;
+
+			return false;
 		}
 	}
 ?>

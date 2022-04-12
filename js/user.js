@@ -4,7 +4,7 @@ class User{
 	}
 
 	logout(){
-		$('#logout').click(function(){
+		$('.logout').click(function(){
 			const _user = new User();
 
 			_user.send_request();
@@ -14,7 +14,7 @@ class User{
 	send_request(){
         let bid = {logout: 'yes'};
 
-        $.post("/app/src/user/logout.php", bid, function(result){
+        $.post("https://travelpackagebids.com/app/src/user/logout.php", bid, function(result){
             if($.trim(result)=='success')
             	window.location.replace("");
         });

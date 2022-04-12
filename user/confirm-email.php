@@ -41,9 +41,6 @@
                       <a class="nav-link active page-header-item" aria-current="page" href="https://travelpackagebids.com">Home</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;font-size: 20px;">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </a>
                         <li class="nav-item">
                             <a class="nav-link page-header-item" href="https://travelpackagebids.com/user/sign-in.php">Log In</a>
                         </li>

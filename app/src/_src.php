@@ -70,4 +70,59 @@
 
 		return false;
 	}
+	
+	function configure_page($page, $noof_pages){
+		if($page=='first' || empty($page))
+			$page = 1;
+		else if($page=='last')
+			$page = $noof_pages;
+
+		return $page;
+	}
+
+	function noof_pages($items, $noof_items){
+		$noof_pages = ceil(count($items)/$noof_items); // no of pages
+
+		return $noof_pages;
+	}
+	
+	function pagination($page, $items, $base_url, $noof_items){
+		$noof_pages = noof_pages($items, $noof_items); // no of pages
+		$last_page = $noof_pages;
+
+		$disable_firstpage = $page==1 || $page=='first' || empty($page) ? 'disabled' : '';
+		$disable_lastpage = $page==$last_page || $page=='last' || $noof_pages==1 ? 'disabled' : '';
+	?>
+        <!-- pagination -->
+        <nav aria-label="Page navigation" style="margin-top: 20px;">
+            <ul class="pagination justify-content-center">
+                <li class="page-item <?php echo $disable_firstpage; ?>">
+                    <a class="page-link" href="<?php echo $base_url; ?>page=first" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item <?php echo $disable_firstpage; ?>">
+                    <a class="page-link" href="<?php echo $base_url; ?>page=1">1</a>
+                </li>
+                <?php
+                	for ($i=1; $i < $noof_pages; $i++) {
+                		$curr_page = $i + 1;
+                		$disabled = $page==$curr_page ? 'disabled' : ''; // if you move the current page
+
+                		$page_item = '<li class="page-item '.$disabled.'">
+                    					<a class="page-link" href="'.$base_url.'page='.$curr_page.'">'.$curr_page.'</a>
+                					</li>';
+
+                		echo $page_item;
+                	}
+                ?>
+                <li class="page-item <?php echo $disable_lastpage; ?>">
+                    <a class="page-link" href="<?php echo $base_url; ?>page=last" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+	<?php
+	}
 ?>

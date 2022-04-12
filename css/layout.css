@@ -25,14 +25,16 @@
 .page-content {
     padding: 0px;
 }
-nav.page-header {
-    padding-right: 50px !important;
-    padding-left: 50px !important;
+.page-header {
+    padding-right: 30px !important;
+    padding-left: 30px !important;
     background-color: #141424 !important;
+    padding-bottom: 1px !important;
+    margin-bottom: 0px !important;
 }
 .page-content-intro {
     background-color: #141424 !important;
-    padding: 10px 100px 30px 100px;
+    padding: 5px 40px 30px 40px;
 }
 .intro-title {
     font-size: 35px !important;
@@ -46,8 +48,8 @@ nav.page-header {
     padding-top: 5px;
 }
 .main-body {
-    padding-right: 110px !important;
-    padding-left: 110px !important;
+    padding-right: 50px !important;
+    padding-left: 50px !important;
 }
 .package-details {
     padding: 10px 12px 10px 12px !important;
@@ -55,8 +57,7 @@ nav.page-header {
     border-radius: 3px;
 }
 .package-details:hover {
-    background-color: white !important;
-    box-shadow: 2px 2px 1px #ECF0F1;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 .package-items span {
     margin-right: 8px;
@@ -93,4 +94,50 @@ nav.page-header {
 }
 .website-title {
     color: white !important;
+}
+.view-listing, .place-bid, .call-agent, .go-back {
+    margin-bottom: 5px;
+}
+.call-agent {
+    background-color: #03C6C1;
+    color: white;
+    border-color: #03C6C1;
+}
+.call-agent:hover {
+    color: white;
+}
+/*LOGIN AND SIGN UP*/
+.user-login, .user-signup {
+    border-width: 1px !important;
+    border-color: #03C6C1 !important;
+}
+.user-login {
+    background-color: inherit !important;
+    color: #03C6C1 !important;
+    margin-right: 4px !important;
+}
+.user-login:hover {
+    background-color: #03C6C1 !important;
+    color: white !important;
+}
+.user-signup {
+    background-color: #03C6C1 !important;
+    color: white !important;
+}
+.user-signup:hover {
+    color: white !important;
+}
+
+/*BIDS*/
+.agent-offer {
+    padding: 2px 5px 2px 5px;
+    border-radius: 5px; 
+    line-height: 25px;
+    cursor: pointer;
+}
+
+.agent-offer:hover {
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, 
+    rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, 
+    rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }

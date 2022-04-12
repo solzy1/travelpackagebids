@@ -19,6 +19,12 @@
 	        return $get;
 	    }
 
+	    public static function find($user_id){
+	    	$found = User::find($user_id);
+
+	        return $found;
+	    }
+
 	    public static function find_byemail($email){
 	    	$found = User::where('email', 'like', $email)->first();
 

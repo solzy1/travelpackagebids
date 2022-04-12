@@ -19,8 +19,14 @@
 	        return $get;
 	    }
 
+	    public static function find_bybidder($bidder_id, $package_id){
+	        $get = Bid::where('bidder_id', $bidder_id)->where('package_id', $package_id)->first();
+
+	        return $get;
+	    }
+
 	    public static function find_bypackage($package_id){
-	        $get = Bid::where('package_id', $package_id)->get();
+	        $get = Bid::where('package_id', $package_id)->orderBy('offer', 'desc')->get();
 
 	        return $get;
 	    }

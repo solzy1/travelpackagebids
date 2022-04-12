@@ -81,7 +81,7 @@ class Confirm_Email {
 	send_password(password, re_password, key){
 		let passwords = {password: password, re_password: re_password, key: key};
 
-        $.post("/app/src/user/receive-password.php", passwords, function(result){
+        $.post("https://travelpackagebids.com/app/src/user/receive-password.php", passwords, function(result){
         	const _confirmemail = new Confirm_Email();
         	
         	_confirmemail.gotopage($.trim(result));

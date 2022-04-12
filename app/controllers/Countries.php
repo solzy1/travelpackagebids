@@ -6,8 +6,8 @@
 	// CRUD (CREATE, READ, UPDATE, DELETE)
 	class Countries{
 		// CREATE
-	    public static function create($name){
-	    	$created = Country::create(['name' => $name]);
+	    public static function create($name, $country_code){
+	    	$created = Country::create(['name' => $name, 'phone_code' => $country_code]);
 
 	    	return $created;
 	    }
@@ -32,10 +32,11 @@
 	    }	    
 
 	    // UPDATE
-	    public static function update($id, $name){
+	    public static function update($id, $name, $phone_code){
 	        $_update = Country::find($id);
 
 	        $_update->name = $name;
+	        $_update->phone_code = $phone_code;
 	        
 	        return $_update->save();
 	    }

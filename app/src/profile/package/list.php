@@ -1,11 +1,10 @@
 <?php
-	// start up eloquent
-	// require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
 
-	// include the validation file that holds the class Validation
-	// require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php';
+
+
+
 	require_once '_package.php';
-	// require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
 
 	use Controllers\Packages;
 	use Controllers\Countries; 
@@ -19,13 +18,42 @@
 			$this->user_id = get_userid();
 		}
 
-		function show_userpackages(){
+		function show_userpackages($page){
 			$user_id = $this->user_id;
-
 			$packages = Packages::find_byuser($user_id);
+
+			// no of pages
+			$noof_pages = noof_pages($packages, 8); // get the no of pages
+			$page =  configure_page($page, $noof_pages); // configure the selected page
+
+			// stop me, if page is not numeric
+			if(!is_numeric($page))
+				return;
+
+			$start = ($page - 1) * 8; // initializer
+			$countdown = 0;
+
 	        $max_desclen = 235;
 
-			foreach ($packages as $package) {
+        ?>
+        	<!-- content -->
+            <div class="col-sm-12 col-md-4 col-lg-4" style="margin-bottom: 10px;min-height: 200px">
+                <button data-bs-toggle="modal" data-bs-target="#create-package" id="create-a-package" class="btn bg-light text-center">
+                    <i class="fa-solid fa-plus" title="Create a Package" data-bs-toggle="tooltip" data-bs-placement="top"></i>
+                </button>
+            </div>
+            <!-- content (end) -->
+
+        <?php 
+			for ($i=$start; $i < count($packages); $i++) { 
+				// STOP COUNTING, WHEN THE NO OF ALLOWED ITEMS ARE COMPLETE
+				if($countdown >= 8)
+					break;
+				$countdown++;
+
+				$package = $packages[$i];
+
+				$package_id = $package->id;
 				$state = $package->state->name; // get state
 				$country = $package->state->country->name; // get country, of state
 
@@ -42,7 +70,7 @@
 		?>
 
 	            <!-- package -->
-	            <div class="col-sm-6 col-md-4 col-lg-4 package-details-container">
+	            <div class="col-sm-12 col-md-4 col-lg-4 package-details-container">
 	                <div class="package-details border bg-light">
 	                    <p class="package-header fw-bold"><?php echo $country.', '.$state ?></p>
 	                    
@@ -80,17 +108,21 @@
 	                    
 	                    <div>
 	                        <button data-bs-toggle="modal" data-bs-target="#create-package" role="button" class="btn btn-secondary edit-package">
-	                            <i class="fa-solid fa-pencil"></i>
-	                            <input type="hidden" class="package_id" value="<?php echo '1'; ?>">
+	                            <i class="fa-solid fa-pencil" title="Edit Package" data-bs-toggle="tooltip" data-bs-placement="top"></i>
+	                            <input type="hidden" class="package_id" value="<?php echo $package_id; ?>">
 	                        </button>
-	                        <!-- https://travelpackagebids.com/user/profile/delete.php?user_id=<?php echo $user_id; ?> -->
-	                        <a href="#" role="button" class="btn btn-danger delete-package">
+	                        <button role="button" class="btn btn-danger delete-package" title="Delete Package" data-bs-toggle="tooltip" data-bs-placement="top">
 	                            <i class="fa-solid fa-trash"></i>
-	                        </a>
-	                        <!-- https://travelpackagebids.com/package.php?package=country-state-id -->
-	                        <a href="#" class="btn view-listing">
-	                            View Listing <i class="fa-solid fa-right-long"></i>
-	                        </a>
+	                            <input type="hidden" class="package_id" value="<?php echo $package_id; ?>">
+	                        </button>
+	                        <button role="button" class="btn view-bids">
+	                            View Bids <i class="fa-solid fa-eye"></i>
+	                            <input type="hidden" class="package_id" value="<?php echo $package_id; ?>">
+	                            <input type="hidden" class="is_owner" value="yes">
+	                        </button>
+	                        <a href="https://travelpackagebids.com/package.php?package=<?php echo $country.'-'.$state.'-'.$package_id; ?>" class="btn view-listing">
+                                View Listing <i class="fa-solid fa-right-long"></i>
+                            </a>
 	                    </div>
 	                </div>
 	            </div>
@@ -99,6 +131,52 @@
 
 		<?php
 			}
+
+			// show the bids container
+			$this->view_bids();
 		}
+        
+        function packages_pagination($page){
+			$user_id = $this->user_id;
+			
+            // packages			
+			$packages = Packages::find_byuser($user_id);
+			
+			$base_url = 'https://travelpackagebids.com/user/profile.php?';
+			
+			pagination($page, $packages, $base_url, 8);
+        }
+
+        function view_bids(){
+        ?>	
+	        <!-- make offer (modal) -->
+	        <div class="modal fade" id="modal-package-bids" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+	                <div class="modal-content">
+	                    <div class="modal-header">
+	                        <h5 class="modal-title text-center fw-bold" id="staticBackdropLabel">My Bids</h5>
+	                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                    </div>
+
+	                    <div class="modal-body" style="margin-top: 0;padding-top: 0">
+		                    <!-- list of bids -->
+		                    <div style="padding: 15px">
+		                        <!-- bids -->
+		                        <div id="package-bids" class="container-fluid">
+		                            
+		                        </div>
+		                        <!-- END bids -->
+		                    </div>
+		                    <!-- END list of bids -->
+	                    </div>
+	                    <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <!-- make offer (modal_end) -->
+        <?php
+        }
 	}
 ?>

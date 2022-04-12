@@ -1,4 +1,5 @@
 <?php
+
 	// start up eloquent
 	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
 
@@ -10,6 +11,8 @@
 	use Controllers\Packages;
 	use Controllers\Comments;
 	use Controllers\Replies;
+	use Controllers\Bids;
+	use Controllers\Profiles;
 
 	Class _Package {
 		private $request;
@@ -68,14 +71,29 @@
 			$package = $this->get_package();
 
 			if(isset($package->id)){
+				// CHECK IF USER HAS A BID FOR THIS PACKAGE
+				$user_id = $this->user_id;
+				// $bid = Bids::find_bybidder($user_id, $package->id);
+				// $agent_name = '';
+
+    // 			// PROFILE
+    // 			$user = $package->user;
+    // 			$profile = Profiles::find_byuser($user->id);
+
+    // 			$phone_code = $profile->country->phone_code;
+    // 			$phone = $phone_code.$profile->phone;
+    // 			$agent_name = 'by '.$profile->name;
+			 //    $no_bid = isset($bid->bidder_id) ? '' : 'no-bid';
+
 				$page_title = $package->country.', '.$package->state;
+				// .' <span style="font-weight: lighter;font-size: 15px;color: grey;text-transform: lowercase;display: none;" class="agent-name agent-name-'.$package->id.' '.$no_bid.'">'.$agent_name.'</span>';
 
 				// $this->page_nav($page_title); // show page header, nav
 			?>      
 		        
 		        <!-- main body -->
 		        <div class="row" style="padding-left: 17px;margin-bottom: 40px;">
-					<div class="package-cover col-sm-12 col-md-8 col-lg-8" style="padding-top: 20px;">
+					<div class="package-cover col-sm-12 col-md-9 col-lg-9" style="padding-top: 20px;">
 				        <h2 class="text-capitalize fw-bold">
 				        	<?php echo $page_title; ?>
                             <input type="hidden" id="package_id" value="<?php echo $package->id; ?>">
@@ -88,7 +106,7 @@
 	                                <i class="fa-solid fa-people-group"></i> 
 	                                <?php echo $package->people; ?> people
 	                            </p>
-	                            <p class="col-sm-8 col-md-3 col-lg-3">
+	                            <p class="col-sm-8 col-md-4 col-lg-4">
 	                                <i class="fa-solid fa-calendar-days"></i> 
 	                                <?php echo $package->from_date.' - '.$package->to_date; ?>
 	                            </p>
@@ -104,6 +122,7 @@
 
 	                            <div style="margin-top: 15px;">
 	                            	<?php 
+	                           // 	$package = Packages::find($package->id);
 									$is_owner = $this->is_owner($package->user);
 
 	                            	if(!$is_owner) {
@@ -112,10 +131,19 @@
 			                                Place Bid
 			                                <input type="hidden" class="package_id" value="<?php echo $package->id; ?>">
 			                            </button>
-		                            <?php 
+			                              <?php 
+	                        		} 
+	                        		else {
+		                        	?>
+	                        		    <button role="button" class="btn place-bid">
+			                                View Bids <i class="fa-solid fa-eye"></i>
+			                                <input type="hidden" class="package_id" value="<?php echo $package->id; ?>">
+			                                <input type="hidden" class="is-owner" value="yes">
+			                            </button>
+				                    <?php
 		                        	}
 		                            ?>
-		                            <a href="https://travelpackagebids.com" class="btn btn-secondary">
+		                            <a href="https://travelpackagebids.com" class="btn btn-secondary go-back">
 		                                <i class="fa-solid fa-left-long"></i> Go Back
 		                            </a>
 		                        </div>
@@ -218,8 +246,11 @@
 
 			// USER
 			$user = $comment->user;
-			$is_owner = $this->is_owner($user);
-			$name = 'fishy bro'.($is_owner ? ' (OWNER)' : ''); // replace this with profile->name... later
+			$package = $comment->package;
+			$is_owner = $this->is_owner($user, $package);
+			
+			$name = explode('@', $user->email);
+			$name = $name[0].($is_owner ? ' <span style="color: #03C6C1;">(OWNER)</span>' : ''); // replace this with profile->name... later
 
 			$user_comment = $comment->comment;
 			$date_created = format_date('M Y', $comment->created_at);
@@ -287,10 +318,10 @@
 	    	return isset($reply->id);
 		}
 
-		function is_owner($user){
-			$user_id = get_userid();
+		function is_owner($user, $package = []){
+			$user_id = isset($package->id) ? $package->user_id : get_userid();
 			$is_owner = $user->id==$user_id ? true : false;
-
+			
 			return $is_owner;
 		}
 

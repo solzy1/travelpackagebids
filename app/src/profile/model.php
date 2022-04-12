@@ -1,34 +1,74 @@
 <?php 
 	class Profile extends _Profile {
-		public $email;
-		public $pass;
+		public $country;
+		public $name;
+		public $phone;
+		public $profile_id;
+		public $phone_code;
 
-		function __construct($email, $pass) {
-			$this->email = $email;
-			$this->pass = $pass;
+		function __construct($country, $name, $phone, $profile_id, $phone_code = '') {
+			$this->country = $country;
+			$this->name = $name;
+			$this->phone = $phone;
+			$this->profile_id = $profile_id;
+			$this->phone_code = $phone_code;
 		}
 
 		// SET & GET FUNCTIONS
-		function set_email(){
+		function set_country(){
 			// validate userinput
-			$this->validate('email', $this->email);
+			$this->country = $this->validate('string', $this->country);
 		}
 
-		function set_password(){
+		function set_name(){
 			// validate userinput
-			$this->validate('string', $this->pass);
+			$this->name = $this->validate('string', $this->name);
 		}
 
-		function get_email(){
-			$this->set_email();
-
-			return $this->email;
+		function set_phone(){
+			// validate userinput
+			$this->phone = $this->validate('phone', $this->phone);
 		}
 
-		function get_pass(){
-			$this->set_password();
+		function set_profile_id(){
+			// validate userinput
+			$this->profile_id = $this->validate('int', $this->profile_id);
+		}
 
-			return $this->pass;
+		function set_phone_code(){
+			// validate userinput
+			$this->phone_code = $this->validate('string', $this->phone_code);
+		}
+
+		// GET
+		function get_country(){
+			$this->set_country();
+
+			return $this->country;
+		}
+
+		function get_name(){
+			$this->set_name();
+
+			return $this->name;
+		}
+
+		function get_phone(){
+			$this->set_phone();
+
+			return $this->phone;
+		}
+
+		function get_profile_id(){
+			$this->set_profile_id();
+
+			return $this->profile_id;
+		}
+
+		function get_phone_code(){
+			$this->set_phone_code();
+
+			return $this->phone_code;
 		}
 	}
 ?>

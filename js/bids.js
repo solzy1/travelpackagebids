@@ -2,7 +2,25 @@ class Bids{
 	constructor(){
 
     }
+    
+    enable_offer(_this){
+        let is_owner = $(_this).children('.is-owner');
+        let offer = $("#bid-submit, #bid-offer");
+        
+        if(is_owner.val()!==undefined){
+            offer.addClass('disabled')
+                .attr('disabled', 'disabled')
+                .css('cursor', 'not-allowed');
+        }
+        else {
+            offer.removeClass('disabled')
+                .removeAttr('disabled')
+                .css('cursor', 'initial');
 
+            $("#bid-submit").css('cursor', 'pointer'); 
+        }
+    }
+    
     // CREATE BID/OFFER
     show_createoffer(){ // append package_id (on click), to input tag (package-id)
         $('.place-bid').click(function(){
@@ -26,9 +44,29 @@ class Bids{
 
                 modal = '#modal-signup-now';
             }
+            else{
+                const _bids = new Bids();
+                
+                _bids.enable_offer(this); // enable or disable the make an offer fields, depending on who wants to place a bid
+
+                // get the offers so far and display it, for the user
+                let is_owner = _bids.is_owner(this);
+                _bids.get_offers(package_id, is_owner); 
+            }
             
             $(modal).modal('show');
         });
+    }
+
+    is_owner(_this){
+        let is_owner = $(_this).children('.is-owner');
+        let offer = $("#bid-submit, #bid-offer");
+        
+        if(is_owner.val()!==undefined){
+            return $.trim(is_owner.val());
+        }
+
+        return '';
     }
 
     create_offer(){
@@ -36,7 +74,7 @@ class Bids{
             let offer = $("#bid-offer").val();
 
             // if an offer was made
-            if($.trim(offer)!=''){
+            if($.trim(offer)!==''){
                 const _bid = new Bids();
 
                 let package_id = $("#package-id").val();
@@ -46,35 +84,44 @@ class Bids{
     	});
     }
 
-    // submit_offer(){
-    //     $('#bid-form').submit(function (evt) {
-    //         // prevent from from submitting (the form is used for validation, purposes)
-    //         evt.preventDefault();
+    get_offers(package_id, is_owner){
+        let bid = {package_id: package_id, is_owner: is_owner};
 
-    //         // BIDS
-    //         const _bid = new Bids();
+        $.post("https://travelpackagebids.com/app/src/bids/get-bids.php", bid, function(result){
+            const _bid = new Bids();
 
-    //         _bid.create_offer();
-    //     });
-    // }
+            _bid.getoffers_response($.trim(result));
+        });
+    }
+
+    getoffers_response(result){
+        $('#package-bids').html(result);
+    }
 
     send_offer(package_id, offer){
         let bid = {package_id: package_id, offer: offer};
 
-        $.post("/app/src/bids/receive.php", bid, function(result){
+        $.post("https://travelpackagebids.com/app/src/bids/receive.php", bid, function(result){
+            // console.log(result);
             const _bid = new Bids();
 
-            _bid.report_status($.trim(result));
+            _bid.report_status($.trim(result), package_id);
         });
     }
 
-    report_status(result){
+    report_status(result, package_id){
         let status = {icon: '', message: '', backcolor: ''};
 
         if(result=='success'){
             status.icon = 'check';
             status.message = 'Your bid was received!';
             status.backcolor = 'green';
+
+            // reload the bids
+            const _bids = new Bids();
+            
+            // get the offers so far and display it, for the user
+            _bids.get_offers(package_id, ''); 
         }
         else{
             status.icon = 'exclamation';

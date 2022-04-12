@@ -23,14 +23,19 @@ $(function () {
 
 	// load comments
 	const is_commentactive = $('.loading-comments').html();
-
-	 // only when user is on the comments page
+	
+    // alert(is_commentactive);
+    
+    // only when user is on the comments page
 	if(is_commentactive!==undefined){
 		let package_id = $.trim($('#package_id').val());
 		_comments.load_comments(package_id); // load comments
 		
 		_comments.prevent_comment();
 	}
+
+	// show the packages that the user has bid for
+// 	$(".call-agent:not(.no-bid), .agent-name:not(.no-bid)").css('display', '');
 });
 
 // COMMENTS

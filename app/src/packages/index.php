@@ -1,13 +1,22 @@
 <?php
+
+
+
+
 	// start up eloquent
 	require_once '_packages.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/_profile.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
 
 	use Controllers\Packages;
 	use Controllers\Countries; 
 	use Controllers\States; 
+	use Controllers\Profiles; 
+	use Controllers\Bids; 
 
 	Class Packages_List {
 		private $user_id;
+		private $noof_items = 21; // max no of packages per page
 		public $noofpackages;
 
 		function __construct() {
@@ -19,17 +28,33 @@
 
 		private function get_noofpackages(){
 			$packages = Packages::index(); // get the available packages
-			$this->noofpackages = count($packages); // count and store the no of available/live packages
+			$this->noofpackages = count($packages); // count and store the no of available/live packages 
 		}
-
-		public function show(){
+        	
+		public function show($page){
 			$user_id = $this->user_id;
+            
+            // PACKAGES
+			$packages = $this->get_packages();
+            
+            $noof_pages = noof_pages($packages, $this->noof_items); // get the no of pages
+			$page =  configure_page($page, $noof_pages); // configure the selected page
 
-			$packages = Packages::index_orderbydate('desc');
+			// stop me, if page is not numeric
+			if(!is_numeric($page))
+				return;
 
+			$start = ($page - 1) * $this->noof_items; // initializer
+			$countdown = 0;
+			
 	        $max_desclen = 220; // max length for description
 
-			foreach ($packages as $package) {
+			for ($i=$start; $i < count($packages); $i++) { 
+			    if($countdown >= $this->noof_items)
+					break;
+				$countdown++;
+
+				$package = $packages[$i];
 				// get user
 				$user = $package->user;
 
@@ -54,13 +79,15 @@
 				$user = $package->user;
 		?>
 				<!-- package -->
-                <div class="col-sm-12 col-md-6 col-lg-6 package-details-container">
+                <div class="col-sm-12 col-md-6 col-lg-4 package-details-container">
                     <div class="package-details border bg-light">
-                        <p class="package-header fw-bold"><?php echo $country.', '.$state ?></p>
+                        <p class="package-header fw-bold">
+                            <?php echo $country.', '.$state; ?>
+                        </p>
                         
                         <div class="container-fluid package-items" style="padding: 0px;color: grey;font-size: 12px;word-wrap: break-word;">
                             <span>
-                                <i class="fa-solid fa-people-group"></i> 
+                                <i class="fa-solid fa-people-group"></i>
                                 <?php echo $people; ?> people
                             </span>
                             <span>
@@ -91,17 +118,25 @@
                         
                         <div>
                         	<?php 
-                        		if($user_id!=$user->id){ 
-                        			$bids = $package->bids;
+                        		if($user_id!=$user->id){
                         			// if logged user's id == one of the offers of this package
                          	?>	
-                         			 <!-- data-bs-toggle="modal" data-bs-target="#create-package-bid" -->
+                         			<!-- data-bs-toggle="modal" data-bs-target="#create-package-bid" -->
 		                            <button role="button" class="btn place-bid">
 		                                Place Bid
 		                                <input type="hidden" class="package_id" value="<?php echo $package->id; ?>">
 		                            </button>
-                        	<?php 
+	                        <?php 
                         		} 
+                        		else {
+                        	?>
+                        		    <button role="button" class="btn place-bid">
+		                                View Bids <i class="fa-solid fa-eye"></i>
+		                                <input type="hidden" class="package_id" value="<?php echo $package->id; ?>">
+		                                <input type="hidden" class="is-owner" value="yes">
+		                            </button>
+		                    <?php
+                        		}
                         	?>
                             <a href="https://travelpackagebids.com/package.php?package=<?php echo $country.'-'.$state.'-'.$package->id; ?>" class="btn view-listing">
                                 View Listing <i class="fa-solid fa-right-long"></i>
@@ -115,17 +150,35 @@
 		<?php
 			}
 		}
-
-		private function checkbids_foruser($bids){
-			for ($i=0; $i < count($bids)/2; $i++) { 
-				# code...
-			}
-		}
-
+        
+        private function get_packages(){
+			$packages = $packages = Packages::index_orderbydate('desc');
+			
+			return $packages;
+        }
+        
 		public function is_userloggedin(){
 			$user_loggedin = is_userloggedin();
 
             return '<input type="hidden" id="user-loggedin" value="'.$user_loggedin.'">';
+		}
+
+		// PROFILE
+		public function get_profile(){
+			$user_id = $this->user_id;
+
+			$profile = new _Profile();
+
+			return $profile->get_user($user_id);
+		}
+        
+		public function pagination($page){
+            // packages	
+            $packages = $this->get_packages();
+            
+			$base_url = 'https://travelpackagebids.com?';
+			
+			pagination($page, $packages, $base_url, $this->noof_items);
 		}
 	}
 ?>

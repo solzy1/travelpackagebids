@@ -10,96 +10,147 @@
         gotopage('https://travelpackagebids.com');
 
     $profile = new _Profile();
+    $user = $profile->get_user($user_id);
+
     $response_msg = '';
     $success = true;
 
     if(isset($_SESSION['travelpackagebids.com']['status'])){
-        $response_msg = $_SESSION['travelpackagebids.com']['status'];
         $success = $_SESSION['travelpackagebids.com']['status_issuccess'];
+        $response_msg = '<i class="fa-solid fa-circle-'.($success ? 'check' : 'exclamation').'"></i>'.$_SESSION['travelpackagebids.com']['status'];
 
         $profile->unset_responsevalues(); // unset status and status_issuccess values
     }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title><?php echo $title; ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+        <meta http-equiv='cache-control' content='no-cache'>
+        <meta http-equiv='expires' content='0'>
+        <meta http-equiv='pragma' content='no-cache'>
+
         <!-- Latest compiled and minified CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!--<link rel="stylesheet" href="css/layout.css">-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <link rel="stylesheet" href="../css/profile.css">
+        <link href="../css/sidebars.css" rel="stylesheet">
         
         <style>
             body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                user-select: none;
+            }
+            
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                  font-size: 3.5rem;
+                }
+            }
         </style>
     </head>
     <body>
+        <!-- main-header -->
+        <div class="container-fluid profile-header">
+            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+              <a href="https://travelpackagebids.com" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <span class="fs-4">Travelpackagebids</span>
+              </a>
+
+              <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item"><a href="https://travelpackagebids.com" class="nav-link text-white">Home</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php" class="nav-link text-white profile-menu">My packages</a></li>
+                <!-- <li class="nav-item"><a role="button" class="nav-link text-white profile-menu">My bids</a></li> -->
+                <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php?user=member" class="nav-link text-white profile-menu">My profile</a></li>
+                <li class="nav-item dropdown" style="padding-top: 9px">
+                  <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+
+                    <!-- <img src="https://github.com/mdo.png" alt=""  class="rounded-circle me-2"> -->
+                    <strong>
+                        <i class="fas fa-circle-user" style="font-size: 20px;"></i> 
+                        <?php 
+                            echo $user->name;
+                        ?>
+                    </strong>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
+                    <li><a class="dropdown-item" href=""><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item logout" role="button"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </header>
+        </div>
+        <!-- end main-header -->
+
         <!-- page content -->
-        <div class="container-fluid page-content">
+        <div class="container-fluid page-content d-flex">
             
             <!-- header -->
-            <nav class="navbar navbar-expand-md sticky-top navbar-light bg-light page-header">
-              <div class="container-fluid">
-                <a class="navbar-brand website-title" href="https://travelpackagebids.com">TravelPackageBids</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-header" aria-controls="nav-header" aria-expanded="false" aria-label="Toggle navigation" style="background-color: white !important">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="nav-header">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-right">
-                        <li class="nav-item">
-                          <a class="nav-link active page-header-item" aria-current="page" href="https://travelpackagebids.com">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;font-size: 20px;">
-                                <i class="fa-solid fa-circle-user"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li>
-                                    <a class="dropdown-item" href="https://travelpackagebids.com/user/profile.php">
-                                        <i class="fa-solid fa-user"></i> Profile
-                                    </a>
-                                </li>
-                                <div class="dropdown-divider"></div>
-                                <li>
-                                    <a class="dropdown-item" id="logout" href="#log-out">
-                                        <i class="fa-solid fa-right-from-bracket"></i> Log Out
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-              </div>
-            </nav>
+            <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-light profile-menu-bar">
+                <a href="https://travelpackagebids.com" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                  <span class="fs-4">Travelpackagebids</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                  <li class="nav-item">
+                    <a href="https://travelpackagebids.com" class="nav-link text-white d-flex" aria-current="page">
+                        <i class="bi bi-house-door-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>
+                      Home
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://travelpackagebids.com/user/profile.php" class="nav-link text-white d-flex profile-menu">
+                        <i class="bi bi-box2-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>My packages
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://travelpackagebids.com/user/profile.php?user=member" class="nav-link text-white d-flex profile-menu" >
+                        <i class="bi bi-person-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>
+                      My profile
+                    </a>
+                  </li>
+                </ul>
+                <hr>
+                <div class="dropdown">
+                  <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 
-            <div class="status-report text-center" style="color: white;background-color: <?php echo $success ? 'green' : 'red'; ?>;opacity: <?php echo empty($response_msg) ? '0' : '1'; ?>;padding: 5px;">
-                <i class="fa-solid fa-circle-<?php echo $success ? 'check' : 'exclamation'; ?>"></i>
-                <?php echo $response_msg; ?>
+                    <!-- <img src="https://github.com/mdo.png" alt=""  class="rounded-circle me-2"> -->
+                    <strong>
+                        <i class="fas fa-circle-user" style="font-size: 20px;"></i>  
+                        <?php 
+                            echo $user->name;
+                        ?>
+                    </strong>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                    <li><a class="dropdown-item" href=""><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item logout" role="button"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a></li>
+                  </ul>
+                </div>
             </div>
             <!-- header (end)-->
             
             <!-- main page content -->
             <div class="container-fluid main-body">
-                <br>
+                <div class="status-report text-center" style="color: white;background-color: <?php echo $success ? 'green' : 'red'; ?>;opacity: <?php echo empty($response_msg) ? '0' : '1'; ?>;padding: 5px;">
+                    <?php echo $response_msg; ?>
+                </div>
+                
                 <!-- header -->
-                <div>
-                    <nav aria-label="...">
-                        <ul class="pagination pagination-md" style="background-color: #F7F9F9">
-                            <li class="page-item disabled" aria-current="page">
-                                <span class="page-link">My Packages</span>
-                            </li>
-                            <!-- <li class="page-item">
-                                <a class="page-link" href="#" style="border-radius: 0px !important;">My Bids</a>
-                            </li> -->
-                        </ul>
-                    </nav>
+                <div style="margin-bottom: 20px;">
+                    <p class="page-link page-title bg-light" style="color: black;font-weight: bold;font-size: 20px;">My Packages</p>
                 </div>
                 <!-- header (end) -->
                 
@@ -109,47 +160,26 @@
                     <!-- main body -->
                     <div class="row">
 
-                        <!-- content -->
-                        <div class="col-sm-6 col-md-4 col-lg-4" style="margin-bottom: 10px;min-height: 200px">
-                            <button data-bs-toggle="modal" data-bs-target="#create-package" id="create-a-package" class="btn bg-light text-center">
-                                <i class="fa-solid fa-plus"></i>
-                            </button>
-                        </div>
-                        <!-- content (end) -->
-
                         <?php 
-                            $list = new Package_List();
+                            if(isset($_GET['user'])){
+                                $user = isset($_GET['user']) ? $_GET['user'] : '';
 
-                            $list->show_userpackages(); 
+                                $profile->form($user_id);
+                            }
+                            else{
+                                $list = new Package_List();
+
+                                $page = isset($_GET['page']) ? $_GET['page'] : '';
+
+                                $list->show_userpackages($page);
+
+                                $list->packages_pagination($page);
+                            }
                         ?>
 
                     </div>
-                    <!-- main body (end) -->
 
-                    <!-- pagination -->
-                    <nav aria-label="Page navigation" style="margin-top: 20px;">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">1</a>
-                            </li>
-                            <!--<li class="page-item">-->
-                            <!--    <a class="page-link" href="#">2</a>-->
-                            <!--</li>-->
-                            <!--<li class="page-item">-->
-                            <!--    <a class="page-link" href="#">3</a>-->
-                            <!--</li>-->
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <!-- main body (end) -->
                 </div>
             </div>
             <!-- main page content (end) -->
@@ -171,12 +201,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
 
-                    <div class="modal-body">
-                        <form action="https://travelpackagebids.com/app/src/profile/package/receivepackage.php" method="POST" target="_blank" autocomplete="off">
+                    <div class="modal-body create-package-body">
+                        <form action="https://travelpackagebids.com/app/src/profile/package/receivepackage.php" method="POST"autocomplete="off">
                             <!-- country -->
                             <div class="mb-3">
                                 <label for="package-country" class="form-label fw-bold">Country</label>
-                                <select class="form-select form-select-sm" id="package-country" aria-label=".form-select-sm" name="country" required>
+                                <select class="form-select form-select-sm countries" id="package-country" aria-label=".form-select-sm" name="country" required>
                                     <option selected>Select Country</option>
                                 </select>
                             </div>
@@ -199,14 +229,14 @@
                             <label for="package-date" class="form-label fw-bold">Travel Date</label>
                             <div class="input-group mb-3" id="package-date">
                                 <span class="input-group-text">From</span>
-                                <input type="date" class="form-control" placeholder="Select From" aria-label="Select From" name="from_date" required>
+                                <input type="date" class="form-control" id="package-from-date" placeholder="Select From" aria-label="Select From" name="from_date" required>
                                 <!-- <span class="input-group-text">To</span>
                                 <input type="date" class="form-control" placeholder="Select To" aria-label="Select To" name="to_date" required> -->
                             </div>
 
                             <div class="input-group mb-3">
                                 <span class="input-group-text">To</span>
-                                <input type="date" class="form-control" placeholder="Select To" aria-label="Select To" name="to_date" required>
+                                <input type="date" class="form-control" id="package-to-date" placeholder="Select To" aria-label="Select To" name="to_date" required>
                             </div>
 
                             <!-- description -->
@@ -217,6 +247,8 @@
 
                             <!-- if user wants to edit -->
                             <input type="hidden" name="package_id" id="package-id">
+                            <input type="hidden" name="package_phonecode" class="phone-code" id="package-phonecode">
+                            <input type="hidden" id="profile-exists" value="<?php echo $user->phone; ?>">
 
                             <div class="submit-package" style="margin-top: 20px;float: right;">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
@@ -238,11 +270,13 @@
         <script src="https://kit.fontawesome.com/6030f7206a.js" crossorigin="anonymous"></script>
         
         <!-- my scripts -->
+        <script src="../js/profile-menu.js"></script>
         <script src="../js/countries.js"></script>
         <script src="../js/packages.js"></script>
-        <script src="../js/confirm-email.js"></script>
+        
         <script src="../js/user.js"></script>
         <script src="../js/profile.js"></script>
+        <script src="../js/sidebars.js"></script>
     </body>
 
 </html>
