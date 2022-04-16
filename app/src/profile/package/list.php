@@ -1,10 +1,6 @@
 <?php
-
-
-
-
 	require_once '_package.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 
 	use Controllers\Packages;
 	use Controllers\Countries; 
@@ -27,15 +23,15 @@
 			$page =  configure_page($page, $noof_pages); // configure the selected page
 
 			// stop me, if page is not numeric
-			if(!is_numeric($page))
+			if(!is_numeric($page) || !$page)
 				return;
 
 			$start = ($page - 1) * 8; // initializer
 			$countdown = 0;
 
 	        $max_desclen = 235;
-
         ?>
+        
         	<!-- content -->
             <div class="col-sm-12 col-md-4 col-lg-4" style="margin-bottom: 10px;min-height: 200px">
                 <button data-bs-toggle="modal" data-bs-target="#create-package" id="create-a-package" class="btn bg-light text-center">
@@ -100,7 +96,7 @@
 	                        	<?php 
 	                        		$desc_len = strlen($description);
 
-	                        		echo $desc_len > $max_desclen ? substr($description, 0, $max_desclen).'<a href="https://travelpackagebids.com/package.php?package=country-state-id">...</a>' : $description; 
+	                        		echo $desc_len > $max_desclen ? substr($description, 0, $max_desclen).'<a href="/travelpackagebids/package.php?package=country-state-id">...</a>' : $description; 
 	                        	?>
 	                        </p>
 	                    </div>
@@ -120,7 +116,7 @@
 	                            <input type="hidden" class="package_id" value="<?php echo $package_id; ?>">
 	                            <input type="hidden" class="is_owner" value="yes">
 	                        </button>
-	                        <a href="https://travelpackagebids.com/package.php?package=<?php echo $country.'-'.$state.'-'.$package_id; ?>" class="btn view-listing">
+	                        <a href="/travelpackagebids/package.php?package=<?php echo $country.'-'.$state.'-'.$package_id; ?>" class="btn view-listing">
                                 View Listing <i class="fa-solid fa-right-long"></i>
                             </a>
 	                    </div>
@@ -131,9 +127,6 @@
 
 		<?php
 			}
-
-			// show the bids container
-			$this->view_bids();
 		}
         
         function packages_pagination($page){
@@ -142,7 +135,7 @@
             // packages			
 			$packages = Packages::find_byuser($user_id);
 			
-			$base_url = 'https://travelpackagebids.com/user/profile.php?';
+			$base_url = '/travelpackagebids/user/profile.php?';
 			
 			pagination($page, $packages, $base_url, 8);
         }
@@ -176,6 +169,79 @@
 	            </div>
 	        </div>
 	        <!-- make offer (modal_end) -->
+        <?php
+        }
+
+        function createpackage_form($user){
+        ?>
+        	<!-- modal -->
+	        <div class="modal fade" id="create-package" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+	                <div class="modal-content">
+	                    <div class="modal-header">
+	                        <h5 class="modal-title text-center fw-bold" id="staticBackdropLabel">Create/Edit Package</h5>
+	                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                    </div>
+
+	                    <div class="modal-body create-package-body">
+	                        <form action="/travelpackagebids/app/src/profile/package/receivepackage.php" method="POST"autocomplete="off">
+	                            <!-- country -->
+	                            <div class="mb-3">
+	                                <label for="package-country" class="form-label fw-bold">Country</label>
+	                                <select class="form-select form-select-sm countries" id="package-country" aria-label=".form-select-sm" name="country" required>
+	                                    <option selected>Select Country</option>
+	                                </select>
+	                            </div>
+
+	                            <!-- state -->
+	                            <div class="mb-3">
+	                                <label for="package-state" class="form-label fw-bold">State</label>
+	                                <select class="form-select form-select-sm" id="package-state" aria-label=".form-select-sm" name="state" required>
+	                                    <option selected>Select State</option>
+	                                </select>
+	                            </div>
+
+	                            <!-- no of people -->
+	                            <div class="mb-3">
+	                                <label for="package-people" class="form-label fw-bold">No of People</label>
+	                                <input type="number" class="form-control" id="package-people" name="people" required>
+	                            </div>
+
+	                            <!-- dates -->
+	                            <label for="package-date" class="form-label fw-bold">Travel Date</label>
+	                            <div class="input-group mb-3" id="package-date">
+	                                <span class="input-group-text">From</span>
+	                                <input type="date" class="form-control" id="package-from-date" placeholder="Select From" aria-label="Select From" name="from_date" required>
+	                                <!-- <span class="input-group-text">To</span>
+	                                <input type="date" class="form-control" placeholder="Select To" aria-label="Select To" name="to_date" required> -->
+	                            </div>
+
+	                            <div class="input-group mb-3">
+	                                <span class="input-group-text">To</span>
+	                                <input type="date" class="form-control" id="package-to-date" placeholder="Select To" aria-label="Select To" name="to_date" required>
+	                            </div>
+
+	                            <!-- description -->
+	                            <div class="mb-3">
+	                                <label for="package-description" class="form-label fw-bold">Description</label>
+	                                <textarea class="form-control" id="package-description" rows="3" style="resize: none;" name="description"></textarea>
+	                            </div>
+
+	                            <!-- if user wants to edit -->
+	                            <input type="hidden" name="package_id" id="package-id">
+	                            <input type="hidden" name="package_phonecode" class="phone-code" id="package-phonecode">
+	                            <input type="hidden" id="profile-exists" value="<?php echo $user->phone; ?>">
+
+	                            <div class="submit-package" style="margin-top: 20px;float: right;">
+	                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+	                                <button type="submit" class="btn btn-primary">Submit <i class="fa-solid fa-arrow-right"></i></button>
+	                            </div>
+	                        </form>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	        <!-- end modal -->
         <?php
         }
 	}

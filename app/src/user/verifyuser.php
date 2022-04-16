@@ -54,19 +54,23 @@
 		}
 
 		function set_password($password, $user){
-        	// update password
-        	$password_updated = Users::update($user->id, $user->email, $password);
+            $status = $this->get_status('inactive');
 
-        	if($password_updated){
-		        // update verified status
-		        $status_updated = Users::update_isverified($user->id, true);
-        	
-        		if($status_updated){
-        			$this->allow_userpass($user);
+            if(isset($status->id)){
+	        	// update password
+	        	$password_updated = Users::update($user->id, $user->email, $password, $status->id);
 
-        			return;
-        		}
-        	}
+	        	if($password_updated){
+			        // update verified status
+			        $status_updated = Users::update_isverified($user->id, true);
+	        	
+	        		if($status_updated){
+	        			$this->allow_userpass($user);
+
+	        			return;
+	        		}
+	        	}
+	        }
 
 	        $this->failure();
 

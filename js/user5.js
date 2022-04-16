@@ -14,9 +14,9 @@ class User{
 	send_request(){
         let bid = {logout: 'yes'};
 
-        $.post("https://travelpackagebids.com/app/src/user/logout.php", bid, function(result){
+        $.post("/travelpackagebids/app/src/user/logout.php", bid, function(result){
             if($.trim(result)=='success')
-            	window.location.replace("");
+            	window.location.replace("/travelpackagebids");
         });
 	}
 }

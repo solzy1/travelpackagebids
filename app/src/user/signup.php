@@ -1,7 +1,7 @@
 <?php 
 	// start up eloquent
 	// require '_user.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/email/_email.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/email/_email.php';
 
 	use Controllers\Users;
 	use Controllers\Userroles;
@@ -28,26 +28,32 @@
                 
                 if(isset($finduser_role->id)){
     				$userrole_id = $finduser_role->id;
-    				$user = Users::create($email, $userrole_id);
-    
-    				// check if user was successfully created
-    				if(isset($user->id)){
-    				    // create the verification link key
-    				    $key = $this->generateuser_key($user->id);
-    				    $userconfirmation = Userconfirmations::create($user->id, $key);
-    				    
-    				    if(isset($userconfirmation->id)){
-        					$_SESSION['travelpackagebids.com']['new_email'] = $email;
-        					
-        					$this->sendemail_confirmation($user->email, $key);
-        					$this->gotopage("https://travelpackagebids.com/user/confirm-email.php");
-    				    }
-    				}
-    				else
-    					$this->reportfailure('User was not created. Something went wrong.', 'sign-up');
+
+                    // get status
+                    $status = $this->get_status('inactive');
+
+                    if(isset($status->id)){
+        				$user = Users::create($email, $userrole_id, $status->id);
+        
+        				// check if user was successfully created
+        				if(isset($user->id)){
+        				    // create the verification link key
+        				    $key = $this->generateuser_key($user->id);
+        				    $userconfirmation = Userconfirmations::create($user->id, $key);
+        				    
+        				    if(isset($userconfirmation->id)){
+            					$_SESSION['travelpackagebids.com']['new_email'] = $email;
+            					
+            					$this->sendemail_confirmation($user->email, $key);
+            					$this->gotopage("/travelpackagebids/user/confirm-email.php");
+
+                                return;
+        				    }
+        				}
+                    }
                 }
-    			else
-    				$this->reportfailure('User was not created. Something went wrong.', 'sign-up');
+    			
+                $this->reportfailure('User was not created. Something went wrong.', 'sign-up');
 			}
 		}
 
@@ -65,14 +71,14 @@
         
         // SEND EMAIL to emailaddress FOR USER CONFIRMATION
         function emailbody($key){
-            $url = "https://travelpackagebids.com/user/confirm-email.php?verify=".$key;
+            $url = "/travelpackagebids/user/confirm-email.php?verify=".$key;
             
             return '<h4 class="col-sm-12 col-md-12 col-lg-12">Hello,</h4>
 
             <div class="col-sm-12 col-md-12 col-lg-12">
                 <p>
                     <span>You just signed-up on</span>
-                    <a href="https://travelpackagebids.com">TravelPackageBids</a><span>, but you have to verify your email, to gain access to your profile.</span>
+                    <a href="/travelpackagebids">TravelPackageBids</a><span>, but you have to verify your email, to gain access to your profile.</span>
                 </p>
 
                 <p style="margin-bottom: 15px;">Kindly Verify your email address</p>
@@ -83,7 +89,7 @@
                 </p>
                 <br>
                 
-                <small style="font-size: 10px">NOTE: If you did not recently register on <a href="https://travelpackagebids.com">TravelPackageBids</a>, Kindly Ignore this message. <br>Thank you.</small>
+                <small style="font-size: 10px">NOTE: If you did not recently register on <a href="/travelpackagebids">TravelPackageBids</a>, Kindly Ignore this message. <br>Thank you.</small>
             </div>';
         }
         

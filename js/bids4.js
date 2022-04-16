@@ -87,7 +87,7 @@ class Bids{
     get_offers(package_id, is_owner){
         let bid = {package_id: package_id, is_owner: is_owner};
 
-        $.post("https://travelpackagebids.com/app/src/bids/get-bids.php", bid, function(result){
+        $.post("/travelpackagebids/app/src/bids/get-bids.php", bid, function(result){
             const _bid = new Bids();
 
             _bid.getoffers_response($.trim(result));
@@ -101,8 +101,7 @@ class Bids{
     send_offer(package_id, offer){
         let bid = {package_id: package_id, offer: offer};
 
-        $.post("https://travelpackagebids.com/app/src/bids/receive.php", bid, function(result){
-            // console.log(result);
+        $.post("/travelpackagebids/app/src/bids/receive.php", bid, function(result){
             const _bid = new Bids();
 
             _bid.report_status($.trim(result), package_id);
@@ -149,6 +148,7 @@ class Bids{
 
         create_bid.addEventListener('hidden.bs.modal', function () {
             $('.create-bid-status').css('opacity', 0);
+            $('#package-bids').html('');
         })
     }
 }

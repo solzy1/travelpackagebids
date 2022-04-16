@@ -1,15 +1,16 @@
 <?php
 	// start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php';
 
 	// include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/validation/validation.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 	require_once 'model.php';
 
 	use Controllers\Countries; 
 	use Controllers\Packages; 
 	use Controllers\States; 
+	use Controllers\Statuss; 
 
 	Class _Package {
 		function __construct() {
@@ -151,6 +152,12 @@
 			set_responsevalues($response_msg, $is_success);
 
 			return;
+		}
+
+		public function get_status($status){
+			$status = Statuss::find_bystatus($status);
+
+			return $status;
 		}
 	}
 ?>

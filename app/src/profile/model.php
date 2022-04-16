@@ -1,4 +1,6 @@
 <?php 
+    require_once '_profile.php';
+    
 	class Profile extends _Profile {
 		public $country;
 		public $name;

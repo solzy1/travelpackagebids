@@ -1,6 +1,6 @@
 <?php
 	require_once '_package.php'; // start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php'; // include the validation file that holds the class Validation
 
 	use Controllers\Packages; 
 
@@ -43,7 +43,7 @@
 						$from_date = $date['from_date'];
 						$to_date = $date['to_date'];
 
-						$saved = Packages::update($package_id, $user_id, $state_id, $people, $from_date, $to_date, $description);
+						$saved = Packages::update($package_id, $user_id, $state_id, $people, $from_date, $to_date, $description, $package->status_id);
 
 						// set response, if package was successfully updated, else
 						if($saved){
@@ -66,7 +66,7 @@
 			}
 			
 			// GO TO profile PAGE
-			gotopage('https://travelpackagebids.com/user/profile.php');
+			gotopage('/travelpackagebids/user/profile.php');
 		}
 	}
 ?>

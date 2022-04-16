@@ -1,7 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 	// include the login file that holds the class Login
 	require_once 'login.php';
 	require_once 'signup.php';
+	require_once 'forgot-password.php';
 	require_once 'model.php';
 	// use User\Login;
 	// use User\User;
@@ -25,7 +30,12 @@
 		$signup->createuser();
 		// $signup->testemail('solzyfrenzy1@gmail.com');
 	}
-	else {
-		
+	else if($_GET['form-type']=="Forgot Password") {
+		$forgotpassword = new Forgotpassword($user);
+
+		$forgotpassword->send_resetpassword_email();
+	}
+	else{
+	    header('Location: /travelpackagebids/user/sign-in.php');
 	}
 ?>

@@ -6,27 +6,27 @@
 	// CRUD (CREATE, READ, UPDATE, DELETE)
 	class Users{
 		// CREATE
-	    public static function create($email, $userrole_id){
-	    	$created = User::firstOrCreate(['email' => $email, 'userrole_id' => $userrole_id]);
+	    public static function create($email, $userrole_id, $status_id){
+	    	$created = User::firstOrCreate(['email' => $email, 'userrole_id' => $userrole_id, 'status_id' => $status_id]);
 
 	    	return $created;
 	    }
 
 	    // READ
-		public static function index(){
-	        $get = User::all();
+		public static function index($filter = []){
+			$status = isset($filter['status']) ? $filter['status'] : 'active';
 
-	        return $get;
+	        $get = User::join('Status', 'Status.id', 'Users.status_id')->where('Status.status', $status)->select("Users.*");
+
+	        return $get->get();
 	    }
 
 	    public static function find($user_id){
-	    	$found = User::find($user_id);
-
-	        return $found;
+	    	return Users::find_byuser($user_id);
 	    }
 
 	    public static function find_byemail($email){
-	    	$found = User::where('email', 'like', $email)->first();
+	    	$found = User::where('email', 'like', $email)->join('Status', 'Status.id', 'Users.status_id')->where('Status.status', 'active')->select('Users.*')->first();
 
 	        return $found;
 	    }
@@ -38,11 +38,12 @@
 	    }
 
 	    // UPDATE
-	    public static function update($id, $email, $password){
+	    public static function update($id, $email, $password, $status_id){
 	        $_update = User::find($id);
 
 	        $_update->email = $email;
 	        $_update->password = $password;
+	        $_update->status_id = $status_id;
 	        
 	        return $_update->save();
 	    }

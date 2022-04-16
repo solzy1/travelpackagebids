@@ -1,9 +1,9 @@
 <?php
 	
 	require_once '_package.php'; // start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php'; // include the validation file that holds the class Validation
 
-	use Controllers\Packages; 
+	use Controllers\Packages;
 
 	Class Create extends _Package{
 		private $package;
@@ -39,11 +39,18 @@
 					$from_date = $date['from_date'];
 					$to_date = $date['to_date'];
 
-					$package = Packages::create($user_id, $state_id, $people, $from_date, $to_date, $description);
+					$status = $this->get_status('active');
 
-					// set response, if package was successfully created, else
-					if(isset($package->id)){
-						set_responsevalues('Your Travel-Package was created successfully!', true);
+					if(isset($status->id)){
+						$package = Packages::create($user_id, $state_id, $people, $from_date, $to_date, $description, $status->id);
+
+						// set response, if package was successfully created, else
+						if(isset($package->id)){
+							set_responsevalues('Your Travel-Package was created successfully!', true);
+						}
+						else{
+							set_responsevalues('Your Travel-Package was not created successfully. Something went wrong.', false);
+						}
 					}
 					else{
 						set_responsevalues('Your Travel-Package was not created successfully. Something went wrong.', false);
@@ -58,7 +65,7 @@
 			}
 			
 			// GO TO profile PAGE
-			gotopage('https://travelpackagebids.com/user/profile.php');
+			gotopage('/travelpackagebids/user/profile.php');
 		}
 	}
 ?>

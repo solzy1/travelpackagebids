@@ -1,6 +1,6 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/packages/index.php';
-    // require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/packages/index.php';
+    // require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 
     $title = "TravelPackaeBids | ".$title;
     $user_id = get_userid();
@@ -14,9 +14,9 @@
         <title><?php echo $title; ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv='cache-control' content='no-cache'>
-        <meta http-equiv='expires' content='0'>
-        <meta http-equiv='pragma' content='no-cache'>
+        <!--<meta http-equiv='cache-control' content='no-cache'>-->
+        <!--<meta http-equiv='expires' content='0'>-->
+        <!--<meta http-equiv='pragma' content='no-cache'>-->
         <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
         
         <!-- Latest compiled and minified CSS -->
@@ -37,18 +37,18 @@
             
             <!-- main-header -->
             <div class="container-fluid sticky-top page-header">
-                <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" style="margin-bottom: 0px !important;">
-                  <a href="https://travelpackagebids.com" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <header class="d-flex flex-wrap justify-content-center py-3 mb-4" style="margin-bottom: 0px !important;">
+                  <a href="/travelpackagebids" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-4">Travelpackagebids</span>
                   </a>
 
                   <ul class="nav nav-pills justify-content-center">
-                    <li class="nav-item"><a href="https://travelpackagebids.com" class="nav-link text-white">Home</a></li>
+                    <li class="nav-item"><a href="/travelpackagebids" class="nav-link text-white">Home</a></li>
                     <?php 
                         if($user_id <= 0) {
                     ?>
-                        <li class="nav-item"><a href="https://travelpackagebids.com/user/sign-in.php" class="nav-link text-white user-login">Log In</a></li>
-                        <li class="nav-item"><a href="https://travelpackagebids.com/user/sign-up.php" class="nav-link text-white user-signup">Sign Up</a></li>
+                        <li class="nav-item"><a href="/travelpackagebids/user/sign-in.php" class="nav-link text-white user-login">Log In</a></li>
+                        <li class="nav-item"><a href="/travelpackagebids/user/sign-up.php" class="nav-link text-white user-signup">Sign Up</a></li>
                     <?php
                         } 
                         else {
@@ -68,9 +68,9 @@
                             </strong>
                           </a>
                           <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
-                            <li><a class="dropdown-item" href="https://travelpackagebids.com/user/profile.php?user=member"><i class="fa-solid fa-user"></i> My profile</a></li>
+                            <li><a class="dropdown-item" href="/travelpackagebids/user/profile.php?user=member"><i class="fa-solid fa-user"></i> My profile</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item btn" href="https://travelpackagebids.com/user/profile.php"><i class="fa-solid fa-box"></i> My packages</a></li>
+                            <li><a class="dropdown-item btn" href="/travelpackagebids/user/profile.php"><i class="fa-solid fa-box"></i> My packages</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item btn logout" role="button"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a></li>
                           </ul>
@@ -86,7 +86,6 @@
             <?php 
             	if($title=="TravelPackaeBids | Home"){
             ?>
-
 		            <!-- jumbotron -->
 		            <div class="jumbotron jumbotron-fluid bg-light page-content-intro" style="padding-top: 20px;">
 		                <div class="container-fluid" style="color: white">
@@ -97,7 +96,7 @@
 		                        <i class="fa-solid fa-bars-staggered"></i>
 		                        Live listings: <span style="margin-right: 10px;"><?php echo $packages->noofpackages; ?></span>
 		                        
-		                        <span style="font-weight: bold;">Ready to sell? <a href="https://travelpackagebids.com/user/sign-up.php" class="sellnow" style="color: white">Sell Now</a></span>
+		                        <span style="font-weight: bold;">Ready to sell? <a href="<?php echo '/travelpackagebids/user/'.(isset($user_id) && !empty($user_id) ? 'profile.php' : 'sign-up.php'); ?>" class="sellnow" style="color: white">Sell Now</a></span>
 		                    </p>
 		                </div>
 		            </div>
@@ -141,7 +140,7 @@
                                 
                             </div>
                             
-                            <!-- action="https://travelpackagebids.com/app/src/bids/receive.php" method="POST" autocomplete="off" -->
+                            <!-- action="/travelpackagebids/app/src/bids/receive.php" method="POST" autocomplete="off" -->
                             <div id="bid-form" style="margin-top: 15px;">
                                 <!-- make an offer -->
                                 <!-- <label for="package-bid" class="form-label fw-bold">Make an Offer</label> -->
@@ -223,10 +222,10 @@
         
         <!-- my scripts -->
         <!-- <script src="js/countries.js"></script> -->
-        <script src="js/user.js"></script>
-        <script src="js/bids.js"></script>
-        <script src="js/comments.js"></script>
-        <script src="js/layout.js"></script>
+        <script src="js/user5.js"></script>
+        <script src="js/bids4.js"></script>
+        <script src="js/comments4.js"></script>
+        <script src="js/layout4.js"></script>
     </body>
 
 </html>

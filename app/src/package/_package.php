@@ -1,18 +1,20 @@
 <?php
 
 	// start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php';
 
 	// include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/validation/validation.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 	require_once 'model.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/model.php';
 
 	use Controllers\Packages;
 	use Controllers\Comments;
 	use Controllers\Replies;
 	use Controllers\Bids;
 	use Controllers\Profiles;
+	use Controllers\Users;
 
 	Class _Package {
 		private $request;
@@ -73,22 +75,8 @@
 			if(isset($package->id)){
 				// CHECK IF USER HAS A BID FOR THIS PACKAGE
 				$user_id = $this->user_id;
-				// $bid = Bids::find_bybidder($user_id, $package->id);
-				// $agent_name = '';
-
-    // 			// PROFILE
-    // 			$user = $package->user;
-    // 			$profile = Profiles::find_byuser($user->id);
-
-    // 			$phone_code = $profile->country->phone_code;
-    // 			$phone = $phone_code.$profile->phone;
-    // 			$agent_name = 'by '.$profile->name;
-			 //    $no_bid = isset($bid->bidder_id) ? '' : 'no-bid';
 
 				$page_title = $package->country.', '.$package->state;
-				// .' <span style="font-weight: lighter;font-size: 15px;color: grey;text-transform: lowercase;display: none;" class="agent-name agent-name-'.$package->id.' '.$no_bid.'">'.$agent_name.'</span>';
-
-				// $this->page_nav($page_title); // show page header, nav
 			?>      
 		        
 		        <!-- main body -->
@@ -143,7 +131,7 @@
 				                    <?php
 		                        	}
 		                            ?>
-		                            <a href="https://travelpackagebids.com" class="btn btn-secondary go-back">
+		                            <a href="/travelpackagebids" class="btn btn-secondary go-back">
 		                                <i class="fa-solid fa-left-long"></i> Go Back
 		                            </a>
 		                        </div>
@@ -164,7 +152,7 @@
 			<?php
 			}
 			else{
-				echo '<div>You have not requested for an existing package. <br>Kindly check out, our other <a href="https://travelpackagebids.com">travel packages</a>, below.</div>';
+				echo '<div>You have not requested for an existing package. <br>Kindly check out, our other <a href="/travelpackagebids">travel packages</a>, below.</div>';
 			}
 		}
 
@@ -249,8 +237,8 @@
 			$package = $comment->package;
 			$is_owner = $this->is_owner($user, $package);
 			
-			$name = explode('@', $user->email);
-			$name = $name[0].($is_owner ? ' <span style="color: #03C6C1;">(OWNER)</span>' : ''); // replace this with profile->name... later
+			$profile = $this->get_user($user->id);
+			$name = $profile->name.($is_owner ? ' <span style="color: #03C6C1;">(OWNER)</span>' : ''); // replace this with profile->name... later
 
 			$user_comment = $comment->comment;
 			$date_created = format_date('M Y', $comment->created_at);
@@ -354,5 +342,30 @@
 
 	        return $package;
 	    }
+
+		function get_user($user_id){
+			$_profile = new Profile('', '', '', '');
+
+			if(isset($user_id)){
+				$profile = Profiles::find_byuser($user_id);
+
+				if(isset($profile->id)){
+					$country = $profile->country->name;
+					$phone_code = $profile->country->phone_code;
+
+					$_profile = new Profile($country, $profile->name, $profile->phone, $profile->id, $phone_code);		  
+				}
+				else{
+					$user = Users::find($user_id);
+
+					if(isset($user->id)){
+                    	$name = isset($user->email) ? explode('@', $user->email)[0] : "";
+						$_profile = new Profile('', $name, '', '', '');
+					}
+				}
+			}
+
+			return $_profile;
+		}
 	}
 ?>

@@ -13,24 +13,26 @@ class Profile_Menu{
     
     show_body(){
         const _profilemenu = new Profile_Menu();
-        
+
         // $(".profile-menu").click(function(){
         let nav_page = _profilemenu.get_page();
 
-       $('.page-title').html(nav_page); // change page title
-       
-       let active_menu = ".profile-menu:contains('"+nav_page+"')";
-       _profilemenu.change_activemenu(active_menu); // change active menu
+        $('.page-title').html(nav_page); // change page title
+
+        let active_menu = ".profile-menu:contains('"+nav_page+"')";
+        _profilemenu.change_activemenu(active_menu); // change active menu
     }
 
     get_page(){
-        let on_profilepage = $('.user-profile');
-        let on_packagespage = $('.package-details');
+        let on_profilepage = $('.user-profile'); // profile page
+        let on_packagespage = $('#create-a-package'); // packages page
 
         if(on_profilepage.length > 0)
             return 'My profile';
         else if(on_packagespage.length > 0)
             return 'My packages';
+        // else
+        //     return 'Dashboard';
 
         return;
     }

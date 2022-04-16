@@ -9,7 +9,7 @@
 	     
 	    protected $table = 'users';
 
-	    protected $fillable = ['email', 'password', 'userrole_id', 'is_verified'];
+	    protected $fillable = ['email', 'password', 'userrole_id', 'is_verified', 'status_id'];
         
         // PARENT TO (userconfirmation) 
 	    public function userconfirmations()
@@ -41,6 +41,11 @@
 	    public function userrole()
 		{
 		    return $this->belongsTo('\Models\Userrole');
+		}
+
+		public function status()
+		{
+		    return $this->belongsTo('\Models\Status');
 		}
 	}
 ?>

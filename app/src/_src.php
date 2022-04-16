@@ -19,7 +19,7 @@
 		// set response, to be shown to the user after page failure
 		setresponse($statusmessage);
 
-		gotopage('https://travelpackagebids.com/user/'.$page.'.php');
+		gotopage('/travelpackagebids/user/'.$page.'.php');
 	}
 
 	function setresponse($response){
@@ -90,8 +90,8 @@
 		$noof_pages = noof_pages($items, $noof_items); // no of pages
 		$last_page = $noof_pages;
 
-		$disable_firstpage = $page==1 || $page=='first' || empty($page) ? 'disabled' : '';
-		$disable_lastpage = $page==$last_page || $page=='last' || $noof_pages==1 ? 'disabled' : '';
+		$disable_firstpage = $page<=1 || $noof_pages<=1 || $page=='first' || empty($page) ? 'disabled' : '';
+		$disable_lastpage = $page==$last_page || $page=='last' || $noof_pages<=1 ? 'disabled' : '';
 	?>
         <!-- pagination -->
         <nav aria-label="Page navigation" style="margin-top: 20px;">
@@ -107,7 +107,7 @@
                 <?php
                 	for ($i=1; $i < $noof_pages; $i++) {
                 		$curr_page = $i + 1;
-                		$disabled = $page==$curr_page ? 'disabled' : ''; // if you move the current page
+                		$disabled = $page==$curr_page || ($curr_page==$noof_pages && $page=='last') ? 'disabled' : ''; // if you move the current page
 
                 		$page_item = '<li class="page-item '.$disabled.'">
                     					<a class="page-link" href="'.$base_url.'page='.$curr_page.'">'.$curr_page.'</a>
@@ -124,5 +124,29 @@
             </ul>
         </nav>
 	<?php
+	}
+
+	function useris_admin(){
+		if(isset($_SESSION['travelpackagebids.com']['is_admin']))
+    		return $_SESSION['travelpackagebids.com']['is_admin'];
+
+    	return false;
+	}
+
+	// ADMIN
+	function set_searchvalues($parent, $search, $filter){
+		$_SESSION['travelpackagebids.com'][$parent]['search'] = $search;
+		$_SESSION['travelpackagebids.com'][$parent]['filter'] = $filter;
+
+		return array('value' => $search, 'filter' => $filter);
+	}
+
+	function get_searchvalues($parent){
+		$web = $_SESSION['travelpackagebids.com'];
+
+		$search = isset($web[$parent]['search']) ? $web[$parent]['search'] : '';
+		$filter = isset($web[$parent]['filter']) ? $web[$parent]['filter'] : '';
+
+		return array('value' => $search, 'filter' => $filter);
 	}
 ?>

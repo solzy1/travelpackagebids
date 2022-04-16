@@ -1,18 +1,27 @@
 <?php
 	// namespace Admin;
 	
-	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php'; // start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php'; // include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php'; // start up eloquent
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/validation/validation.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php'; // include the validation file that holds the class Validation
 
 	// use User\Validation; // call the validation class
+
+	use Controllers\Userroles;
+	use Controllers\Statuss;
 
 	Class _User {
 		private $page_title;
 
 		function __construct($page_title = "") {
 			$this->page_title = $page_title;
+			
 			$this->start_session();
+			$user_id = get_userid();
+			
+			if(isset($user_id) && !empty($user_id)){
+			    gotopage('/travelpackagebids');
+			}
 		}
 
 		function validate($inputtype, $value){ 
@@ -60,10 +69,10 @@
 			$useraction = [];
 
 			if($page_title=="Sign In"){
-				$useraction = array('question' => '','action' => 'Create your Account', 'link' => 'https://travelpackagebids.com/user/sign-up.php');
+				$useraction = array('question' => '','action' => 'Create your Account', 'link' => '/travelpackagebids/user/sign-up.php');
 			}
 			else{
-				$useraction = array('question' => 'Already have an account? ','action' => 'Sign In', 'link' => 'https://travelpackagebids.com/user/sign-in.php');
+				$useraction = array('question' => 'Already have an account? ','action' => 'Sign In', 'link' => '/travelpackagebids/user/sign-in.php');
 			}
 
 			echo '<small>'.$useraction['question'].'</small>
@@ -76,13 +85,20 @@
         // USER PROFILE
         function profile_access($user){
             $_SESSION['travelpackagebids.com']['loggedin'] = true;
+            $_SESSION['travelpackagebids.com']['is_admin'] = $this->is_admin($user);
             $_SESSION['travelpackagebids.com']['user_id'] = $user->id;
         }
+        
+        function is_admin($user){
+        	$role = Userroles::find($user->userrole_id);
 
-        public function logout(){
-        	unset($_SESSION['travelpackagebids.com']);
-
-        	echo 'success';
+        	return isset($role->name) && $role->name=='admin' ? true : false;
         }
+
+		public function get_status($status){
+			$status = Statuss::find_bystatus($status);
+
+			return $status;
+		}
 	}
 ?>

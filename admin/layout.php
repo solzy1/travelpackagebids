@@ -2,17 +2,18 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/_profile.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/package/list.php';
 
-    $title = "TravelPackaeBids | Profile";
+    $title = "Packages"; 
 
     // prevent access to profile page, without logging in
     $user_id = get_userid();
-    if($user_id<=0)
-        gotopage('/travelpackagebids');
 
     $profile = new _Profile();
+    $is_admin = $profile->useris_admin(); // check if user is admin
+
+    if($user_id<=0 || !$is_admin)
+        gotopage('/travelpackagebids');
 
     $user = $profile->get_user($user_id); // get user details
-    $is_admin = $profile->useris_admin(); // check if user is admin
 
     $response_msg = '';
     $success = true;
@@ -28,20 +29,18 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title><?php echo $title; ?></title>
+        <title>TravelPackaeBids | <?php echo $title; ?></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!--<meta http-equiv='cache-control' content='no-cache'>-->
-        <!--<meta http-equiv='expires' content='0'>-->
-        <!--<meta http-equiv='pragma' content='no-cache'>-->
 
         <!-- Latest compiled and minified CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-        <link rel="stylesheet" href="../css/profile.css">
-        <link href="../css/sidebars.css" rel="stylesheet">
+        <link rel="stylesheet" href="/travelpackagebids/css/profile.css">
+        <link href="/travelpackagebids/css/sidebars.css" rel="stylesheet">
+        <link href="/travelpackagebids/css/admin.css" rel="stylesheet">
         
         <style>
             body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
@@ -70,16 +69,8 @@
 
               <ul class="nav nav-pills justify-content-center">
                 <li class="nav-item"><a href="/travelpackagebids" class="nav-link text-white">Home</a></li>
-                <li class="nav-item"><a href="/travelpackagebids/user/profile.php" class="nav-link text-white profile-menu">My packages</a></li>
-
-                <?php 
-                if($is_admin){
-                ?>
-                    <li class="nav-item"><a href="/travelpackagebids/admin" class="nav-link text-white profile-menu">Dashboard</a></li>
-                <?php
-                }
-                ?>
-
+                <li class="nav-item"><a href="/travelpackagebids/admin" class="nav-link text-white profile-menu">Packages</a></li>
+                <li class="nav-item"><a href="/travelpackagebids/admin" class="nav-link text-white profile-menu">Travel agents</a></li>
                 <li class="nav-item"><a href="/travelpackagebids/user/profile.php?user=member" class="nav-link text-white profile-menu">My profile</a></li>
                 <li class="nav-item dropdown" style="padding-top: 9px">
                   <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
@@ -119,28 +110,22 @@
                       Home
                     </a>
                   </li>
-
-                    <?php 
-                    if($is_admin){
-                    ?>
-                        <li class="nav-item">
-                            <a href="/travelpackagebids/admin" class="nav-link text-white d-flex profile-menu" aria-current="page">
-                                <i class="bi bi-speedometer2" style="width: 16px;height: 16px;margin-right: 10px;"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                    <?php
-                    }
-                    ?>
                   <li>
-                    <a href="/travelpackagebids/user/profile.php" class="nav-link text-white d-flex profile-menu">
-                        <i class="bi bi-box2-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>My packages
+                    <a href="/travelpackagebids/admin/packages" class="nav-link text-white d-flex profile-menu">
+                        <i class="bi bi-boxes" style="width: 16px;height: 16px;margin-right: 10px;"></i>
+                        Packages
                     </a>
                   </li>
                   <li>
-                    <a href="/travelpackagebids/user/profile.php?user=member" class="nav-link text-white d-flex profile-menu" >
-                        <i class="bi bi-person-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>
-                      My profile
+                    <a href="/travelpackagebids/admin/travel-agents" class="nav-link text-white d-flex profile-menu">
+                        <i class="bi bi-people-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>
+                        Travel agents
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/travelpackagebids/user/profile.php?user=member" class="nav-link text-white d-flex profile-menu">
+                        <i class="bi bi-person-circle" style="width: 16px;height: 16px;margin-right: 10px;"></i>
+                        My profile
                     </a>
                   </li>
                 </ul>
@@ -157,7 +142,7 @@
                     </strong>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href=""><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a class="dropdown-item" href="/travelpackagebids/user/profile.php"><i class="fa-solid fa-user"></i> Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item logout" role="button"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a></li>
                   </ul>
@@ -167,46 +152,32 @@
             
             <!-- main page content -->
             <div class="container-fluid main-body" style="z-index: 9 !important">
-                <div class="status-report text-center" style="color: white;background-color: <?php echo $success ? 'green' : 'red'; ?>;opacity: <?php echo empty($response_msg) ? '0' : '1'; ?>;padding: 5px;">
-                    <?php echo $response_msg; ?>
-                </div>
                 
                 <!-- header -->
                 <div style="margin-bottom: 20px;">
-                    <p class="page-link page-title bg-light" style="color: black;font-weight: bold;font-size: 20px;">My Packages</p>
+                    <p class="page-link page-title bg-light" style="color: black;font-weight: bold;font-size: 20px;"><?php echo $title; ?></p>
                 </div>
                 <!-- header (end) -->
                 
                 <!-- body -->   
                 <div class="main-body-content container-fluid" style="padding: 0;">
 
+                    <div class="status-report text-center" style="color: white;background-color: <?php echo $success ? 'green' : 'red'; ?>;opacity: <?php echo empty($response_msg) ? '0' : '1'; ?>;padding: 5px;">
+                        <?php echo $response_msg; ?>
+                    </div>
+
                     <!-- main body -->
                     <div class="row">
-
+                        
                         <?php 
-                            if(isset($_GET['user'])){
-                                $user = isset($_GET['user']) ? $_GET['user'] : '';
-
-                                $profile->form($user_id);
-                            }
-                            else{
-                                $list = new Package_List();
-
-                                $page = isset($_GET['page']) ? $_GET['page'] : '';
-
-                                $list->show_userpackages($page);
-
-                                $list->packages_pagination($page);
-                            }
+                            main_body();
                         ?>
-
                     </div>
 
                     <!-- main body (end) -->
                 </div>
             </div>
             <!-- main page content (end) -->
-            
             
             <!-- footer -->
             
@@ -215,18 +186,29 @@
         </div>
         <!-- page content (end) -->
         
+        <div class="modal fade" id="modal-package-bids" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop-bids" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center fw-bold" id="staticBackdrop-bids">Bids</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body" style="margin-top: 10px;padding-top: 0">
+
+                        <div id="package-bids" class="container-fluid">
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
-
-        <?php 
-            if(!isset($_GET['user'])){
-                // create package (form)
-                $list->createpackage_form($user);
-
-                // show the bids container
-                $list->view_bids();
-            }
-        ?>
-
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         
@@ -236,13 +218,20 @@
         <script src="https://kit.fontawesome.com/6030f7206a.js" crossorigin="anonymous"></script>
         
         <!-- my scripts -->
-        <script src="../js/profile-menu4.js"></script>
-        <script src="../js/countries4.js"></script>
-        <script src="../js/packages4.js"></script>
+        <script src="/travelpackagebids/js/profile-menu4.js"></script>
+        <script src="/travelpackagebids/js/countries4.js"></script>
+        <script src="/travelpackagebids/js/packages4.js"></script>
         
-        <script src="../js/user5.js"></script>
-        <script src="../js/profile4.js"></script>
-        <script src="../js/sidebars.js"></script>
+        <script src="/travelpackagebids/js/user5.js"></script>
+        <script src="/travelpackagebids/js/profile4.js"></script>
+        <script src="/travelpackagebids/js/sidebars.js"></script>
+
+        <!-- ADMIN -->
+        <script src="/travelpackagebids/js/admin/list.js"></script>
+        <script src="/travelpackagebids/js/admin/delete.js"></script>
+        <script src="/travelpackagebids/js/admin/activate.js"></script>
+        <script src="/travelpackagebids/js/admin/search.js"></script>
+        <script src="/travelpackagebids/js/admin/_admin.js"></script>
     </body>
 
 </html>

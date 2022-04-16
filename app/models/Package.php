@@ -2,14 +2,11 @@
 	namespace Models;
 	 
 	use Illuminate\Database\Eloquent\Model;
-	use Illuminate\Database\Eloquent\SoftDeletes;
 	 
 	class Package extends Model {
-		use SoftDeletes;
-	     
 	    protected $table = 'packages';
 
-	    protected $fillable = ['user_id', 'state_id', 'people', 'from_date', 'to_date', 'description'];
+	    protected $fillable = ['user_id', 'state_id', 'people', 'from_date', 'to_date', 'description', 'status_id'];
         
         // PARENT TO (userconfirmation) 
 	    public function bids()
@@ -31,6 +28,11 @@
 		public function state()
 		{
 		    return $this->belongsTo('\Models\State');
+		}
+
+		public function status()
+		{
+		    return $this->belongsTo('\Models\Status');
 		}
 	}
 ?>

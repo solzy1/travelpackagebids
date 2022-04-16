@@ -25,7 +25,7 @@
 			// More headers
 			$headers .= 'From: <webuildwebsitesfast@gmail.com>' . "\r\n";
 
-			echo mail($to, $subject, $message, $headers). ' : email sent';
+			mail($to, $subject, $message, $headers);
 		}
 		
 		function bodytemplate(){

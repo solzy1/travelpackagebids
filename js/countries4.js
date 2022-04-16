@@ -7,7 +7,7 @@ class Countries {
     load_json(){
         let all_countries = [];
 
-        $.getJSON('https://travelpackagebids.com/js/json/countries+states.json', function (resp) {
+        $.getJSON('/travelpackagebids/js/json/countries+states.json', function (resp) {
             const _countries = new Countries();
 
             for (let i = 0; i < resp.length; ++i) {
