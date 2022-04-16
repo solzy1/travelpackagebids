@@ -1,6 +1,6 @@
 <?php 
 	include_once '_user.php';
-	include_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+	include_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 
 	use Controllers\Users;
 	use Controllers\Userroles;
@@ -54,7 +54,7 @@
 		}
 
 		function set_password($password, $user){
-            $status = $this->get_status('inactive');
+            $status = $this->get_status('active');
 
             if(isset($status->id)){
 	        	// update password

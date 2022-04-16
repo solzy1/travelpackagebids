@@ -117,21 +117,6 @@
 			return $packages;
         }
         
-		public function is_userloggedin(){
-			$user_loggedin = is_userloggedin();
-
-            return '<input type="hidden" id="user-loggedin" value="'.$user_loggedin.'">';
-		}
-
-		// PROFILE
-		public function get_profile(){
-			$user_id = $this->user_id;
-
-			$profile = new _Profile();
-
-			return $profile->get_user($user_id);
-		}
-        
 		public function pagination($page){
             // packages	
             $packages = $this->get_packages();

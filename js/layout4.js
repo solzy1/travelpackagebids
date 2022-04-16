@@ -12,7 +12,8 @@ $(function () {
 	_bids.create_offer();
 	_bids.on_modalshown();
 	_bids.on_modalhidden();
-	
+	_bids.activate();
+
 	// user
 	const _user = new User();
 
@@ -76,4 +77,10 @@ const prevent_reply = function(_this){
 
 		_comments.prevent_reply(_this);
 	}
+}
+
+const bid_status = function(_this){
+	const _bids = new Bids();
+
+	_bids.activate(_this);
 }

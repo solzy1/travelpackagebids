@@ -26,13 +26,17 @@ class Profile_Menu{
     get_page(){
         let on_profilepage = $('.user-profile'); // profile page
         let on_packagespage = $('#create-a-package'); // packages page
+        // ADMIN
+        let page = $.trim($('#page-url').val());
 
         if(on_profilepage.length > 0)
             return 'My profile';
         else if(on_packagespage.length > 0)
             return 'My packages';
-        // else
-        //     return 'Dashboard';
+        else if (page=='packages')
+            return 'Packages';
+        else if (page=='travel_agents')
+            return 'Travel agents';
 
         return;
     }

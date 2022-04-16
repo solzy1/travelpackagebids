@@ -29,7 +29,7 @@
 				if(!empty($user) && $email==$user->email){
 					$user = Users::find_byuser($user->id); // retrieve the user password for that users
 
-					// check if the user input for password, matches the user password for that user
+					// // check if the user input for password, matches the user password for that user
 					if($pass==$user->password && $user->is_verified){
 						$userrole = Userroles::find($user->userrole_id);
 

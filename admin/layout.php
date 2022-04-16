@@ -70,7 +70,7 @@
               <ul class="nav nav-pills justify-content-center">
                 <li class="nav-item"><a href="/travelpackagebids" class="nav-link text-white">Home</a></li>
                 <li class="nav-item"><a href="/travelpackagebids/admin" class="nav-link text-white profile-menu">Packages</a></li>
-                <li class="nav-item"><a href="/travelpackagebids/admin" class="nav-link text-white profile-menu">Travel agents</a></li>
+                <li class="nav-item"><a href="/travelpackagebids/admin/travel-agents" class="nav-link text-white profile-menu">Travel agents</a></li>
                 <li class="nav-item"><a href="/travelpackagebids/user/profile.php?user=member" class="nav-link text-white profile-menu">My profile</a></li>
                 <li class="nav-item dropdown" style="padding-top: 9px">
                   <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
@@ -227,6 +227,7 @@
         <script src="/travelpackagebids/js/sidebars.js"></script>
 
         <!-- ADMIN -->
+        <script src="/travelpackagebids/js/bids4.js"></script>
         <script src="/travelpackagebids/js/admin/list.js"></script>
         <script src="/travelpackagebids/js/admin/delete.js"></script>
         <script src="/travelpackagebids/js/admin/activate.js"></script>

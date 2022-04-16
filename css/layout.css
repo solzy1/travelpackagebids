@@ -29,12 +29,12 @@
     padding-right: 30px !important;
     padding-left: 30px !important;
     background-color: #141424 !important;
-    padding-bottom: 1px !important;
+    /*padding-bottom: 1px !important;*/
     margin-bottom: 0px !important;
 }
 .page-content-intro {
     background-color: #141424 !important;
-    padding: 5px 40px 30px 40px;
+    padding: 0px 40px 30px 40px;
 }
 .intro-title {
     font-size: 35px !important;

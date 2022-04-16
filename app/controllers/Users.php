@@ -13,12 +13,26 @@
 	    }
 
 	    // READ
-		public static function index($filter = []){
-			$status = isset($filter['status']) ? $filter['status'] : 'active';
+		public static function index($search = []){
+	        $value = isset($search['value']) ? $search['value'] : '';
+	        $filter = isset($search['filter']) ? $search['filter'] : '';
 
-	        $get = User::join('Status', 'Status.id', 'Users.status_id')->where('Status.status', $status)->select("Users.*");
+	        $users = User::where('email', 'like', '%'.(!empty($filter) ? '' : $value).'%'); // if filter is not empty, return all users, else
 
-	        return $get->get();
+	        if($filter=="Email"){
+	        	$users = $users->where('email', 'like', '%'.$value.'%');
+	        }
+	        else if($filter=="Country"){
+	        	$users = $users->join('Profiles', 'Profiles.user_id', 'Users.id')->join('Countries', 'Countries.id', 'Profiles.country_id')->where('Countries.name', 'like', '%'.$value.'%');
+	        }
+	        else if($filter=="Name"){
+	        	$users = $users->join('Profiles', 'Profiles.user_id', 'Users.id')->where('Profiles.name', 'like', '%'.$value.'%');
+	        }
+	        else if($filter=="Phone number"){
+	        	$users = $users->join('Profiles', 'Profiles.user_id', 'Users.id')->join('Countries', 'Countries.id', 'Profiles.country_id')->where('Countries.phone_code', 'like', '%'.$value)->orWhere('Profiles.phone', 'like', $value.'%');
+	        }
+
+	        return $users->join('Userroles', 'Userroles.id', 'Users.userrole_id')->where('Userroles.name', '!=', 'admin')->select('Users.*')->get();
 	    }
 
 	    public static function find($user_id){
@@ -26,12 +40,12 @@
 	    }
 
 	    public static function find_byemail($email){
-	    	$found = User::where('email', 'like', $email)->join('Status', 'Status.id', 'Users.status_id')->where('Status.status', 'active')->select('Users.*')->first();
+	    	$found = User::where('email', 'like', $email)->first();
 
 	        return $found;
 	    }
 
-	    public static function find_byuser($user_id){
+	    public static function find_byuser($user_id){ 
 	        $user = User::find($user_id);
 
 	        return $user;
@@ -47,6 +61,15 @@
 	        
 	        return $_update->save();
 	    }
+	    
+	    public static function update_status($id, $status_id){
+	    	if(is_array($id))
+	    		$_update = User::whereIn('id', $id);
+	    	else
+	        	$_update = User::find($id);
+
+	        return $_update->update(['status_id' => $status_id]);
+	    }
 
 	    public static function update_isverified($id, $is_verified){
 	        $_update = User::find($id);
@@ -59,7 +82,14 @@
 	    // DELETE
 	    public static function destroy($id)
 	    {
-	        $_destroy = User::find($id);
+	        $_destroy = User::join('Userroles', 'Userroles.id', 'Users.userrole_id')->where('Userroles.name', '!=', 'admin');
+
+	        if(is_array($id)){
+	    		$_destroy = $_destroy->whereIn('Users.id', $id);
+	        }
+	        else{
+		        $_destroy = $_destroy->where('Users.id', $id);
+		    }
 
 	        return $_destroy->delete();
 	    }

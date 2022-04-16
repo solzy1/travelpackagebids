@@ -13,7 +13,7 @@ class Delete{
 			if(deletenow){
 				const _list = new List();
 
-				let page_data = _list.get_pagedata(this, 'delete-package.php');
+				let page_data = _list.get_pagedata(this, 'delete.php');
 
 				let data = {id: page_data.row_id};
 
@@ -43,11 +43,17 @@ class Delete{
 			if(ids.length > 0){
 				const _delete = new Delete();
 
-				_list.toggle_btn(0, this); // dedelete this button
+				let deletenow = _delete.prompt_delete();
 
-				let data = {id: ids};
+				if(deletenow){
+					const _delete = new Delete();
 
-				_delete.send_multideleterequest(data);
+					_list.toggle_btn(0, this); // de-activate this button
+
+					let data = {id: ids};
+
+					_delete.send_multideleterequest(data);
+				}
 			}
 			else {
 				alert('No row was selected! Kindly select a row.');
@@ -58,10 +64,11 @@ class Delete{
 	send_multideleterequest(data){
 		const _list = new List();
 
-		let url = _list.get_pageurl('delete-package.php');
+		let url = _list.get_pageurl('delete.php');
 
 		$.post(url, data, function(result){
-			location.reload();
+			console.log(result);
+			// location.reload();
         });
 	}
 }

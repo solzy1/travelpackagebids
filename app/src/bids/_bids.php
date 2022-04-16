@@ -9,6 +9,8 @@
 	use Controllers\Packages;
 	use Controllers\Countries; 
 	use Controllers\States; 
+	use Controllers\Statuss; 
+	use Controllers\Bids; 
 
 	Class _Bids {
 		private $user_id;
@@ -23,6 +25,30 @@
 			// validate userinput
 			$validation = new Validation($inputtype, $value);
 			$value = $validation->validateinput();
+		}
+
+		public function useris_admin(){
+			return useris_admin();
+		}
+
+		public function get_status($status){
+			$status = Statuss::find_bystatus($status);
+
+			return $status;
+		}
+
+		public function update_status($id, $status){
+			$status_id = $this->get_status($status)->id;
+
+			$saved = Bids::update_status($id, $status_id);
+
+			if($saved){
+				echo 'success';
+
+				return;
+			}
+
+			echo 'failure';
 		}
 	}
 ?>

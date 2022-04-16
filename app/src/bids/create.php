@@ -35,7 +35,9 @@
 				$is_success = $saved;
 			}
 			else{
-				$bid = Bids::create($package_id, $user_id, $offer);
+				$status = $this->get_status('active');
+				
+				$bid = Bids::create($package_id, $user_id, $offer, $status->id);
 				$is_success = isset($bid->id);
 			}
 

@@ -24,3 +24,9 @@ $(function () {
 	_search.onenter();
 	_search.append_filtervalue();
 });
+
+const bid_status = function(_this){
+	const _bids = new Bids();
+
+	_bids.activate(_this);
+}

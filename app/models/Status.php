@@ -18,5 +18,10 @@
 		{
 		    return $this->hasMany('\Models\Package');
 		}
+
+		public function bids()
+		{
+		    return $this->hasMany('\Models\Bid');
+		}
 	}
 ?>

@@ -149,4 +149,12 @@
 
 		return array('value' => $search, 'filter' => $filter);
 	}
+
+    function deactivate($de_activate){
+    	if($de_activate){
+    		return 'pointer-events: none; text-decoration: none; cursor: not-allowed; opacity: 0.4';
+    	}
+
+    	return '';
+    }
 ?>

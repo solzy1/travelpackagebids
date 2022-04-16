@@ -21,7 +21,9 @@
         public function bid_offers($is_owner){
             $package_id = $this->bid->get_package_id(); // get package id
 
-            $bids = Bids::find_bypackage($package_id); //find all the bids for the given package
+            $useris_admin = $this->useris_admin();
+
+            $bids = Bids::find_bypackage($package_id, $useris_admin); //find all the bids for the given package
             $noof_bids = count($bids);
 
             $package = Packages::find($package_id);
@@ -77,6 +79,20 @@
                                         </a>
                                     </div>
                                     <!-- END bid-action -->
+                            <?php
+                                }
+
+                                if($useris_admin){
+                                    $status = $bid->status->status;
+                            ?>  
+                                <div>
+                                    <a onclick="bid_status(this)" class="btn btn-success activate-bid toggle-status-<?php echo $bid->id; ?>" role="button" title="Activate bid" data-bs-toggle="tooltip" data-bs-placement="top" style="margin-bottom: 5px;<?php echo deactivate($status=='active'); ?>">
+                                        <i class="fas fa-circle-check"></i>
+                                    </a>
+                                    <a onclick="bid_status(this)" class="btn btn-warning text-white deactivate-bid toggle-status-<?php echo $bid->id; ?>" role="button" title="De-activate bid" data-bs-toggle="tooltip" data-bs-placement="top" style="margin-bottom: 5px;<?php echo deactivate($status=='inactive'); ?>"><i class="fas fa-circle-pause"></i></a>
+
+                                    <input type="hidden" class="id" value="<?php echo $bid->id; ?>">
+                                </div>
                             <?php
                                 }
                             ?>

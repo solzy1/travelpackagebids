@@ -151,4 +151,42 @@ class Bids{
             $('#package-bids').html('');
         })
     }
+
+    // ACTIVATE AND DEACTIVATE BID
+    activate(_this){
+        if(_this!==undefined){
+            let is_activate = $(_this).hasClass('activate-bid');
+            let status = is_activate ? 'active' : 'inactive';
+
+            const _bid = new Bids();
+
+            let id = $.trim($(_this).parent().children('.id').val());
+
+            let url = '/travelpackagebids/app/src/bids/update-status.php';
+
+            let data = {id: id, status: status};
+
+            _bid.send_statusrequest(data, url, _this);
+        }
+    }
+
+    send_statusrequest(data, url, _this){
+        $.post(url, data, function(result){
+            if($.trim(result)=='success'){
+                const _bid = new Bids();
+
+                _bid.toggle_btn(data.id, _this); // de-activate button
+            }
+        });
+    }
+
+    toggle_btn(id, _this){
+        if(id > 0){
+            $('.toggle-status-'+id).css({'pointer-events': '', 'text-decoration': '', 
+                'cursor': 'pointer', 'opacity': ''}); // activate all
+        }
+
+        $(_this).css({'pointer-events': 'none', 'text-decoration': 'none', 
+                'cursor': 'not-allowed', 'opacity': 0.4}); // deactivate selected
+    }
 }
