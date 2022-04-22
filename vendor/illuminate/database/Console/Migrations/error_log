@@ -1,0 +1,32 @@
+[17-Apr-2022 10:07:58 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Console\Command' not found in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/BaseCommand.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/BaseCommand.php on line 7
+[17-Apr-2022 10:08:20 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Console\Command' not found in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/InstallCommand.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/InstallCommand.php on line 9
+[17-Apr-2022 10:08:58 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Console\Migrations\BaseCommand' not found in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/MigrateCommand.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/MigrateCommand.php on line 8
+[17-Apr-2022 10:09:20 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Console\Migrations\BaseCommand' not found in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/MigrateMakeCommand.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/MigrateMakeCommand.php on line 8
+[17-Apr-2022 10:10:45 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Console\Command' not found in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/RefreshCommand.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/RefreshCommand.php on line 9
+[17-Apr-2022 10:11:21 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Console\Migrations\BaseCommand' not found in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/ResetCommand.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/ResetCommand.php on line 9
+[17-Apr-2022 10:13:11 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Console\Migrations\BaseCommand' not found in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/RollbackCommand.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/RollbackCommand.php on line 9
+[17-Apr-2022 10:14:27 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Console\Migrations\BaseCommand' not found in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/StatusCommand.php:9
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Console/Migrations/StatusCommand.php on line 9

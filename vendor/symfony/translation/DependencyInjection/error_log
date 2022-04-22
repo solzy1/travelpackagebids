@@ -1,0 +1,12 @@
+[18-Apr-2022 11:45:21 UTC] PHP Fatal error:  Uncaught Error: Interface 'Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface' not found in /home/travelpa/public_html/vendor/symfony/translation/DependencyInjection/TranslationDumperPass.php:21
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/symfony/translation/DependencyInjection/TranslationDumperPass.php on line 21
+[18-Apr-2022 11:48:26 UTC] PHP Fatal error:  Uncaught Error: Interface 'Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface' not found in /home/travelpa/public_html/vendor/symfony/translation/DependencyInjection/TranslationExtractorPass.php:22
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/symfony/translation/DependencyInjection/TranslationExtractorPass.php on line 22
+[18-Apr-2022 12:00:48 UTC] PHP Fatal error:  Uncaught Error: Interface 'Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface' not found in /home/travelpa/public_html/vendor/symfony/translation/DependencyInjection/TranslatorPass.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/symfony/translation/DependencyInjection/TranslatorPass.php on line 19

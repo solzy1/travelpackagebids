@@ -1,0 +1,4 @@
+[19-Apr-2022 00:56:21 UTC] PHP Fatal error:  Uncaught Error: Interface 'Illuminate\Contracts\Container\Container' not found in /home/travelpa/public_html/vendor/illuminate/contracts/Foundation/Application.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/contracts/Foundation/Application.php on line 7

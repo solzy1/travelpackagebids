@@ -1,0 +1,4 @@
+[18-Apr-2022 19:51:20 UTC] PHP Fatal error:  Uncaught Error: Class 'Symfony\Component\HttpKernel\DataCollector\DataCollector' not found in /home/travelpa/public_html/vendor/symfony/translation/DataCollector/TranslationDataCollector.php:24
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/symfony/translation/DataCollector/TranslationDataCollector.php on line 24

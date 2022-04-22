@@ -1,0 +1,1 @@
+[16-Apr-2022 19:16:50 UTC] PHP Fatal error:  Trait 'Illuminate\Support\Traits\CapsuleManagerTrait' not found in /home/travelpa/public_html/vendor/illuminate/database/Capsule/Manager.php on line 13

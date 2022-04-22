@@ -1,0 +1,112 @@
+/*h4 {
+    width: 40px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+Using these will cut-off your long text based on your width and adds a ... on it.
+*/
+
+/* comments */
+#create-comment-content{
+  position: relative;
+}
+
+.prevent-comment {
+  position: absolute !important;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.1;
+  cursor: pointer;
+}
+
+.commentsection {
+  /*padding: 0 15px 0 15px;*/
+  padding: 0;
+}
+
+.commentheader {
+  font-size: 20px;
+}
+
+.guestcomment, .guestname, .guestemail, .guestwebsite {
+  margin-bottom: 20px;
+}
+
+.submitcommentcontainer {
+  width: 100%;
+  text-align: right;
+}
+
+.submitcomment {
+  text-transform: uppercase;
+}
+
+.guestcommenttop {
+  padding: 0px 10px 0px 0px;
+}
+
+.guestcomments {
+  margin-top: 20px;
+}
+
+.user-comment {
+  word-wrap: break-word !important;
+}
+
+.guestimage {
+  font-size: 30px;
+  color: white;
+}
+
+.guestcontent {
+  width: inherit;
+}
+
+.guestcommentdisplay {
+  background-color: #272727;
+  border-radius: 7px;
+  padding: 10px 10px 1px 10px;
+  margin-bottom: 12px;
+}
+
+.guestcontent .guestnamedisplay {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.guestcontent .guestnamedisplay span {
+  margin-left: 5px;
+  color: gray;
+  font-size: 12px;
+  font-weight: lighter;
+}
+
+.guestcontent p {
+  color: white;
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+.noofcomments {
+  font-size: 21px;
+}
+
+.replycomment {
+  background-color: inherit;
+  border: none;
+  color: gray;
+  text-transform: capitalize;
+  font-size: 16px;
+  padding: 0;
+}
+
+.replycomment:hover {
+  background-color: inherit;
+  color: white;
+}

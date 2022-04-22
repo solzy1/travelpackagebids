@@ -1,0 +1,17 @@
+[16-Apr-2022 20:28:47 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Connectors\Connector' not found in /home/travelpa/public_html/vendor/illuminate/database/Connectors/SqlServerConnector.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Connectors/SqlServerConnector.php on line 8
+[17-Apr-2022 04:08:33 UTC] PHP Fatal error:  Trait 'Illuminate\Database\DetectsLostConnections' not found in /home/travelpa/public_html/vendor/illuminate/database/Connectors/Connector.php on line 11
+[17-Apr-2022 04:08:37 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Connectors\Connector' not found in /home/travelpa/public_html/vendor/illuminate/database/Connectors/MySqlConnector.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Connectors/MySqlConnector.php on line 7
+[17-Apr-2022 04:08:51 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Connectors\Connector' not found in /home/travelpa/public_html/vendor/illuminate/database/Connectors/PostgresConnector.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Connectors/PostgresConnector.php on line 7
+[17-Apr-2022 04:09:15 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Connectors\Connector' not found in /home/travelpa/public_html/vendor/illuminate/database/Connectors/SQLiteConnector.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/database/Connectors/SQLiteConnector.php on line 7

@@ -1,0 +1,157 @@
+/* from profile.php page */
+.package-header {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 0px 0px 10px 0px;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.package-description {
+    font-size: 15px;
+    height: 70px !important;
+    white-space: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.package-description a {
+    text-decoration: none;
+    color: inherit;
+}
+/*---------------------------*/
+
+.page-content {
+    padding: 0px;
+}
+.page-header {
+    padding-right: 30px !important;
+    padding-left: 30px !important;
+    background-color: #141424 !important;
+    /*padding-bottom: 1px !important;*/
+    margin-bottom: 0px !important;
+}
+.page-content-intro {
+    background-color: #141424 !important;
+    padding: 0px 40px 30px 40px;
+}
+.intro-title {
+    font-size: 35px !important;
+    font-weight: bold !important;
+    width: inherit;
+    max-width: 700px !important;
+    word-wrap: break-word !important;
+}
+.intro-others {
+    font-size: 13px;
+    padding-top: 5px;
+}
+.main-body {
+    padding-right: 50px !important;
+    padding-left: 50px !important;
+}
+.package-details {
+    padding: 10px 12px 10px 12px !important;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.package-details:hover {
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.package-items span {
+    margin-right: 8px;
+}
+.package-items span i {
+    margin-right: 3px;
+}
+.package-details-container {
+    padding-left: 0px !important;
+    margin-bottom: 13px;
+}
+.package-details-container:hover {
+    /*background-color: white !important;*/
+    /*box-shadow: 3px 3px 1px #aaaaaa;*/
+}
+.place-bid {
+    background-color: inherit;
+    color: #03C6C1;
+    border-color: #03C6C1;
+}
+.place-bid:hover {
+    background-color: #03C6C1;
+    color: white;
+}
+.view-listing {
+    background-color: #3498DB;
+    color: white !important;
+}
+.view-listing:hover {
+    background-color: #2874A6;
+}
+.page-header-item {
+    color: white !important;
+}
+.website-title {
+    color: white !important;
+}
+.view-listing, .place-bid, .call-agent, .go-back {
+    margin-bottom: 5px;
+}
+.call-agent {
+    background-color: #03C6C1;
+    color: white;
+    border-color: #03C6C1;
+    cursor: pointer;
+}
+.call-agent:hover {
+    color: white;
+}
+/*LOGIN AND SIGN UP*/
+.user-login, .user-signup {
+    border-width: 1px !important;
+    border-color: #03C6C1 !important;
+}
+.user-login {
+    background-color: inherit !important;
+    color: #03C6C1 !important;
+    margin-right: 4px !important;
+}
+.user-login:hover {
+    background-color: #03C6C1 !important;
+    color: white !important;
+}
+.user-signup {
+    background-color: #03C6C1 !important;
+    color: white !important;
+}
+.user-signup:hover {
+    color: white !important;
+}
+
+/*BIDS*/
+.agent-offer {
+    padding: 2px 5px 2px 5px;
+    border-radius: 5px; 
+    line-height: 25px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 4px 5px 0px;
+}
+
+#package-bids {
+    margin: 0px !important;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.no-bidding{
+    cursor: not-allowed !important;
+    text-decoration: none;
+    border-color: red !important;
+    color: red !important;
+}
+
+.place-bid.no-bidding:hover {
+    color: white !important;
+    background-color: red !important;
+}

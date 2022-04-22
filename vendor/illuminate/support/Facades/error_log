@@ -1,0 +1,20 @@
+[16-Apr-2022 15:30:54 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Facade' not found in /home/travelpa/public_html/vendor/illuminate/support/Facades/Validator.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/support/Facades/Validator.php on line 8
+[17-Apr-2022 10:20:12 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Facade' not found in /home/travelpa/public_html/vendor/illuminate/support/Facades/Broadcast.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/support/Facades/Broadcast.php on line 10
+[18-Apr-2022 04:04:39 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Facade' not found in /home/travelpa/public_html/vendor/illuminate/support/Facades/Redirect.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/support/Facades/Redirect.php on line 8
+[18-Apr-2022 13:07:31 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Facade' not found in /home/travelpa/public_html/vendor/illuminate/support/Facades/Password.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/support/Facades/Password.php on line 8
+[19-Apr-2022 06:59:30 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Facade' not found in /home/travelpa/public_html/vendor/illuminate/support/Facades/Response.php:10
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/support/Facades/Response.php on line 10

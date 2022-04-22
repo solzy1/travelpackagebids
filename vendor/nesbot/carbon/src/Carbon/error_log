@@ -1,0 +1,8 @@
+[12-Apr-2022 02:30:59 UTC] PHP Fatal error:  Uncaught Error: Class 'Symfony\Component\Translation\Translator' not found in /home/travelpa/public_html/vendor/nesbot/carbon/src/Carbon/Translator.php:7
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/nesbot/carbon/src/Carbon/Translator.php on line 7
+[14-Apr-2022 00:39:31 UTC] PHP Fatal error:  Uncaught Error: Interface 'UpdateHelper\UpdateHelperInterface' not found in /home/travelpa/public_html/vendor/nesbot/carbon/src/Carbon/Upgrade.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/nesbot/carbon/src/Carbon/Upgrade.php on line 16
