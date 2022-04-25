@@ -1,4 +1,8 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
 	// start up eloquent
 	require_once '_packages.php';
 	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/_profile.php';
@@ -10,6 +14,7 @@
 	use Controllers\Profiles; 
 	use Controllers\Bids; 
 	use Controllers\Users; 
+	use Controllers\Blocked_Bidders; 
 
 	Class Packages_List {
 		private $user_id;
@@ -27,12 +32,30 @@
 			$packages = Packages::index(); // get the available packages
 			$this->noofpackages = count($packages); // count and store the no of available/live packages 
 		}
-        	
+        
+        public function user_isblocked($user, $package_id = 0){
+            if(isset($user->id)){
+                $blocked_user = $user->blocked_user;
+                
+                if(isset($blocked_user->id)){
+                    if($blocked_user->all_packages){
+                        return true;
+                    }
+                    else if(is_numeric($package_id) && $package_id > 0){
+                        $blocked_bidder = Blocked_Bidders::find_byuser($blocked_user->id, $package_id);
+                        
+                        return isset($blocked_bidder->id);
+                    }
+                }
+            }
+            
+            return false;
+        }	
+        
 		public function show($page){
 			$user_id = $this->user_id;
             
 			$loggedin_user = Users::find($user_id);
-			$user_isblocked = user_isblocked($loggedin_user, true);
 
             // PACKAGES
 			$packages = $this->get_packages();
@@ -55,6 +78,7 @@
 				$countdown++;
 
 				$package = $packages[$i];
+				
 				// get user
 				$user = $package->user;
 
@@ -76,7 +100,7 @@
 				$description = $package->description;
 				$noof_bids = count($package->bids); // count no of bids
 
-				$user = $package->user;
+			    $user_isblocked = $this->user_isblocked($loggedin_user, $package->id);
 		?>
 				<!-- package -->
                 <div class="col-sm-12 col-md-6 col-lg-4 package-details-container">

@@ -4,6 +4,7 @@
 	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/_profile.php';
 	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php';
 	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/packages/index.php';
 
 	use Controllers\Packages;
 	use Controllers\Countries;
@@ -49,13 +50,17 @@
 			$countdown = 0;
 			
 	        $max_desclen = 220; // max length for description
-
+            
+            $bidding_values = get_biddingvalues();
+            
+			$package_list = new Packages_List();
+            
 			for ($i=$start; $i < count($users); $i++) {  
 				// FILTER ALLOWED TO BID AND NOT ALLOWED TO BID
 				$user = $users[$i];
-
-				$user_isblocked = user_isblocked($user, true);
-
+                
+			    $user_isblocked = $package_list->user_isblocked($user, $bidding_values['package_id']);
+			    
 	        	$filter = isset($search['filter']) ? $search['filter'] : '';
 	        	
 	        	if($filter=="Barred from bidding" && !$user_isblocked){

@@ -48,7 +48,10 @@
 			// bid was created
 			if($is_success){
 				$package = Packages::find($package_id);
-				$this->sendemail($package, $offer);
+				
+				$deadline = $offer.' hour(s) from now '.date('Y-m-d h:i:s');
+				
+				$this->sendemail($package, $offer, $deadline);
 
 				echo 'success';
 			}
@@ -67,7 +70,7 @@
 		}
 
         // SEND EMAIL to emailaddress FOR USER CONFIRMATION
-        function emailbody($package, $bidder, $offer){
+        function emailbody($package, $bidder, $offer, $deadline){
          	// state and country
          	$state = $package->state;
          	$country = $state->country->name;
@@ -92,13 +95,13 @@
                 </p>
 
                 <p style="margin-bottom: 15px;">
-                 	You can <a href="tel:'.$bidder_phone.'" style="color: white;border: #03C6C1;background-color: #03C6C1;padding:5px 8px 5px 8px;text-decoration: none;border-radius: 6px;">Call '.$bidder->name.'</a>, to talk further about their offer of $'.$offer.'.
+                 	You can <a href="tel:'.$bidder_phone.'" style="color: white;border: #03C6C1;background-color: #03C6C1;padding:5px 8px 5px 8px;text-decoration: none;border-radius: 6px;">Call '.$bidder->name.'</a>, to talk further about their offer of $'.$offer.', which expires in '.$deadline.'
                 </p>
                 
                 <small style="font-size: 10px">NOTE: If you\'re not a Registered Travel Agent on <a href="https://travelpackagebids.com">TravelPackageBids</a>, Kindly Ignore this message. Thank you.</small>';
         }
         
-		function sendemail($package, $offer){
+		function sendemail($package, $offer, $deadline){
 		    $bidder = $this->bidders_profile();
 		    
 		    if(!empty($bidder->phone)){
@@ -106,7 +109,7 @@
     			$email = $package->user->email;
     
                 $subject = "[TravelPackageBids] You just received an Offer";
-                $body = $this->emailbody($package, $bidder, $offer);
+                $body = $this->emailbody($package, $bidder, $offer, $deadline);
                 
                 // send email
                 $email = new Email($email, $subject, $body);

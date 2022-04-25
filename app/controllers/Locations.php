@@ -24,6 +24,12 @@
 
 	    	return $found;
 	    }
+        
+	    public static function find_bycountry($country_id){
+	    	$get = Location::where('country_id', $country_id)->groupBy('user_id')->select('locations.*');
+
+	    	return $get->get();
+	    }
 
 	    public static function agentlocation_exists($user_id, $country_id, $state_id){
 	    	$found = Location::where('user_id', $user_id)->where('country_id', $country_id)->where('state_id', $state_id)->first();

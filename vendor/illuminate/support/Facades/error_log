@@ -18,3 +18,15 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in /home/travelpa/public_html/vendor/illuminate/support/Facades/Response.php on line 10
+[23-Apr-2022 06:17:00 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Facade' not found in /home/travelpa/public_html/vendor/illuminate/support/Facades/Config.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/support/Facades/Config.php on line 8
+[23-Apr-2022 06:17:01 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Facade' not found in /home/travelpa/public_html/vendor/illuminate/support/Facades/Schema.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/support/Facades/Schema.php on line 13
+[23-Apr-2022 13:04:38 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Facade' not found in /home/travelpa/public_html/vendor/illuminate/support/Facades/Cookie.php:8
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/illuminate/support/Facades/Cookie.php on line 8

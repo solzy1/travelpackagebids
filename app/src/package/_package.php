@@ -8,6 +8,7 @@
 	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
 	require_once 'model.php';
 	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/model.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/packages/index.php';
 
 	use Controllers\Packages;
 	use Controllers\Comments;
@@ -79,7 +80,10 @@
 				$page_title = $package->country.', '.$package->state;
 
 				$loggedin_user = Users::find($user_id);
-				$user_isblocked = user_isblocked($loggedin_user, true);
+				
+				$package_list = new Packages_List();
+				
+			    $user_isblocked = $package_list->user_isblocked($loggedin_user, $package->id);
 			?>      
 		        
 		        <!-- main body -->

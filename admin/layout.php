@@ -303,7 +303,7 @@
         <script src="https://travelpackagebids.com/js/admin/1_delete.js"></script>
         <script src="https://travelpackagebids.com/js/admin/1_activate.js"></script>
         <script src="https://travelpackagebids.com/js/admin/1_search.js"></script>
-        <script src="https://travelpackagebids.com/js/admin/1_locations.js"></script>
+        <script src="https://travelpackagebids.com/js/admin/2_locations.js"></script>
         <script src="https://travelpackagebids.com/js/admin/1_bids.js"></script>
         <script src="https://travelpackagebids.com/js/admin/1_admin.js"></script>
     </body>

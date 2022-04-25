@@ -19,7 +19,7 @@ class Locations{
             const _location = new Locations();
 
             // if a country and a state was selected
-            if(country!==''){
+            if(country!=='' && state!==''){
                 let user_id = $("#user-id").val();
                 let phone_code = $('.phone-code').val();
 
@@ -28,7 +28,8 @@ class Locations{
                 _location.send_agentlocation(location); // send country, state and user's id
             }
             else {
-                _location.report_status('failure', 0, 'Please select a country!');
+                _location.report_status('failure', 0, {success: '', 
+                    failure: 'Please select both a Country & it\'s State.', container: '.create-location-status'});
             }
     	});
     }

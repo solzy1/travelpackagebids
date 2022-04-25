@@ -57,7 +57,7 @@
 			$is_success = false;
 
 			$blockeduser = Blocked_Users::find_byuser($user_id); // check if user exists on the blocked user's list
-
+            
 			// if the travel agent exists, as one of the blocked users
 			if(isset($blockeduser->id)){ 
 				$blockedbidders = Blocked_Bidders::find_byuser($blockeduser->id); // check if user has been blocked on individual packages, before
@@ -69,11 +69,11 @@
 
 				// if the user wasn't removed from the list of blocked users
 				if(!$is_success){
-					$is_success = Blocked_Users::update($blockeduser->id, $user_id, $all_packages);
+					$is_success = Blocked_Users::update($blockeduser->id, $user_id, (is_numeric($package_id) && $package_id > 0 ? false : $all_packages));
 				}
 			}
 			else if($all_packages){ // else if, and only if request is 'to disable bidding'
-				$blockeduser = Blocked_Users::create($user_id, $all_packages);
+				$blockeduser = Blocked_Users::create($user_id, (is_numeric($package_id) && $package_id > 0 ? false : $all_packages));
 
 				$is_success = isset($blockeduser->id);
 			}

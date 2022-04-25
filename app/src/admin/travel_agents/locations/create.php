@@ -24,17 +24,12 @@
 			$phone_code = $location->get_phone_code();
 
 			$package = new _Package();
+			
 			$state_id = $package->create_state($state, $country, $phone_code);
 
-			// GET COUNTRY, if state is empty or not
-			if($state_id){
+			if(is_numeric($state_id) && $state_id > 0){
 				$country = States::find_bycountry($state_id);
-			}
-			else{
-				$country = Countries::find_bycountry($country);
-			}
 
-			if(isset($country->name)){
 				$location = $this->location_exists($user_id, $country->id, $state_id);
 
 				if(!isset($location->id)){
