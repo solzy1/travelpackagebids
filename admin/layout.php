@@ -70,6 +70,7 @@
               <ul class="nav nav-pills justify-content-center">
                 <li class="nav-item"><a href="https://travelpackagebids.com" class="nav-link text-white">Home</a></li>
                 <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php" class="nav-link text-white profile-menu">My packages</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php?bids=show" class="nav-link text-white profile-menu" title="All of the packages you've Bid on" data-bs-toggle="tooltip" data-bs-placement="auto">Other packages</a></li>
                 <li class="nav-item"><a href="https://travelpackagebids.com/admin" class="nav-link text-white profile-menu">Packages</a></li>
                 <li class="nav-item"><a href="https://travelpackagebids.com/admin/travel-agents" class="nav-link text-white profile-menu">Travel agents</a></li>
                 <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php?user=member" class="nav-link text-white profile-menu">My profile</a></li>
@@ -116,6 +117,13 @@
                         <i class="bi bi-box2-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>My packages
                     </a>
                   </li>
+
+                  <li>
+                    <a title="All of the packages you've Bid on" data-bs-toggle="tooltip" data-bs-placement="auto" href="https://travelpackagebids.com/user/profile.php?bids=show" class="nav-link text-white d-flex profile-menu">
+                        <i class="bi bi-box2-heart-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>Other packages
+                    </a>
+                  </li>
+                  
                   <li>
                     <a href="https://travelpackagebids.com/admin/packages" class="nav-link text-white d-flex profile-menu">
                         <i class="bi bi-boxes" style="width: 16px;height: 16px;margin-right: 10px;"></i>
@@ -295,16 +303,16 @@
         <script src="https://kit.fontawesome.com/6030f7206a.js" crossorigin="anonymous"></script>
         
         <!-- my scripts -->
-        <script src="https://travelpackagebids.com/js/1_profile-menu.js"></script>
+        <script src="https://travelpackagebids.com/js/2_profile-menu.js"></script>
         <script src="https://travelpackagebids.com/js/1_countries.js"></script>
-        <script src="https://travelpackagebids.com/js/1_packages.js"></script>
+        <script src="https://travelpackagebids.com/js/2_packages.js"></script>
         
         <script src="https://travelpackagebids.com/js/1_user.js"></script>
-        <script src="https://travelpackagebids.com/js/1_profile.js"></script>
+        <script src="https://travelpackagebids.com/js/6_profile.js"></script>
         <script src="https://travelpackagebids.com/js/sidebars.js"></script>
 
         <!-- ADMIN -->
-        <script src="https://travelpackagebids.com/js/2_bids.js"></script>
+        <script src="https://travelpackagebids.com/js/3_bids.js"></script>
         <script src="https://travelpackagebids.com/js/admin/1_list.js"></script>
         <script src="https://travelpackagebids.com/js/admin/1_delete.js"></script>
         <script src="https://travelpackagebids.com/js/admin/1_activate.js"></script>

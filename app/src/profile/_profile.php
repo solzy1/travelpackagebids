@@ -94,7 +94,7 @@
 	                <label for="profile-phone-cont" class="form-label fw-bold">Phone number</label>
 	                <div class="input-group mb-3" id="profile-phone-cont">
 	                    <span class="input-group-text" id="phone-code"><?php echo $_profile->phone_code; ?></span>
-	                    <input type="number" class="form-control" id="profile-phone" placeholder="Input your phone number" name="phone" maxlength="15" required value="<?php echo $_profile->phone; ?>">
+	                    <input type="number" class="form-control" id="profile-phone" placeholder="Input your phone number" name="phone" required value="<?php echo $_profile->phone; ?>">
 	                </div>
 
 	                <!-- if user wants to edit -->

@@ -19,6 +19,17 @@
 	        return $get;
 	    }
 
+	    public static function find_otherbids($package_id, $owner_id, $offer){
+	        $get = Bid::where('package_id', $package_id)
+	        		->where('bids.id', '!=', $owner_id)
+	        		->where('offer', '>', $offer)
+	        		->join('packages', 'packages.id', 'bids.package_id')
+	        		->join('users', 'users.id', 'bids.bidder_id')
+	        		->select('users.email as email', 'users.id as user_id', 'bids.offer as offer');
+
+	        return $get->get();
+	    }
+
 	    public static function find_bybidder($bidder_id, $package_id){
 	        $get = Bid::where('bidder_id', $bidder_id)->where('package_id', $package_id)->first();
 
@@ -31,7 +42,10 @@
 	        if(!$useris_admin){
 	        	$now = date('Y-m-d h:i:s');
 
-	        	$get = $get->join('status', 'status.id', 'bids.status_id')->where('status.status', 'active')->select('bids.*')->where('deadline', '>=', $now);
+	        	$get = $get->join('status', 'status.id', 'bids.status_id')
+	        			->where('status.status', 'active')
+	        			->select('bids.*')
+	        			->where('deadline', '>=', $now);
 	        }
 
 	        return $get->orderBy('deadline', 'asc')->get();

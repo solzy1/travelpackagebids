@@ -149,4 +149,72 @@ class Packages {
     getoffers_response(result){
         $('#package-bids').html(result);
     }
+
+    // configure date
+    configure_date(){
+    	const _packages = new Packages();
+
+    	let today = _packages.getmin_date();
+    	let tomorrow = _packages.setmin_todate(today);
+
+    	$("#package-from-date").attr('min', today);
+    	$("#package-to-date").attr('min', tomorrow);
+    }	
+
+    getmin_date(today = ''){
+    	if(today==='')
+    		today = new Date();
+
+    	let dd = today.getDate();
+    	let mm = today.getMonth() + 1;
+    	let yyyy = today.getFullYear();
+
+    	if(dd < 10){
+    		dd = '0' + dd;
+    	}
+    	if(mm < 10){
+    		mm = '0' + mm;
+    	}
+
+    	today = yyyy+'-'+mm+'-'+dd;
+
+    	return today;
+    }
+
+    setmin_todate(today){
+    	const _packages = new Packages();
+
+    	let date = new Date(today);
+    	date.setDate(date.getDate() + 1); // increase day by 1
+
+    	let tomorrow = _packages.getmin_date(date);
+
+    	return tomorrow;
+    }
+
+    set_date(){
+    	$("#package-from-date").on('change', function(){
+    		var from_date = $(this).val();
+    		var to_date = $("#package-to-date").val();
+
+    		const _packages = new Packages();
+
+    		let from_dateisgreater = _packages.checkdate(from_date, to_date);
+    		to_date = from_dateisgreater ? '' : to_date;
+
+			let tomorrow = _packages.setmin_todate(from_date);
+
+    		$("#package-to-date").attr('min', tomorrow).val(to_date);
+    	});
+    }
+
+    checkdate(from, to){
+    	let from_date = new Date(from).getTime();
+    	let to_date = new Date(to).getTime();
+
+    	if(from_date >= to_date)
+    		return true;
+
+    	return false;
+    }
 }

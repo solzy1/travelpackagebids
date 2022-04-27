@@ -1,13 +1,7 @@
 $(function () {
-	// countries and states
-	// const _countries = new Countries();
-
-	// let all_countries = _countries.load_json();
-	// _countries.show_states(all_countries);
-
 	// bids/offers
 	const _bids = new Bids();
-
+ 
 	_bids.show_createoffer();
 	_bids.create_offer();
 	_bids.on_modalshown();

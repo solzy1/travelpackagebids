@@ -26,6 +26,7 @@ class Profile_Menu{
     get_page(){
         let on_profilepage = $('.user-profile'); // profile page
         let on_packagespage = $('#create-a-package'); // packages page
+        let on_otherpackagepage = $('.other-packages');
         // ADMIN
         let page = $.trim($('#page-url').val());
 
@@ -33,6 +34,8 @@ class Profile_Menu{
             return 'My profile';
         else if(on_packagespage.length > 0)
             return 'My packages';
+        else if(on_otherpackagepage.length > 0)
+            return 'Other packages';
         else if (page=='packages')
             return 'Packages';
         else if (page=='travel_agents')

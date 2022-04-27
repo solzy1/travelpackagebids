@@ -84,6 +84,7 @@ class Bids{
                 // hide the error/response message display
                 $('.create-bid-status').html('').css({'opacity': 0});
 
+                $(this).attr('disabled', 'disabled').css('cursor', 'not-allowed');
                 _bid.send_offer(bid); // send offer
             }
             else {
@@ -100,6 +101,8 @@ class Bids{
 
     send_offer(bid){
         $.post("https://travelpackagebids.com/app/src/bids/receive.php", bid, function(result){
+            $('#bid-submit').removeAttr('disabled').css('cursor', '');
+
             const _bid = new Bids();
 
             _bid.report_status($.trim(result), bid.package_id, 'Your bid was not received. Please try again, later.');
@@ -158,7 +161,7 @@ class Bids{
 
         create_bid.addEventListener('shown.bs.modal', function () {
             $('#bid-offer').focus(); // focus on the 'make an offer', input tag
-        })
+        });
     }
 
     on_modalhidden(){

@@ -71,6 +71,7 @@
               <ul class="nav nav-pills justify-content-center">
                 <li class="nav-item"><a href="https://travelpackagebids.com" class="nav-link text-white">Home</a></li>
                 <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php" class="nav-link text-white profile-menu">My packages</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php?bids=show" class="nav-link text-white profile-menu" title="All of the packages you've Bid on" data-bs-toggle="tooltip" data-bs-placement="auto">Other packages</a></li>
 
                 <?php 
                 if($is_admin){
@@ -124,6 +125,12 @@
                   <li>
                     <a href="https://travelpackagebids.com/user/profile.php" class="nav-link text-white d-flex profile-menu">
                         <i class="bi bi-box2-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>My packages
+                    </a>
+                  </li>
+
+                  <li>
+                    <a title="All of the packages you've Bid on" data-bs-toggle="tooltip" data-bs-placement="auto" href="https://travelpackagebids.com/user/profile.php?bids=show" class="nav-link text-white d-flex profile-menu">
+                        <i class="bi bi-box2-heart-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>Other packages
                     </a>
                   </li>
                   
@@ -192,19 +199,24 @@
                     <div class="row">
 
                         <?php 
+                            $show_saved = isset($_GET['bids']) && $_GET['bids']=='show';
+                            $list = new Package_List();
+                            $page = isset($_GET['page']) ? $_GET['page'] : '';
+
                             if(isset($_GET['user'])){
                                 $user = isset($_GET['user']) ? $_GET['user'] : '';
 
                                 $profile->form($user_id);
                             }
+                            else if ($show_saved){
+                                $list->show_savedpackages($page);
+                            }
                             else{
-                                $list = new Package_List();
-
-                                $page = isset($_GET['page']) ? $_GET['page'] : '';
-
                                 $list->show_userpackages($page);
+                            }
 
-                                $list->packages_pagination($page);
+                            if(isset($_GET['user']) || isset($_GET['bids'])){
+                                $list->packages_pagination($page, $show_saved);
                             }
                         ?>
 
@@ -226,12 +238,76 @@
         
 
         <?php 
-            if(!isset($_GET['user'])){
+            if(!isset($_GET['user']) && !isset($_GET['bids'])){
                 // create package (form)
                 $list->createpackage_form($user);
 
                 // show the bids container
                 $list->view_bids();
+            }
+            if(isset($_GET['bids'])){
+        ?>
+                <!-- make offer (modal) -->
+                <div class="modal fade" id="create-package-bid" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 40000">
+                    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-center fw-bold" id="staticBackdropLabel"><span class="bid-action">Make an</span> Offer</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body container-fluid" style="margin-top: 0;padding-top: 0">
+                                <div class="row">
+                                    <!-- create bid section-->
+                                    <div class="col-12 col-lg-4 create-bid-section">
+                                        <div class="create-bid-status text-center" style="color: white;padding: 5px;opacity: 0">
+                                            
+                                        </div>
+                                        
+                                        <div id="bid-form" style="margin-top: 15px;">
+                                            <!-- make an offer -->
+                                            <div class="mb-3">
+                                                <label for="bid-offer" class="form-label fw-bold">Offer</label>
+                                                <input type="number" class="form-control" id="bid-offer" name="offer" placeholder="Make Offer Here" required>
+                                            </div>
+                
+                                            <div class="mb-3">
+                                                <label for="bid-deadline" class="form-label fw-bold">Expiration</label>
+                                                <div class="input-group mb-3">
+                                                    <input type="number" class="form-control" id="bid-deadline" name="deadline" placeholder="e.g. 24 for 24 hours, 48 for 48 hours" required>
+                                                    <span class="input-group-text">hour(s)</span>
+                                                </div>
+                                            </div>
+
+                                            <!-- if user wants to edit -->
+                                            <input type="hidden" name="package_id" id="package-id">
+                
+                                            <div class="submit-package" style="margin-top: 20px;float: right;">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                                                <button type="submit" class="btn btn-primary" id="bid-submit" style="background-color: #03C6C1;border-color: #03C6C1;">Send Offer <i class="fa-solid fa-send"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end create bid section-->
+
+                                    <!-- list of bids -->
+                                    <div class="col-12 col-lg-8" style="margin-top: 10px;">
+                                        <!-- bids -->
+                                        <div id="package-bids" class="container-fluid">
+                                            
+                                        </div>
+                                        <!-- END bids -->
+                                    </div>
+                                    <!-- END list of bids -->
+                                </div>
+                            </div>
+                            <!-- END modal body -->
+                        </div>
+                    </div>
+                </div>
+                <!-- make offer (modal_end) -->
+        <?php
             }
         ?>
 
@@ -244,13 +320,22 @@
         <script src="https://kit.fontawesome.com/6030f7206a.js" crossorigin="anonymous"></script>
         
         <!-- my scripts -->
-        <script src="../js/1_profile-menu.js"></script>
+        <script src="../js/2_profile-menu.js"></script>
         <script src="../js/1_countries.js"></script>
-        <script src="../js/1_packages.js"></script>
+        <script src="../js/2_packages.js"></script>
         
         <script src="../js/1_user.js"></script>
-        <script src="../js/1_profile.js"></script>
+        <script src="../js/3_bids.js"></script>
+        <script src="../js/6_profile.js"></script>
         <script src="../js/sidebars.js"></script>
+        
+        <script>
+            const bid_status = function(_this){
+            	const _bids = new Bids();
+            
+            	_bids.activate(_this);
+            }
+        </script>
     </body>
 
 </html>

@@ -15,7 +15,7 @@
 	Class Packages_List {
 		private $user_id;
 		private $noof_items = 21; // max no of packages per page
-		public $noofpackages;
+		public $noofpackages; 
 
 		function __construct() {
 			start_session();

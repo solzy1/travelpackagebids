@@ -23,7 +23,9 @@
 			$country = $profile->get_country();
 			$phone_code = $profile->get_phone_code();
 			$name = $profile->get_name();
+
 			$phone = $profile->get_phone();
+			$phone = strlen($phone) > 10 ? substr($phone, 0, 10) : $phone; // reduce the length of the phone number to 10
 
 			$response_msg = 'Your profile was not created. Kindly try again later';
 			$is_success = false;

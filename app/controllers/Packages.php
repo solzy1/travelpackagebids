@@ -32,6 +32,12 @@
 	        return $packages->select('packages.*')->get();
 	    }
 
+	    public static function find_savedpackages($user_id){
+	    	$get = Package::join('status', 'status.id', 'packages.status_id')->where('status.status', 'active')->join('bids', 'bids.package_id', 'packages.id')->where('bids.bidder_id', $user_id)->select('packages.*')->orderBy('bids.created_at', 'desc')->get();
+
+	    	return $get;
+	    }
+
 		public static function index_orderbydate($order){
 	        $get = Package::join('status', 'status.id', 'packages.status_id')->where('status.status', 'active')->select('packages.*')->orderBy('created_at', $order)->get(); 
 	        // join('status', 'status.id', 'packages.status_id')->where('status.status', 'active')->

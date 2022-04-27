@@ -207,7 +207,7 @@
                             continue;
                             
                         $phone_code = $profile->country->phone_code;
-                        $phone = $phone_code.$profile->phone;
+                        $phone = '+'.$phone_code.$profile->phone;
                         $agent_name = $profile->name;
                     }
 

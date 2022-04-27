@@ -51,7 +51,11 @@
 				
 				$deadline = $offer.' hour(s) from now '.date('Y-m-d h:i:s');
 				
+				// alert package owner of the bid
 				$this->sendemail($package, $offer, $deadline);
+
+				// alert other travel agents, if they've been outbid
+				$this->send_outbidalert($package_id, $bid->id, $offer);
 
 				echo 'success';
 			}
@@ -151,6 +155,57 @@
 			}
 
 			return $_profile;
+		}
+
+		// if a bid is lower than the others
+		private function outbidalert_body($package, $bidder, $offer, $outbid){
+         	// state and country
+         	$state = $package->state;
+         	$country = $state->country->name;
+         	$state = $state->name;
+            
+            $package_tag = $country.'-'.$state.'-'.$package->id;
+            
+            $url = "https://travelpackagebids.com/package.php?package=".$package_tag;
+
+            $offer = number_format($offer);
+			$outbid = number_format($outbid);
+
+            
+            return '<h4>Hello '.$bidder->name.',</h4>
+            
+                <p>
+                    A travel-agent just out-bid you on a package <a href="'.$url.'" style="color: #03C6C1;text-transform: capitalize">'.$country.', '.$state.'</a>, at '.$outbid.'.
+                </p>
+
+                <p style="margin-bottom: 15px;">
+                 	You can <a href="'.$url.'" style="color: #03C6C1;text-transform: capitalize">Check out the package</a>, to change your previous offer of '.$offer.'.
+                </p>
+                
+                <small style="font-size: 10px">NOTE: If you\'re not a Registered Travel Agent on <a href="https://travelpackagebids.com">TravelPackageBids</a>, Kindly Ignore this message. Thank you.</small>';
+		}
+
+		private function send_outbidalert($package_id, $bidder_id, $offer){
+			$bids = Bids::find_otherbids($package_id, $bidder_id, $offer);
+			$package = Packages::find($package_id);
+
+            $subject = "[TravelPackageBids] You've just been out-bid on a package";
+
+            foreach ($bids as $bid) {
+		    	$bidder = $this->get_user($bid->user_id);
+		    
+			    if(!empty($bidder->phone)){
+	    			// GET USER
+	    			$email = $package->user->email;
+	    
+	                $body = $this->outbidalert_body($package, $bidder, $bid->offer, $offer);
+	                
+	                // send email
+	                $email = new Email($email, $subject, $body);
+	                
+	                $email->send();
+			    }
+			}
 		}
 	}
 ?>
