@@ -47,7 +47,7 @@
 	    }
 
 	    public static function find_byuser($user_id){
-	        $get = Package::where('user_id', $user_id)->join('status', 'status.id', 'packages.status_id')->where('status.status', 'active')->select('packages.*')->get();
+	        $get = Package::where('user_id', $user_id)->join('status', 'status.id', 'packages.status_id')->where('status.status', 'active')->orderBy('created_at', 'desc')->select('packages.*')->get();
 
 	        return $get;
 	    }

@@ -68,7 +68,7 @@
 			}
 			
 			// GO TO profile PAGE
-			// gotopage('https://travelpackagebids.com/user/profile.php');
+			gotopage('https://travelpackagebids.com/user/profile.php');
 		}
 		
 		private function send_emails($package){
@@ -84,7 +84,9 @@
             
             $url = "https://travelpackagebids.com/package.php?package=".$package_tag;
             
-		    $locations = Locations::find_bycountry($country_id);
+            $user = $package->user->id;
+            
+		    $locations = Locations::find_bycountry($country_id, $user_id);
 		    
             foreach ($locations as $location) {
                 $user = $location->user;

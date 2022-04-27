@@ -220,7 +220,7 @@
         <!-- my scripts -->
         <!-- <script src="js/countries.js"></script> -->
         <script src="js/1_user.js"></script>
-        <script src="js/1_bids.js"></script>
+        <script src="js/2_bids.js"></script>
         <script src="js/1_comments.js"></script>
         <script src="js/1_layout.js"></script>
     </body>

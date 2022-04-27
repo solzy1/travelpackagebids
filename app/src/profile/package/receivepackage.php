@@ -1,8 +1,4 @@
 <?php
-    
-    
-    
-
 	// include the login file that holds the class Login
 	require_once 'create.php';
 	require_once 'update.php';

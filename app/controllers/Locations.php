@@ -25,8 +25,8 @@
 	    	return $found;
 	    }
         
-	    public static function find_bycountry($country_id){
-	    	$get = Location::where('country_id', $country_id)->groupBy('user_id')->select('locations.*');
+	    public static function find_bycountry($country_id, $user_id){
+	    	$get = Location::where('country_id', $country_id)->where('user_id', '!=', $user_id)->groupBy('user_id')->select('locations.*');
 
 	    	return $get->get();
 	    }

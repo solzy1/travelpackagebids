@@ -69,6 +69,7 @@
 
               <ul class="nav nav-pills justify-content-center">
                 <li class="nav-item"><a href="https://travelpackagebids.com" class="nav-link text-white">Home</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php" class="nav-link text-white profile-menu">My packages</a></li>
                 <li class="nav-item"><a href="https://travelpackagebids.com/admin" class="nav-link text-white profile-menu">Packages</a></li>
                 <li class="nav-item"><a href="https://travelpackagebids.com/admin/travel-agents" class="nav-link text-white profile-menu">Travel agents</a></li>
                 <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php?user=member" class="nav-link text-white profile-menu">My profile</a></li>
@@ -111,6 +112,11 @@
                     </a>
                   </li>
                   <li>
+                    <a href="https://travelpackagebids.com/user/profile.php" class="nav-link text-white d-flex profile-menu">
+                        <i class="bi bi-box2-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>My packages
+                    </a>
+                  </li>
+                  <li>
                     <a href="https://travelpackagebids.com/admin/packages" class="nav-link text-white d-flex profile-menu">
                         <i class="bi bi-boxes" style="width: 16px;height: 16px;margin-right: 10px;"></i>
                         Packages
@@ -124,7 +130,7 @@
                   </li>
                   <li>
                     <a href="https://travelpackagebids.com/user/profile.php?user=member" class="nav-link text-white d-flex profile-menu">
-                        <i class="bi bi-person-circle" style="width: 16px;height: 16px;margin-right: 10px;"></i>
+                        <i class="bi bi-person-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>
                         My profile
                     </a>
                   </li>
@@ -298,7 +304,7 @@
         <script src="https://travelpackagebids.com/js/sidebars.js"></script>
 
         <!-- ADMIN -->
-        <script src="https://travelpackagebids.com/js/1_bids.js"></script>
+        <script src="https://travelpackagebids.com/js/2_bids.js"></script>
         <script src="https://travelpackagebids.com/js/admin/1_list.js"></script>
         <script src="https://travelpackagebids.com/js/admin/1_delete.js"></script>
         <script src="https://travelpackagebids.com/js/admin/1_activate.js"></script>

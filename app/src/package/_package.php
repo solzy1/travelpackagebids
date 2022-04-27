@@ -1,5 +1,4 @@
 <?php
-
 	// start up eloquent
 	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
 
@@ -21,7 +20,7 @@
 		private $request;
 		private $user_id;
 
-		function __construct($request) {
+		function __construct($request = '') {
 			$this->request = $request;
 
 			start_session();
@@ -88,7 +87,7 @@
 		        
 		        <!-- main body -->
 		        <div class="row" style="padding-left: 17px;margin-bottom: 40px;">
-					<div class="package-cover col-sm-12 col-md-9 col-lg-9" style="padding-top: 20px;">
+					<div class="package-cover col-sm-12 col-md-8" style="padding-top: 20px;margin-bottom: 30px;">
 				        <h2 class="text-capitalize fw-bold">
 				        	<?php echo $page_title; ?>
                             <input type="hidden" id="package_id" value="<?php echo $package->id; ?>">
@@ -158,14 +157,113 @@
                         </div>
                         <br>
 					</div>
+					<!-- END package details and comments -->
+
+					<!-- bids -->
+					<div class="col-sm-12 col-md-4" id="package-bids-display" style="padding-left: 20px;padding-right: 20px;">
+						<?php 
+							$this->bids($package->id);
+						?>
+					</div>
+					<!-- END bids -->
 		        </div>
 		        <!-- main body (end) -->
 
 			<?php
 			}
 			else{
-				echo '<div>You have not requested for an existing package. <br>Kindly check out, our other <a href="https://travelpackagebids.com">travel packages</a>, below.</div>';
+				echo '<div style="font-weight: bold;font-size: 25px;">You have not requested for an existing package. <br></div>';
+
+				// Kindly check out, our other <a href="https://travelpackagebids.com">travel packages</a>, below.	
 			}
+		}
+
+		function bids($package_id){
+			$package = Packages::find($package_id);
+
+			$is_owner = $this->is_owner($package->user);
+
+            $useris_admin = useris_admin();
+
+            $bids = Bids::find_bypackage($package->id, $useris_admin); //find all the bids for the given package
+            $noof_bids = count($bids);
+
+            $state = $package->state;
+            $country = $state->country->name;
+            $state = $state->name;
+        ?>
+
+            <h4 class="fw-bold text-center" style="margin-bottom: 18px;"><?php echo $noof_bids > 0 ? $noof_bids : 'No'; ?> Bid(s) so far <span style="color: grey;font-size: 13px;font-weight: lighter;">for <b class="text-capitalize" ><?php echo $country.', '.$state; ?></b></span></h4>
+            <div class="row" style="max-height: 600px;overflow-y: auto;">
+            <?php
+                $is_owner = !empty($is_owner) && $is_owner=='yes' ? true : false;
+
+                foreach ($bids as $bid) {
+                    if($is_owner){
+                        $profile = Profiles::find_byuser($bid->bidder_id);
+                        
+                        // if profile doesn't exist, move right along
+                        if(!isset($profile->id))
+                            continue;
+                            
+                        $phone_code = $profile->country->phone_code;
+                        $phone = $phone_code.$profile->phone;
+                        $agent_name = $profile->name;
+                    }
+
+                    $offer = number_format($bid->offer);
+            ?>
+                    <!-- agent-offer -->
+                    <div class="col-12 col-sm-6 col-md-6" style="margin-bottom: 10px;">
+                        <div class="border text-black agent-offer">
+                            <p class="agent-details" style="font-size: 25px;font-weight: lighter;word-wrap: break-word;">
+                                <span style="font-size: 17px;color: grey">BID: </span> <?php echo $offer; ?>
+                                <?php 
+                                    if($is_owner){
+                                ?>
+                                        <span class="agent-name" style="font-size: 15px;color: grey;"> by <b class="text-capitalize"><?php echo $agent_name; ?></b></span>
+                                <?php
+                                    }
+                                ?>
+
+                            </p>
+
+                            <?php 
+                                if($is_owner){
+                            ?>
+                                    <!-- bid-action -->
+                                    <div class="call-agent-section">
+                                        <a href="tel:<?php echo $phone; ?>" class="btn call-agent" style="text-align: left;max-width: 160px;word-wrap: break-word !important;">
+                                            <i class="fa-solid fa-phone"></i> CALL AGENT <span style="word-wrap: break-word;">(<?php echo $phone; ?>)</span>
+                                        </a>
+                                    </div>
+                                    <!-- END bid-action -->
+                            <?php
+                                }
+
+                                if($useris_admin){
+                                    $status = $bid->status->status;
+                            ?>  
+                                <div>
+                                    <a onclick="bid_status(this)" class="btn btn-success activate-bid toggle-status-<?php echo $bid->id; ?>" role="button" title="Activate bid" data-bs-toggle="tooltip" data-bs-placement="top" style="margin-bottom: 5px;<?php echo deactivate($status=='active'); ?>">
+                                        <i class="fas fa-circle-check"></i>
+                                    </a>
+                                    <a onclick="bid_status(this)" class="btn btn-warning text-white deactivate-bid toggle-status-<?php echo $bid->id; ?>" role="button" title="De-activate bid" data-bs-toggle="tooltip" data-bs-placement="top" style="margin-bottom: 5px;<?php echo deactivate($status=='inactive'); ?>"><i class="fas fa-circle-pause"></i></a>
+
+                                    <input type="hidden" class="id" value="<?php echo $bid->id; ?>">
+                                </div>
+                            <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
+                    <!-- END agent-offer -->
+            <?php
+                }
+            ?>
+            </div>
+
+        <?php
 		}
 
 		function comments_section($package){

@@ -92,6 +92,11 @@ class Bids{
     	});
     }
 
+    refresh_bids(package_id){
+        $.post("https://travelpackagebids.com/app/src/package/get-bids.php", {package_id: package_id}, function(result){
+            $("#package-bids-display").html(result);
+        });
+    }
 
     send_offer(bid){
         $.post("https://travelpackagebids.com/app/src/bids/receive.php", bid, function(result){
@@ -113,7 +118,12 @@ class Bids{
             const _bids = new Bids();
             
             // get the offers so far and display it, for the user
-            _bids.get_offers(package_id, ''); 
+            _bids.get_offers(package_id, '');
+
+            // refresh the bids on the package page
+            if($("#package-bids-display").length > 0){
+                _bids.refresh_bids(package_id);
+            }
         }
         else{
             status.icon = 'exclamation';

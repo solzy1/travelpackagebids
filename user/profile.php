@@ -75,16 +75,17 @@
                 <?php 
                 if($is_admin){
                 ?>
-                    <li class="nav-item"><a href="https://travelpackagebids.com/admin" class="nav-link text-white profile-menu">Dashboard</a></li>
+                    <li class="nav-item"><a href="https://travelpackagebids.com/admin" class="nav-link text-white profile-menu">Packages</a></li>
+                    <li class="nav-item"><a href="https://travelpackagebids.com/admin/travel-agents" class="nav-link text-white profile-menu">Travel agents</a></li>
                 <?php
                 }
                 ?>
 
                 <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php?user=member" class="nav-link text-white profile-menu">My profile</a></li>
-                <li class="nav-item dropdown" style="padding-top: 9px">
+                
+                <li class="nav-item dropdown" style="padding-top: 9px;margin-left: 5px;">
                   <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-
-                    <!-- <img src="https://github.com/mdo.png" alt=""  class="rounded-circle me-2"> -->
+                  
                     <strong>
                         <i class="fas fa-circle-user" style="font-size: 20px;"></i> 
                         <?php 
@@ -120,23 +121,30 @@
                     </a>
                   </li>
 
-                    <?php 
-                    if($is_admin){
-                    ?>
-                        <li class="nav-item">
-                            <a href="https://travelpackagebids.com/admin" class="nav-link text-white d-flex profile-menu" aria-current="page">
-                                <i class="bi bi-speedometer2" style="width: 16px;height: 16px;margin-right: 10px;"></i>
-                                Dashboard
-                            </a>
-                        </li>
-                    <?php
-                    }
-                    ?>
                   <li>
                     <a href="https://travelpackagebids.com/user/profile.php" class="nav-link text-white d-flex profile-menu">
                         <i class="bi bi-box2-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>My packages
                     </a>
                   </li>
+                  
+                    <?php 
+                    if($is_admin){
+                    ?>
+                        <li>
+                            <a href="https://travelpackagebids.com/admin/packages" class="nav-link text-white d-flex profile-menu">
+                                <i class="bi bi-boxes" style="width: 16px;height: 16px;margin-right: 10px;"></i>
+                                Packages
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://travelpackagebids.com/admin/travel-agents" class="nav-link text-white d-flex profile-menu">
+                                <i class="bi bi-people-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>
+                                Travel agents
+                            </a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                   <li>
                     <a href="https://travelpackagebids.com/user/profile.php?user=member" class="nav-link text-white d-flex profile-menu" >
                         <i class="bi bi-person-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>

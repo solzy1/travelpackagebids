@@ -1,0 +1,8 @@
+[25-Apr-2022 02:20:26 UTC] PHP Fatal error:  Uncaught Error: Class 'Symfony\Component\Translation\PluralizationRules' not found in /home/travelpa/public_html/vendor/nesbot/carbon/src/Carbon/Lang/oc.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/nesbot/carbon/src/Carbon/Lang/oc.php on line 12
+[25-Apr-2022 05:57:12 UTC] PHP Fatal error:  Uncaught Error: Class 'Symfony\Component\Translation\PluralizationRules' not found in /home/travelpa/public_html/vendor/nesbot/carbon/src/Carbon/Lang/sh.php:12
+Stack trace:
+#0 {main}
+  thrown in /home/travelpa/public_html/vendor/nesbot/carbon/src/Carbon/Lang/sh.php on line 12
