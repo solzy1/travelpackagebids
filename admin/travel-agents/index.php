@@ -1,9 +1,9 @@
 <?php 
     $title = 'Travel agents';
 
-    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/admin/travel_agents/index.php';
-    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
-    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/admin/layout.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/admin/travel_agents/index.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/admin/layout.php';
 
     function main_body(){
     	$travel_agents = new Travel_Agents();

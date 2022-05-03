@@ -76,3 +76,10 @@ const bid_status = function(_this){
 
 	_bids.activate(_this);
 }
+
+const show_offer = function(_this){
+	const _bids = new Bids();
+
+	_bids.edit_offer(_this); // append offer and deadline value to the modal
+	_bids.show_offer(_this); // show offer modal
+}

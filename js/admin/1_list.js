@@ -22,7 +22,7 @@ class List{
 
 	get_pageurl(script){
 		let base_url = $.trim($('#page-url').val());
-		let url = '/travelpackagebids/app/src/admin/'+base_url+'/'+script;
+		let url = 'https://travelpackagebids.com/app/src/admin/'+base_url+'/'+script;
 
 		return url;
 	}

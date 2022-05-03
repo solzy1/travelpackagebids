@@ -1,6 +1,7 @@
  <?php 
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/email/_email.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
+	require_once '_user.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/email/_email.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
 
 	use Controllers\Users;
 
@@ -62,7 +63,7 @@
 		        }
 		    }
 			
-			$this->gotopage('/travelpackagebids');
+			$this->gotopage('https://travelpackagebids.com');
 		}
 		
 		private function get_resetemail(){
@@ -91,7 +92,7 @@
 			    return;
 		    }
 		    
-			$this->gotopage('/travelpackagebids/user/reset-password.php');
+			$this->gotopage('https://travelpackagebids.com/user/reset-password.php');
 		}
 		
 		function get_user($email){
@@ -108,14 +109,14 @@
             
                 <p>
                     <span>You just made a request to reset your password on</span> 
-                    <a href="/travelpackagebids">TravelPackageBids</a>.
+                    <a href="https://travelpackagebids.com">TravelPackageBids</a>.
                 </p>
 
                 <p style="margin-bottom: 20px;">
-                 	You can <a href="/travelpackagebids/user/reset-password.php?email='.$user->email.'&user='.$user->id.'" style="color: white;border: #03C6C1;background-color: #03C6C1;padding:5px 8px 5px 8px;text-decoration: none;border-radius: 6px;">Reset your Password here</a> now.
+                 	You can <a href="https://travelpackagebids.com/user/reset-password.php?email='.$user->email.'&user='.$user->id.'" style="color: white;border: #03C6C1;background-color: #03C6C1;padding:5px 8px 5px 8px;text-decoration: none;border-radius: 6px;">Reset your Password here</a> now.
                 </p>
                 
-                <small style="font-size: 10px">NOTE: If you\'re not a Registered Travel Agent on <a href="/travelpackagebids">TravelPackageBids</a> or you didn\'t recently request for a new password, Kindly Ignore this message. Thank you.</small>';
+                <small style="font-size: 10px">NOTE: If you\'re not a Registered Travel Agent on <a href="https://travelpackagebids.com">TravelPackageBids</a> or you didn\'t recently request for a new password, Kindly Ignore this message. Thank you.</small>';
         }
         
 		function sendemail($user){

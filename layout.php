@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/packages/index.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/packages/index.php';
 
     $title = "TravelPackaeBids | ".$title;
     $user_id = get_userid();
@@ -33,17 +33,17 @@
             <!-- main-header -->
             <div class="container-fluid sticky-top page-header">
                 <header class="d-flex flex-wrap justify-content-center py-3 mb-4" style="margin-bottom: 0px !important;">
-                  <a href="/travelpackagebids" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                  <a href="https://travelpackagebids.com" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-4">Travelpackagebids</span>
                   </a>
 
                   <ul class="nav nav-pills justify-content-center">
-                    <li class="nav-item"><a href="/travelpackagebids" class="nav-link text-white">Home</a></li>
+                    <li class="nav-item"><a href="https://travelpackagebids.com" class="nav-link text-white">Home</a></li>
                     <?php 
                         if($user_id <= 0) {
                     ?>
-                        <li class="nav-item"><a href="/travelpackagebids/user/sign-in.php" class="nav-link text-white user-login">Log In</a></li>
-                        <li class="nav-item"><a href="/travelpackagebids/user/sign-up.php" class="nav-link text-white user-signup">Sign Up</a></li>
+                        <li class="nav-item"><a href="https://travelpackagebids.com/user/sign-in.php" class="nav-link text-white user-login">Log In</a></li>
+                        <li class="nav-item"><a href="https://travelpackagebids.com/user/sign-up.php" class="nav-link text-white user-signup">Sign Up</a></li>
                     <?php
                         } 
                         else {
@@ -63,9 +63,9 @@
                             </strong>
                           </a>
                           <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
-                            <li><a class="dropdown-item" href="/travelpackagebids/user/profile.php?user=member"><i class="fa-solid fa-user"></i> My profile</a></li>
+                            <li><a class="dropdown-item" href="https://travelpackagebids.com/user/profile.php?user=member"><i class="fa-solid fa-user"></i> My profile</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item btn" href="/travelpackagebids/user/profile.php"><i class="fa-solid fa-box"></i> My packages</a></li>
+                            <li><a class="dropdown-item btn" href="https://travelpackagebids.com/user/profile.php"><i class="fa-solid fa-box"></i> My packages</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item btn logout" role="button"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a></li>
                           </ul>
@@ -91,7 +91,7 @@
 		                        <i class="fa-solid fa-bars-staggered"></i>
 		                        Live listings: <span style="margin-right: 10px;"><?php echo $packages->noofpackages; ?></span>
 		                        
-		                        <span style="font-weight: bold;">Ready to sell? <a href="<?php echo '/travelpackagebids/user/'.(isset($user_id) && !empty($user_id) ? 'profile.php' : 'sign-up.php'); ?>" class="sellnow" style="color: white">Sell Now</a></span>
+		                        <span style="font-weight: bold;">Ready to sell? <a href="<?php echo 'https://travelpackagebids.com/user/'.(isset($user_id) && !empty($user_id) ? 'profile.php' : 'sign-up.php'); ?>" class="sellnow" style="color: white">Sell Now</a></span>
 		                    </p>
 		                </div>
 		            </div>
@@ -228,9 +228,9 @@
         <!-- my scripts -->
         <!-- <script src="js/countries.js"></script> -->
         <script src="js/1_user.js"></script>
-        <script src="js/3_bids.js"></script>
+        <script src="js/6_bids.js"></script>
         <script src="js/1_comments.js"></script>
-        <script src="js/1_layout.js"></script>
+        <script src="js/2_layout.js"></script>
     </body>
 
 </html>

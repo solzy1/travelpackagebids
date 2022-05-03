@@ -32,6 +32,6 @@
 		$forgotpassword->send_resetpassword_email();
 	}
 	else{
-	    header('Location: /travelpackagebids/user/sign-in.php');
+	    header('Location: https://travelpackagebids.com/user/sign-in.php');
 	}
 ?>

@@ -1,13 +1,13 @@
 <?php
 	// start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
 
 	// include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/validation/validation.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
 	require_once 'model.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/model.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/packages/index.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/model.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/packages/index.php';
 
 	use Controllers\Packages;
 	use Controllers\Comments;
@@ -140,7 +140,7 @@
 				                    <?php
 		                        	}
 		                            ?>
-		                            <a href="/travelpackagebids" class="btn btn-secondary go-back">
+		                            <a href="https://travelpackagebids.com" class="btn btn-secondary go-back">
 		                                <i class="fa-solid fa-left-long"></i> Go Back
 		                            </a>
 		                        </div>
@@ -177,7 +177,7 @@
 			else{
 				echo '<div style="font-weight: bold;font-size: 25px;">You have not requested for an existing package. <br></div>';
 
-				// Kindly check out, our other <a href="/travelpackagebids">travel packages</a>, below.	
+				// Kindly check out, our other <a href="https://travelpackagebids.com">travel packages</a>, below.	
 			}
 		}
 
@@ -194,6 +194,8 @@
             $state = $package->state;
             $country = $state->country->name;
             $state = $state->name;
+
+            $user_id = $this->user_id;
         ?>
 
             <h4 class="fw-bold text-center" style="margin-bottom: 18px;"><?php echo $noof_bids > 0 ? $noof_bids : 'No'; ?> Bid(s) so far <span style="color: grey;font-size: 13px;font-weight: lighter;">for <b class="text-capitalize" ><?php echo $country.', '.$state; ?></b></span></h4>
@@ -215,23 +217,43 @@
                     }
 
                     $offer = number_format($bid->offer);
+                    $users_bid = $bid->bidder_id==$user_id;
             ?>
                     <!-- agent-offer -->
                     <div class="col-12 col-sm-6 col-md-6" style="margin-bottom: 10px;">
-                        <div class="border text-black agent-offer">
+                        <div class="border agent-offer <?php echo $users_bid ? 'text-white' : 'text-black'; ?>" style="<?php echo $users_bid ? 'background-color: #34DB89' : ''; ?>">
                             <p class="agent-details" style="font-size: 25px;font-weight: lighter;word-wrap: break-word;">
-                                <span style="font-size: 17px;color: grey">BID: </span> <?php echo $offer; ?>
+                                <span style="font-size: 17px;color: <?php echo $users_bid ? 'white' : 'grey'; ?>">BID: </span> <?php echo $offer; ?>
                                 <?php 
                                     if($is_owner){
                                 ?>
-                                        <span class="agent-name" style="font-size: 15px;color: grey;"> by <b class="text-capitalize"><?php echo $agent_name; ?></b></span>
+                                        <span class="agent-name" style="font-size: 15px;color: <?php echo $users_bid ? 'white' : 'grey'; ?>;"> by <b class="text-capitalize"><?php echo $agent_name; ?></b></span>
                                 <?php
                                     }
                                 ?>
 
                             </p>
+							<?php 
+                                if($users_bid){
+                            ?>
+	                                <button class="btn btn-light edit-bid" onclick="show_offer(this)" style="margin-bottom: 5px;">
+	                                    <i class="fas fa-pen" role="button" title="Edit your Bid" data-bs-toggle="tooltip" data-bs-placement="top"></i>
+			                            <input type="hidden" class="package_id" value="<?php echo $bid->package_id; ?>">
+	                                    <div class="bid-details-container">
+	                                        <input type="hidden" class="offer" value="<?php echo round($bid->offer); ?>">
+	                                        <?php 
+	                                            $start = strtotime($bid->updated_at);
+	                                            $end = strtotime($bid->deadline);
 
+	                                            $deadline = abs($end - $start) / 3600;
+	                                            $deadline = round($deadline > 1 ? $deadline - 1 : $deadline); // it's adding an hour to the result
+	                                        ?>
+
+	                                        <input type="hidden" class="deadline" value="<?php echo $deadline; ?>">
+	                                    </div>
+	                                </button>
                             <?php 
+                                }
                                 if($is_owner){
                             ?>
                                     <!-- bid-action -->
@@ -469,5 +491,15 @@
 
 			return $_profile;
 		}
+		
+        function save_page($page){
+            if(!empty($page) && $page=='page'){
+                // Append the host(domain name, ip) to the URL.   
+                $url = "https://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
+                $split = explode('&save=page', $url);
+                
+                $_SESSION['travelpackagebids.com']['re-direct'] = $split[0];
+            }
+        }
 	}
 ?>

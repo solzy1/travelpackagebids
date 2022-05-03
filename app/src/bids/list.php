@@ -37,6 +37,7 @@
             <div class="row" style="max-height: 400px;overflow-y: auto;">
             <?php
                 $is_owner = !empty($is_owner) && $is_owner=='yes' ? true : false;
+                $user_id = $this->user_id;
 
                 foreach ($bids as $bid) {
                     if($is_owner){
@@ -52,23 +53,43 @@
                     }
 
                     $offer = number_format($bid->offer);
+                    $users_bid = $bid->bidder_id==$user_id;
             ?>
                     <!-- agent-offer -->
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4" style="margin-bottom: 10px;">
-                        <div class="border text-black agent-offer">
+                        <div class="border agent-offer <?php echo $users_bid ? 'text-white' : 'text-black'; ?>" style="<?php echo $users_bid ? 'background-color: #34DB89' : ''; ?>">
                             <p class="agent-details" style="font-size: 25px;font-weight: lighter;word-wrap: break-word;">
-                                <span style="font-size: 17px;color: grey">BID: </span> <?php echo $offer; ?>
+                                <span style="font-size: 17px;color: <?php echo $users_bid ? 'white' : 'grey'; ?>">BID: </span> <?php echo $offer; ?>
                                 <?php 
                                     if($is_owner){
                                 ?>
-                                        <span class="agent-name" style="font-size: 15px;color: grey;"> by <b class="text-capitalize"><?php echo $agent_name; ?></b></span>
+                                        <span class="agent-name" style="font-size: 15px;color: <?php echo $users_bid ? 'white' : 'grey'; ?>;"> by <b class="text-capitalize"><?php echo $agent_name; ?></b></span>
                                 <?php
                                     }
                                 ?>
 
                             </p>
-
                             <?php 
+                                if($users_bid){
+                            ?>
+                                <button class="btn btn-light edit-bid" onclick="show_offer(this)" style="margin-bottom: 5px;">
+                                    <i class="fas fa-pen" role="button" title="Edit your Bid" data-bs-toggle="tooltip" data-bs-placement="top"></i>
+		                            <input type="hidden" class="package_id" value="<?php echo $bid->package_id; ?>">
+                                    <div class="bid-details-container">
+                                        <input type="hidden" class="offer" value="<?php echo round($bid->offer); ?>">
+                                        <?php 
+                                            $start = strtotime($bid->updated_at);
+                                            $end = strtotime($bid->deadline);
+
+                                            $deadline = abs($end - $start) / 3600;
+                                            $deadline = round($deadline > 1 ? $deadline - 1 : $deadline); // it's adding an hour to the result
+                                        ?>
+
+                                        <input type="hidden" class="deadline" value="<?php echo $deadline; ?>">
+                                    </div>
+                                </button>
+                            <?php 
+                                }
                                 if($is_owner){
                             ?>
                                     <!-- bid-action -->

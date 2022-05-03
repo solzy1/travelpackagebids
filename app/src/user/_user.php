@@ -1,9 +1,9 @@
 <?php
 	// namespace Admin;
 	
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php'; // start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/validation/validation.php'; // include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php'; // start up eloquent
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php'; // include the validation file that holds the class Validation
 
 	// use User\Validation; // call the validation class
 
@@ -20,7 +20,7 @@
 			$user_id = get_userid();
 			
 			if(isset($user_id) && !empty($user_id)){
-			    gotopage('/travelpackagebids');
+			    gotopage('https://travelpackagebids.com');
 			}
 		}
 
@@ -69,10 +69,10 @@
 			$useraction = [];
 
 			if($page_title=="Sign In"){
-				$useraction = array('question' => '','action' => 'Create your Account', 'link' => '/travelpackagebids/user/sign-up.php');
+				$useraction = array('question' => '','action' => 'Create your Account', 'link' => 'https://travelpackagebids.com/user/sign-up.php');
 			}
 			else{
-				$useraction = array('question' => 'Already have an account? ','action' => 'Sign In', 'link' => '/travelpackagebids/user/sign-in.php');
+				$useraction = array('question' => 'Already have an account? ','action' => 'Sign In', 'link' => 'https://travelpackagebids.com/user/sign-in.php');
 			}
 
 			echo '<small>'.$useraction['question'].'</small>

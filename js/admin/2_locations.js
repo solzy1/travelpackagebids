@@ -35,7 +35,7 @@ class Locations{
     }
 
     send_agentlocation(location){
-        $.post("/travelpackagebids/app/src/admin/travel_agents/locations/receive.php", location, function(result){
+        $.post("https://travelpackagebids.com/app/src/admin/travel_agents/locations/receive.php", location, function(result){
             const _location = new Locations();
 
             _location.report_status($.trim(result), location.user_id, 
@@ -105,7 +105,7 @@ class Locations{
     get_locations(user_id){
         let location = {user_id: user_id};
 
-        $.post("/travelpackagebids/app/src/admin/travel_agents/locations/get-locations.php", 
+        $.post("https://travelpackagebids.com/app/src/admin/travel_agents/locations/get-locations.php", 
             location, function(result){
             const _location = new Locations();
 
@@ -133,7 +133,7 @@ class Locations{
     }
 
     send_deleterequest(location, _this){
-        $.post("/travelpackagebids/app/src/admin/travel_agents/locations/delete.php", 
+        $.post("https://travelpackagebids.com/app/src/admin/travel_agents/locations/delete.php", 
             location, function(result){
             const _location = new Locations();
 

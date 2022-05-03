@@ -19,7 +19,7 @@
 		// set response, to be shown to the user after page failure
 		setresponse($statusmessage);
 
-		gotopage('/travelpackagebids/user/'.$page.'.php');
+		gotopage('https://travelpackagebids.com/user/'.$page.'.php');
 	}
 
 	function setresponse($response){

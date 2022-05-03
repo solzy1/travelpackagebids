@@ -50,7 +50,7 @@ class Packages {
 	get_packagerequest(package_id, countries){
 		let apackage = {package_id: package_id};
 
-        $.post("/travelpackagebids/app/src/profile/package/retrieve-package.php", apackage, function(result){
+        $.post("https://travelpackagebids.com/app/src/profile/package/retrieve-package.php", apackage, function(result){
             const _packages = new Packages();
 
             _packages.handle_response($.trim(result), countries);
@@ -85,7 +85,7 @@ class Packages {
 				_package.set_package(apackage, []);
 			}
 			else{
-				let url = '/travelpackagebids/user/profile.php?user=member';
+				let url = 'https://travelpackagebids.com/user/profile.php?user=member';
 				let signup_first = '<div class="text-center"><p class="lead">You must <a href="'+url+'">'+
 				'update your profile</a>, before you create a package.</p><p class="lead">Kindly <a href="'+url+'">'+
 				'update your profile</a>, to create your first travel package.</p></div>';
@@ -111,8 +111,8 @@ class Packages {
 	send_deleterequest(package_id){
 		let apackage = {package_id: package_id};
 
-        $.post("/travelpackagebids/app/src/profile/package/delete-package.php", apackage, function(result){
-			window.location.replace('/travelpackagebids/user/profile.php');
+        $.post("https://travelpackagebids.com/app/src/profile/package/delete-package.php", apackage, function(result){
+			window.location.replace('https://travelpackagebids.com/user/profile.php');
         });
 	}
 
@@ -139,7 +139,7 @@ class Packages {
     get_offers(package_id, is_owner){
         let bid = {package_id: package_id, is_owner: is_owner};
 
-        $.post("/travelpackagebids/app/src/bids/get-bids.php", bid, function(result){
+        $.post("https://travelpackagebids.com/app/src/bids/get-bids.php", bid, function(result){
             const _packages = new Packages();
 
             _packages.getoffers_response($.trim(result));

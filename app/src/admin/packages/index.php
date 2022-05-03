@@ -1,14 +1,15 @@
 <?php
 	// start up eloquent
 	require_once '_packages.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/_profile.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/_profile.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
 
 	use Controllers\Packages;
 	use Controllers\Countries;
 	use Controllers\States; 
 	use Controllers\Profiles; 
 	use Controllers\Bids; 
+	use Controllers\Statuss; 
 
 	Class Packages_List {
 		private $user_id;
@@ -65,7 +66,13 @@
 				$noof_bids = count($package->bids); // count no of bids
 
 				$user = $package->user;
-				$status = $package->status->status;
+				$status = $package->status;
+				
+				if(!isset($status->status)){
+				    $status = Statuss::find($package->status_id);
+				}
+				
+				$status = $status->status;
 		?>
 
 				<!-- package -->
@@ -91,12 +98,12 @@
                         </a>
                         <a class="btn btn-warning text-white row-deactivate toggle-activate-<?php echo $package->id; ?>" role="button" title="De-activate package" data-bs-toggle="tooltip" data-bs-placement="top" style="<?php echo $this->deactivate($status=='inactive'); ?>"><i class="fas fa-circle-pause"></i></a>
                         <a class="btn btn-danger row-delete" role="button" title="Delete package" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fas fa-trash"></i></a>
-                        <a href="/travelpackagebids/package.php?package=<?php echo $country.'-'.$state.'-'.$package->id; ?>" class="btn btn-primary" title="View Listing" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fas fa-eye"></i></a>
+                        <a href="https://travelpackagebids.com/package.php?package=<?php echo $country.'-'.$state.'-'.$package->id; ?>" class="btn btn-primary" title="View Listing" data-bs-toggle="tooltip" data-bs-placement="top"><i class="fas fa-eye"></i></a>
 
-                        <a href="/travelpackagebids/admin/travel-agents?package=<?php echo $country.'-'.$state.'-'.$package->id.'&bidding=allow'; ?>" class="btn btn-info text-white" role="button" title="Select users to Allow Bidding" data-bs-toggle="tooltip" data-bs-placement="top">
+                        <a href="https://travelpackagebids.com/admin/travel-agents?package=<?php echo $country.'-'.$state.'-'.$package->id.'&bidding=allow'; ?>" class="btn btn-info text-white" role="button" title="Select users to Allow Bidding" data-bs-toggle="tooltip" data-bs-placement="top">
                         	<i class="fas fa-handshake"></i>
                         </a>
-                        <a href="/travelpackagebids/admin/travel-agents?package=<?php echo $country.'-'.$state.'-'.$package->id.'&bidding=prevent'; ?>" class="btn btn-dark" role="button" title="Select Users to Barr from Bidding" data-bs-toggle="tooltip" data-bs-placement="top">
+                        <a href="https://travelpackagebids.com/admin/travel-agents?package=<?php echo $country.'-'.$state.'-'.$package->id.'&bidding=prevent'; ?>" class="btn btn-dark" role="button" title="Select Users to Barr from Bidding" data-bs-toggle="tooltip" data-bs-placement="top">
                         	<i class="fas fa-handshake-slash"></i>
                         </a>
 
@@ -128,7 +135,7 @@
             // packages	
             $packages = $this->get_packages();
             
-			$base_url = '/travelpackagebids/admin?';
+			$base_url = 'https://travelpackagebids.com/admin?';
 			
 			pagination($page, $packages, $base_url, $this->noof_items);
 		}

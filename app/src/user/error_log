@@ -1,4 +1,0 @@
-[30-Apr-2022 06:32:57 UTC] PHP Fatal error:  Uncaught Error: Class '_User' not found in /home/travelpa/public_html/app/src/user/forgot-password.php:7
-Stack trace:
-#0 {main}
-  thrown in /home/travelpa/public_html/app/src/user/forgot-password.php on line 7

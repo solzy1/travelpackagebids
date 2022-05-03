@@ -19,6 +19,6 @@
 		}
 	}
 	else{
-	    header("Location: /travelpackagebids/user/profile.php?user=member");
+	    header("Location: https://travelpackagebids.com/user/profile.php?user=member");
 	}
 ?>

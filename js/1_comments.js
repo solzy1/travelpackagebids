@@ -75,7 +75,7 @@ class Comments{
 	post_comment(comment, comment_id, package_id){
 		let user_comment = {comment: comment, package_id: package_id, comment_id: comment_id};
 
-        $.post("/travelpackagebids/app/src/comments/receive.php", user_comment, function(result){
+        $.post("https://travelpackagebids.com/app/src/comments/receive.php", user_comment, function(result){
         	// console.log($.trim(result));
         	// const _comments = new Comments();
 
@@ -100,7 +100,7 @@ class Comments{
 	load_comments(package_id){
 		let load = {package_id: package_id, allow: 'yes'};
 
-        $.post("/travelpackagebids/app/src/package/get_comments.php", load, function(result){
+        $.post("https://travelpackagebids.com/app/src/package/get_comments.php", load, function(result){
             // const _comments = new Comments();
 
             $('.loading-comments').html(''); // hide loading

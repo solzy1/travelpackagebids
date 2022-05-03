@@ -1,7 +1,7 @@
 <?php
 	require_once '_package.php'; // start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/email/_email.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/email/_email.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php'; // include the validation file that holds the class Validation
 
 	use Controllers\Packages;
 	use Controllers\Locations;
@@ -68,7 +68,7 @@
 			}
 			
 			// GO TO profile PAGE
-			gotopage('/travelpackagebids/user/profile.php');
+			gotopage('https://travelpackagebids.com/user/profile.php');
 		}
 		
 		private function send_emails($package){
@@ -83,11 +83,11 @@
             
             $package_tag = $country.'-'.$state.'-'.$package->id;
             
-            $url = "/travelpackagebids/package.php?package=".$package_tag;
+            $url = "https://travelpackagebids.com/package.php?package=".$package_tag.'&save=page';
             
-            $user = $package->user->id;
+            $user_id = $package->user->id;
             
-		    $locations = Locations::find_bystate($state_id, $user->id);
+		    $locations = Locations::find_bystate($state_id, $user_id);
 		    
             foreach ($locations as $location) {
                 $user = $location->user;
@@ -123,7 +123,7 @@
                  	Be the first to <a href="'.$url.'">PLACE A BID</a>, to buy this package, now.
                 </p>
                 
-                <small style="font-size: 10px;margin-top: 20px;">NOTE: If you\'re not a Registered Travel Agent on <a href="/travelpackagebids">TravelPackageBids</a>, Kindly Ignore this message. Thank you.</small>';
+                <small style="font-size: 10px;margin-top: 20px;">NOTE: If you\'re not a Registered Travel Agent on <a href="https://travelpackagebids.com">TravelPackageBids</a>, Kindly Ignore this message. Thank you.</small>';
         }
         
 		function sendemail($country, $state, $url, $user){

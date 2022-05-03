@@ -1,8 +1,8 @@
 <?php
 	// start up eloquent
 	require_once '_locations.php';
-	// require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/_profile.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
+	// require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/_profile.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
 
 	use Controllers\Locations;
 	use Controllers\Countries;

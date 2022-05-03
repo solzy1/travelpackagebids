@@ -1,8 +1,4 @@
 <?php
-
-
-
-
 	require_once '_profile.php';
 
 	use Controllers\Users; 
@@ -70,7 +66,7 @@
 			set_responsevalues($response_msg, $is_success);
 
 			// GO TO profile PAGE
-			gotopage('/travelpackagebids/user/profile.php?user=member');
+			gotopage('https://travelpackagebids.com/user/profile.php?user=member');
 
 			return;
 		}

@@ -24,38 +24,61 @@ class Bids{
     // CREATE BID/OFFER
     show_createoffer(){ // append package_id (on click), to input tag (package-id)
         $('.place-bid:not(.no-bidding)').click(function(){
-            let package_id = $.trim($(this).children('.package_id').val());
+            const _bids = new Bids();
             
-            $("#package-id").val(package_id); // add package_id to the form
-
-            // check if user is loggedin
-            let is_userloggedin = $.trim($("#user-loggedin").val());
-            let modal = '#create-package-bid'; // selector for create bid modal
-
-            // if user isn't logged-in
-            if(is_userloggedin=='no'){
-                let sign_up_first = '<p>Hello, <br>You cannot place a Bid, on this package, unless you '+
-                    '<a href="/user/sign-up.php" class="btn-link" style="color: #03C6C1;"'+
-                    'target="_blank">Sign up</a>.</p>'+
-                    '<p>Kindly <a href="/user/sign-up.php" class="btn-link" '+
-                    'style="color: #03C6C1;" target="_blank">Sign up</a> now, to PLACE BID.</p>';
-
-                $('#sign-up-first').html(sign_up_first);
-
-                modal = '#modal-signup-now';
-            }
-            else{
-                const _bids = new Bids();
-                
-                _bids.enable_offer(this); // enable or disable the make an offer fields, depending on who wants to place a bid
-
-                // get the offers so far and display it, for the user
-                let is_owner = _bids.is_owner(this);
-                _bids.get_offers(package_id, is_owner); 
-            }
-            
-            $(modal).modal('show');
+            _bids.show_offer(this);
         });
+    }
+
+    show_offer(_this){
+        let package_id = $.trim($(_this).children('.package_id').val());
+            
+        $("#package-id").val(package_id); // add package_id to the form
+
+        // check if user is loggedin
+        let is_userloggedin = $.trim($("#user-loggedin").val());
+        let modal = '#create-package-bid'; // selector for create bid modal
+
+        // if user isn't logged-in
+        if(is_userloggedin=='no'){
+            let sign_up_first = '<p>Hello, <br>You cannot place a Bid, on this package, unless you '+
+                '<a href="/user/sign-up.php" class="btn-link" style="color: #03C6C1;"'+
+                'target="_blank">Sign up</a>.</p>'+
+                '<p>Kindly <a href="/user/sign-up.php" class="btn-link" '+
+                'style="color: #03C6C1;" target="_blank">Sign up</a> now, to PLACE BID.</p>';
+
+            $('#sign-up-first').html(sign_up_first);
+
+            modal = '#modal-signup-now';
+        }
+        else{
+            const _bids = new Bids();
+            
+            _bids.enable_offer(_this); // enable or disable the make an offer fields, depending on who wants to place a bid
+
+            // get the offers so far and display it, for the user
+            let is_owner = _bids.is_owner(_this);
+            _bids.get_offers(package_id, is_owner); 
+        }
+        
+        var isShown = $('#create-package-bid').hasClass('show');
+
+        // if modal is already shown
+        if(!isShown){
+            $(modal).modal('show');
+        }
+    }
+
+    edit_offer (_this){
+        let container = $(_this).children('.bid-details-container');
+
+        // get offer and deadline values
+        let offer = $.trim(container.children('.offer').val());
+        let deadline = $.trim(container.children('.deadline').val());
+
+        // set offer and deadline values
+        $('#bid-offer').val(offer);
+        $('#bid-deadline').val(deadline);
     }
 
     is_owner(_this){
@@ -76,7 +99,7 @@ class Bids{
             const _bid = new Bids();
 
             // if an offer was made
-            if(offer!=='' && deadline!==''){
+            if(offer!=='' && deadline!=='' && deadline > 0){
                 let package_id = $("#package-id").val();
 
                 let bid = {package_id: package_id, offer: offer, deadline: deadline};
@@ -94,19 +117,18 @@ class Bids{
     }
 
     refresh_bids(package_id){
-        $.post("/travelpackagebids/app/src/package/get-bids.php", {package_id: package_id}, function(result){
+        $.post("https://travelpackagebids.com/app/src/package/get-bids.php", {package_id: package_id}, function(result){
             $("#package-bids-display").html(result);
         });
     }
 
     send_offer(bid){
-        $.post("/travelpackagebids/app/src/bids/receive.php", bid, function(result){
+        $.post("https://travelpackagebids.com/app/src/bids/receive.php", bid, function(result){
             $('#bid-submit').removeAttr('disabled').css('cursor', '');
             
-            console.log(result);
-            // const _bid = new Bids();
+            const _bid = new Bids();
 
-            // _bid.report_status($.trim(result), bid.package_id, 'Your bid was not received. Please try again, later.');
+            _bid.report_status($.trim(result), bid.package_id, 'Your bid was not received. Please try again, later.');
         });
     }
 
@@ -146,7 +168,7 @@ class Bids{
     get_offers(package_id, is_owner){
         let bid = {package_id: package_id, is_owner: is_owner};
 
-        $.post("/travelpackagebids/app/src/bids/get-bids.php", bid, function(result){
+        $.post("https://travelpackagebids.com/app/src/bids/get-bids.php", bid, function(result){
             const _bid = new Bids();
 
             _bid.getoffers_response($.trim(result));
@@ -184,7 +206,7 @@ class Bids{
 
             let id = $.trim($(_this).parent().children('.id').val());
 
-            let url = '/travelpackagebids/app/src/bids/update-status.php';
+            let url = 'https://travelpackagebids.com/app/src/bids/update-status.php';
 
             let data = {id: id, status: status};
 

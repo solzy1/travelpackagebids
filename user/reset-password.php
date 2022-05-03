@@ -1,11 +1,11 @@
 <?php 
-    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/user/_user.php';
-    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/user/forgot-password.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/user/_user.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/user/forgot-password.php';
     
     $resetpassword = new Forgotpassword();
 
     if(!isset($_SESSION['travelpackagebids.com']['reset_email'])) {
-        $user->gotopage('/travelpackagebids');
+        $resetpassword->gotopage('https://travelpackagebids.com');
     }
 ?>
 
@@ -31,14 +31,14 @@
         <!-- main-header -->
         <div class="container-fluid sticky-top page-header">
             <header class="d-flex flex-wrap justify-content-center py-3 mb-4" style="margin-bottom: 0px !important;">
-              <a href="/travelpackagebids" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+              <a href="https://travelpackagebids.com" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <span class="fs-4">Travelpackagebids</span>
               </a>
 
               <ul class="nav nav-pills justify-content-center">
-                <li class="nav-item"><a href="/travelpackagebids" class="nav-link text-white">Home</a></li>
-                <li class="nav-item"><a href="/travelpackagebids/user/sign-in.php" class="nav-link text-white user-login">Log In</a></li>
-                <li class="nav-item"><a href="/travelpackagebids/user/sign-up.php" class="nav-link text-white user-signup">Sign Up</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com" class="nav-link text-white">Home</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/user/sign-in.php" class="nav-link text-white user-login">Log In</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/user/sign-up.php" class="nav-link text-white user-signup">Sign Up</a></li>
               </ul>
             </header>
         </div>
@@ -99,4 +99,4 @@
 
         <script src="../js/1_confirm-email.js"></script>
     </body>
-</html>
+</html> 

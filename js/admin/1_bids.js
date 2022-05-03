@@ -11,7 +11,7 @@ class Bidding{
 
 			let row_id = $.trim($(this).parent().children('.id').val());
 
-			let url = '/travelpackagebids/app/src/admin/bidding/allow-bidding.php';
+			let url = 'https://travelpackagebids.com/app/src/admin/bidding/allow-bidding.php';
 
 			let data = {id: row_id, status: status};
 
@@ -69,7 +69,7 @@ class Bidding{
 	send_biddingrequest(data){
 		const _bidding = new Bidding();
 
-		let url = '/travelpackagebids/app/src/admin/bidding/allow-bidding.php';
+		let url = 'https://travelpackagebids.com/app/src/admin/bidding/allow-bidding.php';
 
 		$.post(url, data, function(result){
 			// console.log(result);

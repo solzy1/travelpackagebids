@@ -1,10 +1,10 @@
 <?php
 	// start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
 
 	// include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/validation/validation.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
 
 	use Controllers\Users; 
 	use Controllers\Blocked_Users; 

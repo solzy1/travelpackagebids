@@ -1,6 +1,6 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/_profile.php';
-    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/package/list.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/_profile.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/package/list.php';
 
     $title = "Packages"; 
 
@@ -11,7 +11,7 @@
     $is_admin = $profile->useris_admin(); // check if user is admin
 
     if($user_id<=0 || !$is_admin)
-        gotopage('/travelpackagebids');
+        gotopage('https://travelpackagebids.com');
 
     $user = $profile->get_user($user_id); // get user details
 
@@ -38,9 +38,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-        <link rel="stylesheet" href="/travelpackagebids/css/profile.css">
-        <link href="/travelpackagebids/css/sidebars.css" rel="stylesheet">
-        <link href="/travelpackagebids/css/admin.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://travelpackagebids.com/css/profile.css">
+        <link href="https://travelpackagebids.com/css/sidebars.css" rel="stylesheet">
+        <link href="https://travelpackagebids.com/css/admin.css" rel="stylesheet">
         
         <style>
             body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
@@ -63,17 +63,17 @@
         <!-- main-header -->
         <div class="container-fluid profile-header">
             <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-              <a href="/travelpackagebids" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+              <a href="https://travelpackagebids.com" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <span class="fs-4">Travelpackagebids</span>
               </a>
 
               <ul class="nav nav-pills justify-content-center">
-                <li class="nav-item"><a href="/travelpackagebids" class="nav-link text-white">Home</a></li>
-                <li class="nav-item"><a href="/travelpackagebids/user/profile.php" class="nav-link text-white profile-menu">My packages</a></li>
-                <li class="nav-item"><a href="/travelpackagebids/user/profile.php?bids=show" class="nav-link text-white profile-menu" title="All of the packages you've Bid on" data-bs-toggle="tooltip" data-bs-placement="auto">Other packages</a></li>
-                <li class="nav-item"><a href="/travelpackagebids/admin" class="nav-link text-white profile-menu">Packages</a></li>
-                <li class="nav-item"><a href="/travelpackagebids/admin/travel-agents" class="nav-link text-white profile-menu">Travel agents</a></li>
-                <li class="nav-item"><a href="/travelpackagebids/user/profile.php?user=member" class="nav-link text-white profile-menu">My profile</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com" class="nav-link text-white">Home</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php" class="nav-link text-white profile-menu">My packages</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php?bids=show" class="nav-link text-white profile-menu" title="All of the packages you've Bid on" data-bs-toggle="tooltip" data-bs-placement="auto">Other packages</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/admin" class="nav-link text-white profile-menu">Packages</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/admin/travel-agents" class="nav-link text-white profile-menu">Travel agents</a></li>
+                <li class="nav-item"><a href="https://travelpackagebids.com/user/profile.php?user=member" class="nav-link text-white profile-menu">My profile</a></li>
                 <li class="nav-item dropdown" style="padding-top: 9px">
                   <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
 
@@ -101,43 +101,43 @@
             
             <!-- header -->
             <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-light profile-menu-bar">
-                <a href="/travelpackagebids" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <a href="https://travelpackagebids.com" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                   <span class="fs-4">Travelpackagebids</span>
                 </a>
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                   <li class="nav-item">
-                    <a href="/travelpackagebids" class="nav-link text-white d-flex" aria-current="page">
+                    <a href="https://travelpackagebids.com" class="nav-link text-white d-flex" aria-current="page">
                         <i class="bi bi-house-door-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>
                       Home
                     </a>
                   </li>
                   <li>
-                    <a href="/travelpackagebids/user/profile.php" class="nav-link text-white d-flex profile-menu">
+                    <a href="https://travelpackagebids.com/user/profile.php" class="nav-link text-white d-flex profile-menu">
                         <i class="bi bi-box2-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>My packages
                     </a>
                   </li>
 
                   <li>
-                    <a title="All of the packages you've Bid on" data-bs-toggle="tooltip" data-bs-placement="auto" href="/travelpackagebids/user/profile.php?bids=show" class="nav-link text-white d-flex profile-menu">
+                    <a title="All of the packages you've Bid on" data-bs-toggle="tooltip" data-bs-placement="auto" href="https://travelpackagebids.com/user/profile.php?bids=show" class="nav-link text-white d-flex profile-menu">
                         <i class="bi bi-box2-heart-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>Other packages
                     </a>
                   </li>
                   
                   <li>
-                    <a href="/travelpackagebids/admin/packages" class="nav-link text-white d-flex profile-menu">
+                    <a href="https://travelpackagebids.com/admin/packages" class="nav-link text-white d-flex profile-menu">
                         <i class="bi bi-boxes" style="width: 16px;height: 16px;margin-right: 10px;"></i>
                         Packages
                     </a>
                   </li>
                   <li>
-                    <a href="/travelpackagebids/admin/travel-agents" class="nav-link text-white d-flex profile-menu">
+                    <a href="https://travelpackagebids.com/admin/travel-agents" class="nav-link text-white d-flex profile-menu">
                         <i class="bi bi-people-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>
                         Travel agents
                     </a>
                   </li>
                   <li>
-                    <a href="/travelpackagebids/user/profile.php?user=member" class="nav-link text-white d-flex profile-menu">
+                    <a href="https://travelpackagebids.com/user/profile.php?user=member" class="nav-link text-white d-flex profile-menu">
                         <i class="bi bi-person-fill" style="width: 16px;height: 16px;margin-right: 10px;"></i>
                         My profile
                     </a>
@@ -156,7 +156,7 @@
                     </strong>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" href="/travelpackagebids/user/profile.php"><i class="fa-solid fa-user"></i> Profile</a></li>
+                    <li><a class="dropdown-item" href="https://travelpackagebids.com/user/profile.php"><i class="fa-solid fa-user"></i> Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item logout" role="button"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a></li>
                   </ul>
@@ -303,23 +303,23 @@
         <script src="https://kit.fontawesome.com/6030f7206a.js" crossorigin="anonymous"></script>
         
         <!-- my scripts -->
-        <script src="/travelpackagebids/js/2_profile-menu.js"></script>
-        <script src="/travelpackagebids/js/1_countries.js"></script>
-        <script src="/travelpackagebids/js/2_packages.js"></script>
+        <script src="https://travelpackagebids.com/js/2_profile-menu.js"></script>
+        <script src="https://travelpackagebids.com/js/1_countries.js"></script>
+        <script src="https://travelpackagebids.com/js/2_packages.js"></script>
         
-        <script src="/travelpackagebids/js/1_user.js"></script>
-        <script src="/travelpackagebids/js/6_profile.js"></script>
-        <script src="/travelpackagebids/js/sidebars.js"></script>
+        <script src="https://travelpackagebids.com/js/1_user.js"></script>
+        <script src="https://travelpackagebids.com/js/6_profile.js"></script>
+        <script src="https://travelpackagebids.com/js/sidebars.js"></script>
 
         <!-- ADMIN -->
-        <script src="/travelpackagebids/js/3_bids.js"></script>
-        <script src="/travelpackagebids/js/admin/1_list.js"></script>
-        <script src="/travelpackagebids/js/admin/1_delete.js"></script>
-        <script src="/travelpackagebids/js/admin/1_activate.js"></script>
-        <script src="/travelpackagebids/js/admin/1_search.js"></script>
-        <script src="/travelpackagebids/js/admin/2_locations.js"></script>
-        <script src="/travelpackagebids/js/admin/1_bids.js"></script>
-        <script src="/travelpackagebids/js/admin/1_admin.js"></script>
+        <script src="https://travelpackagebids.com/js/6_bids.js"></script>
+        <script src="https://travelpackagebids.com/js/admin/1_list.js"></script>
+        <script src="https://travelpackagebids.com/js/admin/1_delete.js"></script>
+        <script src="https://travelpackagebids.com/js/admin/1_activate.js"></script>
+        <script src="https://travelpackagebids.com/js/admin/1_search.js"></script>
+        <script src="https://travelpackagebids.com/js/admin/2_locations.js"></script>
+        <script src="https://travelpackagebids.com/js/admin/1_bids.js"></script>
+        <script src="https://travelpackagebids.com/js/admin/1_admin.js"></script>
     </body>
 
 </html>

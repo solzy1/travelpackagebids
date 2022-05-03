@@ -1,6 +1,6 @@
  <?php 
 	// start up eloquent
-	// require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php';
+	// require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
 	require_once '_user.php';
 
 	use Controllers\Users; 
@@ -35,10 +35,15 @@
 
 						// assign session values
 					    $this->profile_access($user);
-
-					    $url = $userrole->name=='admin' ? '/admin' : '/user/profile.php';
-
-						$this->gotopage('/travelpackagebids'.$url);
+					    
+					    // set page url
+                        $url = $this->page_redirect();
+                        
+                        if(empty($url)){
+					        $url = 'https://travelpackagebids.com'.($userrole->name=='admin' ? '/admin' : '/user/profile.php');
+                        }
+                        
+						$this->gotopage($url);
 
 						return;
 					}
@@ -49,6 +54,18 @@
 			else{
 				$this->reportfailure('Invalid Email or Password. Please try again.');
 			}
+		}
+		
+		private function page_redirect(){
+		    if(isset($_SESSION['travelpackagebids.com']['re-direct'])){
+		        $url = $_SESSION['travelpackagebids.com']['re-direct'];
+		        
+		        unset($_SESSION['travelpackagebids.com']['re-direct']);
+		        
+		        return $url;
+		    }
+		    
+		    return '';
 		}
 	}
 ?>

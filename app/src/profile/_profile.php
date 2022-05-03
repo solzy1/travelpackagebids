@@ -1,8 +1,8 @@
 <?php
     
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php'; // start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/validation/validation.php'; // include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php'; // start up eloquent
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
 	require_once 'model.php';
 
 	use Controllers\Users; 
@@ -71,7 +71,7 @@
 			}
 		?>
 			<div class="col-sm-12 col-md-6 col-lg-4 user-profile">
-	            <form action="/travelpackagebids/app/src/profile/receive.php" method="POST" autocomplete="off">
+	            <form action="https://travelpackagebids.com/app/src/profile/receive.php" method="POST" autocomplete="off">
 	                <!-- country -->
 	                <div class="mb-3">
 	                    <label for="profile-country" class="form-label fw-bold">Country</label>
