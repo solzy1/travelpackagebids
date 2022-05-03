@@ -15,5 +15,8 @@
     "require": {
         "phpmailer/phpmailer": "^6.6",
         "illuminate/database": "^5.4"
+    },
+    "require-dev": {
+        "composer/composer": "^2.2"
     }
 }

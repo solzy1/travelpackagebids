@@ -308,7 +308,7 @@
         <script src="https://travelpackagebids.com/js/2_packages.js"></script>
         
         <script src="https://travelpackagebids.com/js/1_user.js"></script>
-        <script src="https://travelpackagebids.com/js/6_profile.js"></script>
+        <script src="https://travelpackagebids.com/js/4_profile.js"></script>
         <script src="https://travelpackagebids.com/js/sidebars.js"></script>
 
         <!-- ADMIN -->

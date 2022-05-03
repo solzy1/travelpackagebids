@@ -161,7 +161,7 @@ class Bids{
 
         create_bid.addEventListener('shown.bs.modal', function () {
             $('#bid-offer').focus(); // focus on the 'make an offer', input tag
-        });
+        })
     }
 
     on_modalhidden(){

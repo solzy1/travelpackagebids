@@ -326,16 +326,8 @@
         
         <script src="../js/1_user.js"></script>
         <script src="../js/3_bids.js"></script>
-        <script src="../js/6_profile.js"></script>
+        <script src="../js/4_profile.js"></script>
         <script src="../js/sidebars.js"></script>
-        
-        <script>
-            const bid_status = function(_this){
-            	const _bids = new Bids();
-            
-            	_bids.activate(_this);
-            }
-        </script>
     </body>
 
 </html>
