@@ -87,7 +87,7 @@
             
             $user = $package->user->id;
             
-		    $locations = Locations::find_bystate($state_id, $user_id);
+		    $locations = Locations::find_bystate($state_id, $user->id);
 		    
             foreach ($locations as $location) {
                 $user = $location->user;
