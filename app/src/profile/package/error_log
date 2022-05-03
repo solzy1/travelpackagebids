@@ -1,0 +1,9 @@
+[30-Apr-2022 09:22:23 UTC] PHP Notice:  Undefined variable: user_id in /home/travelpa/public_html/app/src/profile/package/create.php on line 89
+[01-May-2022 03:14:01 UTC] PHP Notice:  Undefined variable: user_id in /home/travelpa/public_html/app/src/profile/package/create.php on line 89
+[02-May-2022 06:12:07 UTC] PHP Notice:  Undefined variable: user_id in /home/travelpa/public_html/app/src/profile/package/create.php on line 89
+[02-May-2022 06:12:14 UTC] PHP Notice:  Undefined variable: user_id in /home/travelpa/public_html/app/src/profile/package/create.php on line 89
+[02-May-2022 07:26:16 UTC] PHP Notice:  Undefined variable: user_id in /home/travelpa/public_html/app/src/profile/package/create.php on line 89
+[02-May-2022 10:16:38 UTC] PHP Notice:  Undefined variable: user_id in /home/travelpa/public_html/app/src/profile/package/create.php on line 90
+[02-May-2022 10:19:06 UTC] PHP Notice:  Undefined variable: user_id in /home/travelpa/public_html/app/src/profile/package/create.php on line 90
+[03-May-2022 03:17:20 UTC] PHP Notice:  Undefined variable: user_id in /home/travelpa/public_html/app/src/profile/package/create.php on line 90
+[03-May-2022 05:42:49 UTC] PHP Notice:  Undefined variable: user_id in /home/travelpa/public_html/app/src/profile/package/create.php on line 90

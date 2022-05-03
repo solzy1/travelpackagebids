@@ -1,5 +1,13 @@
 <?php 
-	// namespace Email;
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\SMTP;
+	use PHPMailer\PHPMailer\Exception;
+	
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php';
 	
 	class Email {
 		private $receiver_email;
@@ -13,19 +21,54 @@
 		}
 
 		function send(){
-			$to = $this->receiver_email;
-			$subject = $this->subject;
-
-			$message = $this->bodytemplate();
-
-			// Always set content-type when sending HTML email
-			$headers = "MIME-Version: 1.0" . "\r\n";
-			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-			// More headers
-// 			$headers .= 'From: <webuildwebsitesfast@gmail.com>' . "\r\n";
-
-			mail($to, $subject, $message, $headers);
+            $mail = new PHPMailer(true);
+            
+    	   // try {
+    	        //Server settings
+    			$mail->SMTPDebug = SMTP::DEBUG_SERVER;                                       // Enable verbose debug output
+    	        $mail->isSMTP();                                            // Set mailer to use SMTP
+    	        $mail->Host       = 'mail.travelpackagebids.com';              // Specify main and backup SMTP servers
+    	        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+    	        $mail->Username   = 'info@travelpackagebids.com';        // SMTP username
+    	        $mail->Password   = 'travelpackageauctionorbidding';              // SMTP password
+    	        $mail->SMTPSecure = 'ssl';            //Enable implicit TLS encryption
+                $mail->Port       = 465;
+                
+    // 			$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;                                  // Enable TLS encryption, `ssl` also accepted 
+    // 	        $mail->Port       = 587;                  // TCP port to connect to
+    	        
+    	        //Recipients
+    	        $mail->setFrom('info@travelpackagebids.com', 'TravelPackageBids');
+    	        
+    			$to = $this->receiver_email;
+    	        $receiver_name = $this->get_name($to);
+    	        
+    			$subject = $this->subject;
+    
+    			$message = $this->bodytemplate();
+    	        
+    	        $mail->addAddress($to, $receiver_name);    // Add a recipient
+    	      
+    	        // Content
+    	        $mail->isHTML(true);                                  // Set email format to HTML
+    	        $mail->Subject = $subject;
+    	        $mail->Body    = $message;
+    
+    	        // altbody (plain html)
+    	        $mail->AltBody = $message;
+    
+    	        $mail->send();
+    	        
+    	       // echo 'sent';
+    	   // } catch (Exception $e) {
+    	   //     echo 'Message could not be sent. Mailer Error: {$mail->ErrorInfo}';
+    	   // }
+		}
+		
+		function get_name($email){
+		    $split = explode('@', $email);
+		    
+		    return $split[0];
 		}
 		
 		function bodytemplate(){

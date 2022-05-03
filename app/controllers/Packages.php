@@ -29,7 +29,7 @@
 	        	$packages = $packages->where('people', 'like', '%'.$value);
 	        }
 
-	        return $packages->select('packages.*')->get();
+	        return $packages->select('packages.*')->orderBy('packages.created_at', 'desc')->get();
 	    }
 
 	    public static function find_savedpackages($user_id){

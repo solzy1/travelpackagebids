@@ -3,6 +3,8 @@
 	 
 	use Illuminate\Database\Eloquent\Model;
 	 
+	use Models\Bid;
+	
 	class Package extends Model {
 	    protected $table = 'packages';
 
@@ -11,7 +13,7 @@
         // PARENT TO (userconfirmation) 
 	    public function bids()
 		{
-		    return $this->hasMany('\Models\Bid');
+		   return $this->hasMany('\Models\Bid');
 		}
 		
 		public function comments()

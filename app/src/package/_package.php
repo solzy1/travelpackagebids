@@ -1,13 +1,13 @@
 <?php
 	// start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php';
 
 	// include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/validation/validation.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 	require_once 'model.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/model.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/packages/index.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/model.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/packages/index.php';
 
 	use Controllers\Packages;
 	use Controllers\Comments;
@@ -25,6 +25,9 @@
 
 			start_session();
 			$this->user_id = get_userid();
+			
+			// delete all the expired bids
+			Bids::delete_expiredbids();
 		}
 
 		function validate($inputtype, $value){ 
@@ -137,7 +140,7 @@
 				                    <?php
 		                        	}
 		                            ?>
-		                            <a href="https://travelpackagebids.com" class="btn btn-secondary go-back">
+		                            <a href="/travelpackagebids" class="btn btn-secondary go-back">
 		                                <i class="fa-solid fa-left-long"></i> Go Back
 		                            </a>
 		                        </div>
@@ -174,7 +177,7 @@
 			else{
 				echo '<div style="font-weight: bold;font-size: 25px;">You have not requested for an existing package. <br></div>';
 
-				// Kindly check out, our other <a href="https://travelpackagebids.com">travel packages</a>, below.	
+				// Kindly check out, our other <a href="/travelpackagebids">travel packages</a>, below.	
 			}
 		}
 

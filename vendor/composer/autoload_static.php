@@ -9,9 +9,7 @@ class ComposerStaticInit4fecf1bc6abe09fa248141505c9e7d95
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
-        'ad155f8f1cf0d418fe49e248db8c661b' => __DIR__ . '/..' . '/react/promise/src/functions_include.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -26,32 +24,15 @@ class ComposerStaticInit4fecf1bc6abe09fa248141505c9e7d95
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\Translation\\' => 30,
-            'Symfony\\Component\\Process\\' => 26,
-            'Symfony\\Component\\Finder\\' => 25,
-            'Symfony\\Component\\Filesystem\\' => 29,
-            'Symfony\\Component\\Debug\\' => 24,
-            'Symfony\\Component\\Console\\' => 26,
-            'Seld\\PharUtils\\' => 15,
-            'Seld\\JsonLint\\' => 14,
-        ),
-        'R' => 
-        array (
-            'React\\Promise\\' => 14,
         ),
         'P' => 
         array (
-            'Psr\\Log\\' => 8,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
             'Models\\' => 7,
-        ),
-        'J' => 
-        array (
-            'JsonSchema\\' => 11,
         ),
         'I' => 
         array (
@@ -63,13 +44,6 @@ class ComposerStaticInit4fecf1bc6abe09fa248141505c9e7d95
         'C' => 
         array (
             'Controllers\\' => 12,
-            'Composer\\XdebugHandler\\' => 23,
-            'Composer\\Spdx\\' => 14,
-            'Composer\\Semver\\' => 16,
-            'Composer\\Pcre\\' => 14,
-            'Composer\\MetadataMinifier\\' => 26,
-            'Composer\\CaBundle\\' => 18,
-            'Composer\\' => 9,
         ),
     );
 
@@ -86,49 +60,9 @@ class ComposerStaticInit4fecf1bc6abe09fa248141505c9e7d95
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
-        ),
         'Symfony\\Component\\Translation\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/translation',
-        ),
-        'Symfony\\Component\\Process\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/process',
-        ),
-        'Symfony\\Component\\Finder\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/finder',
-        ),
-        'Symfony\\Component\\Filesystem\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/filesystem',
-        ),
-        'Symfony\\Component\\Debug\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/debug',
-        ),
-        'Symfony\\Component\\Console\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/console',
-        ),
-        'Seld\\PharUtils\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/seld/phar-utils/src',
-        ),
-        'Seld\\JsonLint\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/seld/jsonlint/src/Seld/JsonLint',
-        ),
-        'React\\Promise\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/react/promise/src',
-        ),
-        'Psr\\Log\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'PHPMailer\\PHPMailer\\' => 
         array (
@@ -137,10 +71,6 @@ class ComposerStaticInit4fecf1bc6abe09fa248141505c9e7d95
         'Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/models',
-        ),
-        'JsonSchema\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
         ),
         'Illuminate\\Support\\' => 
         array (
@@ -161,34 +91,6 @@ class ComposerStaticInit4fecf1bc6abe09fa248141505c9e7d95
         'Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/controllers',
-        ),
-        'Composer\\XdebugHandler\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/xdebug-handler/src',
-        ),
-        'Composer\\Spdx\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/spdx-licenses/src',
-        ),
-        'Composer\\Semver\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/semver/src',
-        ),
-        'Composer\\Pcre\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/pcre/src',
-        ),
-        'Composer\\MetadataMinifier\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/metadata-minifier/src',
-        ),
-        'Composer\\CaBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
-        ),
-        'Composer\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/composer/src/Composer',
         ),
     );
 

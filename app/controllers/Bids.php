@@ -23,7 +23,7 @@
 	        $get = Bid::where('package_id', $package_id)
 	        		->where('bids.id', '!=', $owner_id)
 	        		->where('offer', '>', $offer)
-	        		->join('packages', 'packages.id', 'bids.package_id')
+	       // 		->join('packages', 'packages.id', 'bids.package_id')
 	        		->join('users', 'users.id', 'bids.bidder_id')
 	        		->select('users.email as email', 'users.id as user_id', 'bids.offer as offer');
 

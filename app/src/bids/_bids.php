@@ -1,10 +1,10 @@
 <?php
 	// start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php';
 
 	// include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/validation/validation.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 
 	use Controllers\Packages;
 	use Controllers\Countries; 
@@ -19,6 +19,8 @@
 			start_session();
 
 			$this->user_id = get_userid(); // get user id
+			
+			Bids::delete_expiredbids(); // delete all the expired bids
 		}
 
 		function validate($inputtype, $value){ 

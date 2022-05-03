@@ -94,18 +94,19 @@ class Bids{
     }
 
     refresh_bids(package_id){
-        $.post("https://travelpackagebids.com/app/src/package/get-bids.php", {package_id: package_id}, function(result){
+        $.post("/travelpackagebids/app/src/package/get-bids.php", {package_id: package_id}, function(result){
             $("#package-bids-display").html(result);
         });
     }
 
     send_offer(bid){
-        $.post("https://travelpackagebids.com/app/src/bids/receive.php", bid, function(result){
+        $.post("/travelpackagebids/app/src/bids/receive.php", bid, function(result){
             $('#bid-submit').removeAttr('disabled').css('cursor', '');
+            
+            console.log(result);
+            // const _bid = new Bids();
 
-            const _bid = new Bids();
-
-            _bid.report_status($.trim(result), bid.package_id, 'Your bid was not received. Please try again, later.');
+            // _bid.report_status($.trim(result), bid.package_id, 'Your bid was not received. Please try again, later.');
         });
     }
 
@@ -145,7 +146,7 @@ class Bids{
     get_offers(package_id, is_owner){
         let bid = {package_id: package_id, is_owner: is_owner};
 
-        $.post("https://travelpackagebids.com/app/src/bids/get-bids.php", bid, function(result){
+        $.post("/travelpackagebids/app/src/bids/get-bids.php", bid, function(result){
             const _bid = new Bids();
 
             _bid.getoffers_response($.trim(result));
@@ -161,7 +162,7 @@ class Bids{
 
         create_bid.addEventListener('shown.bs.modal', function () {
             $('#bid-offer').focus(); // focus on the 'make an offer', input tag
-        })
+        });
     }
 
     on_modalhidden(){
@@ -183,7 +184,7 @@ class Bids{
 
             let id = $.trim($(_this).parent().children('.id').val());
 
-            let url = 'https://travelpackagebids.com/app/src/bids/update-status.php';
+            let url = '/travelpackagebids/app/src/bids/update-status.php';
 
             let data = {id: id, status: status};
 

@@ -1,6 +1,6 @@
  <?php 
 	// start up eloquent
-	// require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
+	// require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php';
 	require_once '_user.php';
 
 	use Controllers\Users; 
@@ -38,7 +38,7 @@
 
 					    $url = $userrole->name=='admin' ? '/admin' : '/user/profile.php';
 
-						$this->gotopage('https://travelpackagebids.com'.$url);
+						$this->gotopage('/travelpackagebids'.$url);
 
 						return;
 					}

@@ -1,6 +1,6 @@
 <?php
 	require_once '_package.php'; // start up eloquent
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php'; // include the validation file that holds the class Validation
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php'; // include the validation file that holds the class Validation
 
 	use Controllers\Packages; 
 
@@ -66,7 +66,7 @@
 			}
 			
 			// GO TO profile PAGE
-			gotopage('https://travelpackagebids.com/user/profile.php');
+			gotopage('/travelpackagebids/user/profile.php');
 		}
 	}
 ?>

@@ -81,7 +81,7 @@ class Confirm_Email {
 	send_password(password, re_password, key){
 		let passwords = {password: password, re_password: re_password, key: key};
 
-        $.post("https://travelpackagebids.com/app/src/user/receive-password.php", passwords, function(result){
+        $.post("/travelpackagebids/app/src/user/receive-password.php", passwords, function(result){
         	const _confirmemail = new Confirm_Email();
         	
         	_confirmemail.gotopage($.trim(result));
@@ -89,10 +89,10 @@ class Confirm_Email {
 	}
 
 	gotopage(result){
-		let url = 'https://travelpackagebids.com/user/profile.php'; // is request was successful
+		let url = '/travelpackagebids/user/profile.php'; // is request was successful
 
 		if(result=='failure')
-			url = "https://travelpackagebids.com";
+			url = "/travelpackagebids";
 
 		window.location.replace(url);
 	}
