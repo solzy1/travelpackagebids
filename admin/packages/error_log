@@ -1,0 +1,6 @@
+[27-Apr-2022 18:44:48 UTC] PHP Notice:  Trying to get property 'status' of non-object in /home/travelpa/public_html/app/src/admin/packages/index.php on line 68
+[27-Apr-2022 18:59:55 UTC] PHP Notice:  Trying to get property 'status' of non-object in /home/travelpa/public_html/app/src/admin/packages/index.php on line 68
+[30-Apr-2022 09:19:20 UTC] PHP Notice:  Trying to get property 'status' of non-object in /home/travelpa/public_html/app/src/admin/packages/index.php on line 68
+[01-May-2022 16:06:22 UTC] PHP Notice:  Trying to get property 'status' of non-object in /home/travelpa/public_html/app/src/admin/packages/index.php on line 68
+[01-May-2022 16:06:27 UTC] PHP Notice:  Trying to get property 'status' of non-object in /home/travelpa/public_html/app/src/admin/packages/index.php on line 68
+[02-May-2022 10:11:57 UTC] PHP Notice:  Trying to get property 'status' of non-object in /home/travelpa/public_html/app/src/admin/packages/index.php on line 68

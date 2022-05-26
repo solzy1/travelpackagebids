@@ -1,5 +1,5 @@
 <?php
-    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/packages/index.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/packages/index.php';
 
     $title = "TravelPackaeBids | ".$title;
     $user_id = get_userid();
@@ -33,17 +33,17 @@
             <!-- main-header -->
             <div class="container-fluid sticky-top page-header">
                 <header class="d-flex flex-wrap justify-content-center py-3 mb-4" style="margin-bottom: 0px !important;">
-                  <a href="https://travelpackagebids.com" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                  <a href="/travelpackagebids" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-4">Travelpackagebids</span>
                   </a>
 
                   <ul class="nav nav-pills justify-content-center">
-                    <li class="nav-item"><a href="https://travelpackagebids.com" class="nav-link text-white">Home</a></li>
+                    <li class="nav-item"><a href="/travelpackagebids" class="nav-link text-white">Home</a></li>
                     <?php 
                         if($user_id <= 0) {
                     ?>
-                        <li class="nav-item"><a href="https://travelpackagebids.com/user/sign-in.php" class="nav-link text-white user-login">Log In</a></li>
-                        <li class="nav-item"><a href="https://travelpackagebids.com/user/sign-up.php" class="nav-link text-white user-signup">Sign Up</a></li>
+                        <li class="nav-item"><a href="/travelpackagebids/user/sign-in.php" class="nav-link text-white user-login">Log In</a></li>
+                        <li class="nav-item"><a href="/travelpackagebids/user/sign-up.php" class="nav-link text-white user-signup">Sign Up</a></li>
                     <?php
                         } 
                         else {
@@ -63,9 +63,9 @@
                             </strong>
                           </a>
                           <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser">
-                            <li><a class="dropdown-item" href="https://travelpackagebids.com/user/profile.php?user=member"><i class="fa-solid fa-user"></i> My profile</a></li>
+                            <li><a class="dropdown-item" href="/travelpackagebids/user/profile.php?user=member"><i class="fa-solid fa-user"></i> My profile</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item btn" href="https://travelpackagebids.com/user/profile.php"><i class="fa-solid fa-box"></i> My packages</a></li>
+                            <li><a class="dropdown-item btn" href="/travelpackagebids/user/profile.php"><i class="fa-solid fa-box"></i> My packages</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item btn logout" role="button"><i class="fa-solid fa-right-from-bracket"></i> Sign out</a></li>
                           </ul>
@@ -91,7 +91,7 @@
 		                        <i class="fa-solid fa-bars-staggered"></i>
 		                        Live listings: <span style="margin-right: 10px;"><?php echo $packages->noofpackages; ?></span>
 		                        
-		                        <span style="font-weight: bold;">Ready to sell? <a href="<?php echo 'https://travelpackagebids.com/user/'.(isset($user_id) && !empty($user_id) ? 'profile.php' : 'sign-up.php'); ?>" class="sellnow" style="color: white">Sell Now</a></span>
+		                        <span style="font-weight: bold;">Ready to sell? <a href="<?php echo '/travelpackagebids/user/'.(isset($user_id) && !empty($user_id) ? 'profile.php' : 'sign-up.php'); ?>" class="sellnow" style="color: white">Sell Now</a></span>
 		                    </p>
 		                </div>
 		            </div>
@@ -132,7 +132,7 @@
                         <div class="row">
                             <!-- create bid section-->
                             <div class="col-12 col-lg-4 create-bid-section">
-                                <div class="create-bid-status text-center" style="color: white;padding: 5px;opacity: 0">
+                                <div class="create-bid-status text-center d-none" style="color: white;padding: 5px;">
                                     
                                 </div>
                                 
@@ -148,6 +148,31 @@
                                         <div class="input-group mb-3">
                                             <input type="number" class="form-control" id="bid-deadline" name="deadline" placeholder="e.g. 24 for 24 hours, 48 for 48 hours" required>
                                             <span class="input-group-text">hour(s)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3" style="position: relative;text-align: left;">
+                                        <label for="upload-file" class="form-label fw-bold">Select File <sm class="text-secondary" style="font-size: 12px;">(pdf, txt, image or word)</sm></label>
+                                    
+                                        <div class="uploadfile" id="upload-file">
+                                            <label class="btn addpic" style="margin: 0 auto;display: flex;align-items: center;justify-content: center;" for="selectfile"> 
+                                                <input class="uploadfromlib" id="selectfile" name="file" type="file" style="display:none;" accept="image/png, image/jpg, image/jpeg, .pdf, .docx, .doc, .txt">
+                                                <input type="hidden" id="itenary-file" name="itenary-file" value="">
+                                            
+                                                <div style="text-align: center;font-size: 30px;">
+                                                    <div class="mb-3 input-group">
+                                                        <i class="fa fa-file-circle-plus"></i>
+
+                                                        <div id="loader" class="fa-3x d-none" style="font-size: 22px;margin-left: 5px;">
+                                                            <i class="fas fa-spinner fa-pulse"></i>
+                                                        </div>
+
+                                                        <div id="file-name" class="text-secondary d-none" style="font-size: 22px;margin-left: 5px;">
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </label>
                                         </div>
                                     </div>
 
@@ -228,9 +253,11 @@
         <!-- my scripts -->
         <!-- <script src="js/countries.js"></script> -->
         <script src="js/1_user.js"></script>
-        <script src="js/6_bids.js"></script>
+        <script src="js/5_bids.js"></script>
         <script src="js/1_comments.js"></script>
         <script src="js/2_layout.js"></script>
+        <script src="js/file-upload.js"></script>
+        <script src="js/file-download.js"></script>
     </body>
 
 </html>

@@ -1,6 +1,6 @@
 <?php
 	require_once '_package.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 
 	use Controllers\Packages;
 	use Controllers\Countries; 
@@ -103,7 +103,7 @@
 	                        	<?php 
 	                        		$desc_len = strlen($description);
 
-	                        		echo $desc_len > $max_desclen ? substr($description, 0, $max_desclen).'<a href="https://travelpackagebids.com/package.php?package=country-state-id">...</a>' : $description; 
+	                        		echo $desc_len > $max_desclen ? substr($description, 0, $max_desclen).'<a href="/travelpackagebids/package.php?package=country-state-id">...</a>' : $description; 
 	                        	?>
 	                        </p>
 	                    </div>
@@ -123,7 +123,7 @@
 	                            <input type="hidden" class="package_id" value="<?php echo $package_id; ?>">
 	                            <input type="hidden" class="is_owner" value="yes">
 	                        </button>
-	                        <a href="https://travelpackagebids.com/package.php?package=<?php echo $country.'-'.$state.'-'.$package_id; ?>" class="btn view-listing">
+	                        <a href="/travelpackagebids/package.php?package=<?php echo $country.'-'.$state.'-'.$package_id; ?>" class="btn view-listing">
                                 View Listing <i class="fa-solid fa-right-long"></i>
                             </a>
 	                    </div>
@@ -142,7 +142,7 @@
             // packages			
 			$packages = $show_saved ? $this->get_packages($user_id) : Packages::find_byuser($user_id);
 			
-			$base_url = 'https://travelpackagebids.com/user/profile.php?';
+			$base_url = '/travelpackagebids/user/profile.php?';
 			if($show_saved)
 				$base_url .= 'bids=show&';
 			
@@ -193,7 +193,7 @@
 	                    </div>
 
 	                    <div class="modal-body create-package-body">
-	                        <form action="https://travelpackagebids.com/app/src/profile/package/receivepackage.php" method="POST"autocomplete="off">
+	                        <form action="/travelpackagebids/app/src/profile/package/receivepackage.php" method="POST"autocomplete="off">
 	                            <!-- country -->
 	                            <div class="mb-3">
 	                                <label for="package-country" class="form-label fw-bold">Country</label>
@@ -355,7 +355,7 @@
                             	<?php 
 	                        		$desc_len = strlen($description);
 
-	                        		echo $desc_len > $max_desclen ? substr($description, 0, $max_desclen).'<a href="https://travelpackagebids.com/package.php?package=country-state-id">...</a>' : $description; 
+	                        		echo $desc_len > $max_desclen ? substr($description, 0, $max_desclen).'<a href="/travelpackagebids/package.php?package=country-state-id">...</a>' : $description; 
 	                        	?>
                             </p>
                         </div>
@@ -368,7 +368,7 @@
                                 <input type="hidden" class="package_id" value="<?php echo $package->id; ?>">
                             </button>
 	                       
-                            <a style="margin-bottom: 5px;" href="https://travelpackagebids.com/package.php?package=<?php echo $country.'-'.$state.'-'.$package->id; ?>" class="btn view-listing">
+                            <a style="margin-bottom: 5px;" href="/travelpackagebids/package.php?package=<?php echo $country.'-'.$state.'-'.$package->id; ?>" class="btn view-listing">
                                 View Listing <i class="fa-solid fa-right-long"></i>
                             </a>
                         </div>
@@ -387,7 +387,7 @@
 			}
 
 			if(count($packages)==0){
-				echo '<div class="text-center other-packages" style="font-size: 25px;">You\'ve not placed a bid on any package yet. You can do that <a href="https://travelpackagebids.com">here</a>.</div>';
+				echo '<div class="text-center other-packages" style="font-size: 25px;">You\'ve not placed a bid on any package yet. You can do that <a href="/travelpackagebids">here</a>.</div>';
 			}
 		}
         

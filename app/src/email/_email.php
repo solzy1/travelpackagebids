@@ -1,9 +1,11 @@
 <?php 
+    date_default_timezone_set('Etc/UTC');
+    
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
     
-    require_once $_SERVER['DOCUMENT_ROOT'].'/start.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/start.php';
     
     class Email {
         private $receiver_email;
@@ -20,31 +22,47 @@
             $mail = new PHPMailer(true);
             
             try {
+                // $mail->Host       = 'server111.verygoodserver.com';   ]
+                // $mail->Password   = 'Travel123!';
+                
+                // $mail->Host       = 'travelpackagebids.com';
+                // $mail->Password   = 'travelpackageauctionorbidding';
+                
                 //Server settings
-                // $mail->SMTPDebug = 1;
+                // $mail->SMTPDebug = 2;
+
+                //Ask for HTML-friendly debug output
+                // $mail->Debugoutput = 'html';
+                
+                $mail->Priority = 1;
                 // SMTP::DEBUG_SERVER;                                       // Enable verbose debug output
-                $mail->isSMTP();                                            // Set mailer to use SMTP
-                $mail->Host       = 'travelpackagebids.com';              // Specify main and backup SMTP servers
-                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                $mail->Username   = 'info@travelpackagebids.com';        // SMTP username
-                $mail->Password   = 'travelpackageauctionorbidding';              // SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;          //Enable implicit TLS encryption
+                // $mail->Mailer = "smtp";
+             
+                $mail->isSMTP(); // Set mailer to use SMTP
+                $mail->Host       = "smtp.gmail.com";
+                // 'server111.verygoodserver.com'; // Specify main and backup SMTP servers
+                $mail->SMTPAuth   = true; // Enable SMTP authentication
+                $mail->Username   = 'travelpackagebids@gmail.com'; // SMTP username
+                $mail->Password   = 'Vasu91@Rajit88'; // SMTP password
+                $mail->SMTPSecure = 'ssl'; //Enable implicit TLS encryption
                 $mail->Port       = 465;
                 
+                // $mail->SMTPSecure = "tls";
+                // $mail->Port       = 587;
+                
                 //Recipients
-                $mail->setFrom('info@travelpackagebids.com', 'TravelPackageBids');
+                $mail->setFrom('travelpackagebids@gmail.com', 'TravelPackageBids');
                 
                 $to = $this->receiver_email;
                 $receiver_name = $this->get_name($to);
                 
                 $subject = $this->subject;
-    
                 $message = $this->bodytemplate();
                 
-                $mail->addAddress($to, $receiver_name);    // Add a recipient
+                $mail->addAddress($to, $receiver_name); // Add a recipient
               
                 // Content
-                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->isHTML(true); // Set email format to HTML
                 $mail->Subject = $subject;
                 $mail->Body    = $message;
     
@@ -55,17 +73,17 @@
             } catch (Exception $e) {
                 echo 'Message could not be sent. Mailer Error: {$mail->ErrorInfo}';
             }
-		}
-		
+        }
+        
         function get_name($email){
             $split = explode('@', $email);
             
             return $split[0];
         }
         
-		function bodytemplate(){
-		
-		    return '<!DOCTYPE html> 
+        function bodytemplate(){
+        
+            return '<!DOCTYPE html> 
             <html>
                 <head>
                     <meta charset="UTF-8">
@@ -97,6 +115,6 @@
                 </body>
             
             </html>';
-		}
-	}
+        }
+    }
 ?>

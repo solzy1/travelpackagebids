@@ -1,6 +1,6 @@
 <?php
 	// include the validation file that holds the class Validation
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/user/_user.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/user/_user.php';
 
 	$user = new _User($title);
 
@@ -42,7 +42,7 @@
 					<img src="../images/img-01.png" alt="IMG">
 				</div>
 
-				<form action="https://travelpackagebids.com/app/src/user/receive.php" class="login100-form validate-form">
+				<form action="/travelpackagebids/app/src/user/receive.php" class="login100-form validate-form">
 					<p class="login100-form-title">
 						<span style="padding-bottom: 20px;">Travelpackagebids</span>
 						<br><br>
@@ -95,7 +95,7 @@
 						<span class="txt1">
 							Forgot
 						</span>
-						<a class="txt2" href="https://travelpackagebids.com/user/forgot-password.php">
+						<a class="txt2" href="/travelpackagebids/user/forgot-password.php">
 							Email / Password?
 						</a>
 					</div>

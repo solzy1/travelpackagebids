@@ -1,8 +1,8 @@
 <?php
 	// start up eloquent
 	require_once '_packages.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/_profile.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/_profile.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 
 	use Controllers\Packages;
 	use Controllers\Countries;
@@ -82,13 +82,9 @@
 				$user = $package->user;
 
 				// if user is not found, continue
-				if(!isset($user->id)){
-				    $user = Users::find($package->user_id);
-				    
-				    if(!isset($user->id))
-					    continue;
-				}
-				
+				if(!isset($user->id))
+					continue;
+
 				$state = $package->state->name; // get state
 				$country = $package->state->country->name; // get country, of state
 
@@ -137,7 +133,7 @@
                             	<?php 
 	                        		$desc_len = strlen($description);
 
-	                        		echo $desc_len > $max_desclen ? substr($description, 0, $max_desclen).'<a href="https://travelpackagebids.com/package.php?package=country-state-id">...</a>' : $description; 
+	                        		echo $desc_len > $max_desclen ? substr($description, 0, $max_desclen).'<a href="/travelpackagebids/package.php?package=country-state-id">...</a>' : $description; 
 	                        	?>
                             </p>
                         </div>
@@ -165,7 +161,7 @@
 		                    <?php
                         		}
                         	?>
-                            <a href="https://travelpackagebids.com/package.php?package=<?php echo $country.'-'.$state.'-'.$package->id; ?>" class="btn view-listing">
+                            <a href="/travelpackagebids/package.php?package=<?php echo $country.'-'.$state.'-'.$package->id; ?>" class="btn view-listing">
                                 View Listing <i class="fa-solid fa-right-long"></i>
                             </a>
                         </div>
@@ -209,7 +205,7 @@
             // packages	
             $packages = $this->get_packages();
             
-			$base_url = 'https://travelpackagebids.com?';
+			$base_url = '/travelpackagebids?';
 			
 			pagination($page, $packages, $base_url, $this->noof_items);
 		}

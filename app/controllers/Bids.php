@@ -6,8 +6,8 @@
 	// CRUD (CREATE, READ, UPDATE, DELETE)
 	class Bids{
 		// CREATE
-	    public static function create($package_id, $bidder_id, $offer, $status_id, $deadline){
-	    	$created = Bid::firstOrCreate(['package_id' => $package_id, 'bidder_id' => $bidder_id, 'offer' => $offer, 'status_id' => $status_id, 'deadline' => $deadline]);
+	    public static function create($package_id, $bidder_id, $offer, $status_id, $deadline, $itenary_file){
+	    	$created = Bid::firstOrCreate(['package_id' => $package_id, 'bidder_id' => $bidder_id, 'offer' => $offer, 'status_id' => $status_id, 'deadline' => $deadline, 'itenary_file' => $itenary_file]);
 
 	    	return $created;
 	    }
@@ -39,14 +39,14 @@
 	    public static function find_bypackage($package_id, $useris_admin = false){
 	        $get = Bid::where('package_id', $package_id);
 
-	        if(!$useris_admin){
-	        	$now = date('Y-m-d h:i:s');
+	        // if(!$useris_admin){
+	        // 	$now = date('Y-m-d h:i:s');
 
-	        	$get = $get->join('status', 'status.id', 'bids.status_id')
-	        			->where('status.status', 'active')
-	        			->select('bids.*')
-	        			->where('deadline', '>=', $now);
-	        }
+	        // 	$get = $get->join('status', 'status.id', 'bids.status_id')
+	        // 			->where('status.status', 'active')
+	        // 			->select('bids.*')
+	        // 			->where('deadline', '>=', $now);
+	        // }
 
 	        return $get->orderBy('deadline', 'asc')->get();
 	    }
@@ -58,13 +58,14 @@
 	    }
 
 	    // UPDATE
-	    public static function update($id, $package_id, $bidder_id, $offer, $deadline){
+	    public static function update($id, $package_id, $bidder_id, $offer, $deadline, $itenary_file){
 	        $_update = Bid::find($id);
 
 	        $_update->package_id = $package_id;
 	        $_update->bidder_id = $bidder_id;
 	        $_update->offer = $offer;
 	        $_update->deadline = $deadline;
+	        $_update->itenary_file = $itenary_file;
 	        
 	        return $_update->save();
 	    }
@@ -87,11 +88,7 @@
 
 	    public static function delete_expiredbids()
 	    {
-	    	$now = date('Y-m-d h:i:s');
-
-	        $get = Bid::where('deadline', '<', $now);
-
-	        return $get->delete();
+	    	
 	    }
 	}
 ?>

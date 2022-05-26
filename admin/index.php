@@ -1,3 +1,3 @@
 <?php 
-    require_once $_SERVER['DOCUMENT_ROOT'].'/admin/packages/index.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/admin/packages/index.php';
 ?>

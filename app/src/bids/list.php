@@ -40,26 +40,35 @@
                 $user_id = $this->user_id;
 
                 foreach ($bids as $bid) {
-                    if($is_owner){
-                        $profile = Profiles::find_byuser($bid->bidder_id);
+                    $profile = Profiles::find_byuser($bid->bidder_id);
+
+                    // if profile doesn't exist, move right along
+                    if(!isset($profile->id))
+                        continue;
+                    
+                    $agent_name = $profile->name;
                         
-                        // if profile doesn't exist, move right along
-                        if(!isset($profile->id))
-                            continue;
-                            
+                    if($is_owner){
                         $phone_code = $profile->country->phone_code;
                         $phone = '+'.$phone_code.$profile->phone;
-                        $agent_name = $profile->name;
                     }
 
                     $offer = number_format($bid->offer);
                     $users_bid = $bid->bidder_id==$user_id;
+                    
+                    // bid-START and bid-END
+                    $start = strtotime($bid->updated_at);
+                    $end = strtotime($bid->deadline);
+                    $now = strtotime(date('Y-m-d H:i:s'));
+                
+                    // itenary
+                    $itenary = $bid->itenary_file;
             ?>
                     <!-- agent-offer -->
                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4" style="margin-bottom: 10px;">
                         <div class="border agent-offer <?php echo $users_bid ? 'text-white' : 'text-black'; ?>" style="<?php echo $users_bid ? 'background-color: #34DB89' : ''; ?>">
                             <p class="agent-details" style="font-size: 25px;font-weight: lighter;word-wrap: break-word;">
-                                <span style="font-size: 17px;color: <?php echo $users_bid ? 'white' : 'grey'; ?>">BID: </span> <?php echo $offer; ?>
+                                <span style="font-size: 17px;color: <?php echo $users_bid ? 'white' : 'grey'; ?>"><sm class="text-danger fw-bold" style="font-size: 20px;"><?php echo $end <= $now ? 'EXPIRED ': '';  ?></sm>BID: </span> <?php echo $offer; ?>
                                 <?php 
                                     if($is_owner){
                                 ?>
@@ -69,18 +78,16 @@
                                 ?>
 
                             </p>
+                            
                             <?php 
                                 if($users_bid){
                             ?>
                                 <button class="btn btn-light edit-bid" onclick="show_offer(this)" style="margin-bottom: 5px;">
                                     <i class="fas fa-pen" role="button" title="Edit your Bid" data-bs-toggle="tooltip" data-bs-placement="top"></i>
-		                            <input type="hidden" class="package_id" value="<?php echo $bid->package_id; ?>">
+                                    <input type="hidden" class="package_id" value="<?php echo $bid->package_id; ?>">
                                     <div class="bid-details-container">
                                         <input type="hidden" class="offer" value="<?php echo round($bid->offer); ?>">
                                         <?php 
-                                            $start = strtotime($bid->updated_at);
-                                            $end = strtotime($bid->deadline);
-
                                             $deadline = abs($end - $start) / 3600;
                                             $deadline = round($deadline > 1 ? $deadline - 1 : $deadline); // it's adding an hour to the result
                                         ?>
@@ -90,6 +97,7 @@
                                 </button>
                             <?php 
                                 }
+                            
                                 if($is_owner){
                             ?>
                                     <!-- bid-action -->
@@ -99,9 +107,27 @@
                                         </a>
                                     </div>
                                     <!-- END bid-action -->
+                                <?php 
+                                    if(!empty($itenary)){
+                                ?>
+                                        <div class="itenary">
+                                            <button role="button" onclick="file_download(this)" class="btn btn-dark text-white download-itenary" style="margin-bottom: 5px;" title="Download Itenary" data-bs-toggle="tooltip" data-bs-placement="auto">
+                                                <i class="fa-solid fa-download"></i>
+                                            </button>
+                                       
+                                            <span class="agent-name d-none"><?php echo $agent_name; ?></b></span>
+                                            <input type="hidden" class="itenary-file" value="<?php echo $itenary; ?>">
+                                        </div>
                             <?php
+                                    }
                                 }
-
+                                else{
+                                    if(!empty($itenary)){
+                                ?>
+                                    <span class="fw-bold text-secondary text-uppercase" style="font-size: 13px;">an itenary exists</span>
+                                <?php 
+                                    }
+                                }
                                 if($useris_admin){
                                     $status = $bid->status->status;
                             ?>  

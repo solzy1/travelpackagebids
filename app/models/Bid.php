@@ -6,7 +6,7 @@
 	class Bid extends Model {
 	    protected $table = 'bids';
 
-	    protected $fillable = ['package_id', 'bidder_id', 'offer', 'status_id', 'deadline'];
+	    protected $fillable = ['package_id', 'bidder_id', 'offer', 'status_id', 'deadline', 'itenary_file'];
         
 	    // CHILD OF (user, state [many to one])
 	    public function user()

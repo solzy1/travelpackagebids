@@ -1,10 +1,10 @@
 <?php
 	// start up eloquent
 	require_once '_travel_agents.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/_profile.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/validation/validation.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/_src.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/packages/index.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/_profile.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/validation/validation.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/packages/index.php';
 
 	use Controllers\Packages;
 	use Controllers\Countries;

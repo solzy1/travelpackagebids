@@ -1,11 +1,11 @@
 <?php 
-    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/user/_user.php';
-    require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/user/verifyuser.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/user/_user.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/user/verifyuser.php';
     
     $user = new _User();
 
     if(!isset($_SESSION['travelpackagebids.com']['new_email']) && !isset($_GET['verify'])) {
-        $user->gotopage('https://travelpackagebids.com');
+        $user->gotopage('/travelpackagebids');
     }
 ?>
 
@@ -31,21 +31,21 @@
         <!-- header -->
         <nav class="navbar navbar-expand-md sticky-top navbar-light bg-light page-header">
           <div class="container-fluid">
-            <a class="navbar-brand website-title" href="https://travelpackagebids.com">TravelPackageBids</a>
+            <a class="navbar-brand website-title" href="/travelpackagebids">TravelPackageBids</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-header" aria-controls="nav-header" aria-expanded="false" aria-label="Toggle navigation" style="background-color: white !important">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="nav-header">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-right">
                     <li class="nav-item">
-                      <a class="nav-link active page-header-item" aria-current="page" href="https://travelpackagebids.com">Home</a>
+                      <a class="nav-link active page-header-item" aria-current="page" href="/travelpackagebids">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <li class="nav-item">
-                            <a class="nav-link page-header-item" href="https://travelpackagebids.com/user/sign-in.php">Log In</a>
+                            <a class="nav-link page-header-item" href="/travelpackagebids/user/sign-in.php">Log In</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link page-header-item" href="https://travelpackagebids.com/user/sign-up.php">Sign Up</a>
+                            <a class="nav-link page-header-item" href="/travelpackagebids/user/sign-up.php">Sign Up</a>
                         </li>
                     </li>
                 </ul>
@@ -80,7 +80,7 @@
 
                     // if key doesn't exist, for an unverified user, to go homepage
                     if(!$key_exists){
-                        gotopage('https://travelpackagebids.com');
+                        gotopage('/travelpackagebids');
                     }
                     else{
             ?>

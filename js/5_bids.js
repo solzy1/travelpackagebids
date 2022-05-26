@@ -101,11 +101,12 @@ class Bids{
             // if an offer was made
             if(offer!=='' && deadline!=='' && deadline > 0){
                 let package_id = $("#package-id").val();
+                let itenary_file = $("#itenary-file").val();
 
-                let bid = {package_id: package_id, offer: offer, deadline: deadline};
+                let bid = {package_id: package_id, offer: offer, deadline: deadline, itenary_file: itenary_file};
 
                 // hide the error/response message display
-                $('.create-bid-status').html('').css({'opacity': 0});
+                $('.create-bid-status').html('').addClass('d-none');
 
                 $(this).attr('disabled', 'disabled').css('cursor', 'not-allowed');
                 _bid.send_offer(bid); // send offer
@@ -117,13 +118,13 @@ class Bids{
     }
 
     refresh_bids(package_id){
-        $.post("https://travelpackagebids.com/app/src/package/get-bids.php", {package_id: package_id}, function(result){
+        $.post("/travelpackagebids/app/src/package/get-bids.php", {package_id: package_id}, function(result){
             $("#package-bids-display").html(result);
         });
     }
 
     send_offer(bid){
-        $.post("https://travelpackagebids.com/app/src/bids/receive.php", bid, function(result){
+        $.post("/travelpackagebids/app/src/bids/receive.php", bid, function(result){
             $('#bid-submit').removeAttr('disabled').css('cursor', '');
             
             const _bid = new Bids();
@@ -162,13 +163,14 @@ class Bids{
 
         $('.create-bid-status')
         .html(content)
-        .css({'opacity': 1, 'background-color': status.backcolor});
+        .css({'background-color': status.backcolor})
+        .removeClass('d-none');
     }
 
     get_offers(package_id, is_owner){
         let bid = {package_id: package_id, is_owner: is_owner};
 
-        $.post("https://travelpackagebids.com/app/src/bids/get-bids.php", bid, function(result){
+        $.post("/travelpackagebids/app/src/bids/get-bids.php", bid, function(result){
             const _bid = new Bids();
 
             _bid.getoffers_response($.trim(result));
@@ -191,7 +193,7 @@ class Bids{
         let create_bid = document.getElementById('create-package-bid');
 
         create_bid.addEventListener('hidden.bs.modal', function () {
-            $('.create-bid-status').css('opacity', 0);
+            $('.create-bid-status').addClass('d-none');
             $('#package-bids').html('');
         })
     }
@@ -206,7 +208,7 @@ class Bids{
 
             let id = $.trim($(_this).parent().children('.id').val());
 
-            let url = 'https://travelpackagebids.com/app/src/bids/update-status.php';
+            let url = '/travelpackagebids/app/src/bids/update-status.php';
 
             let data = {id: id, status: status};
 

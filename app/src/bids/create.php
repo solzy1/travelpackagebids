@@ -1,8 +1,8 @@
 <?php
 	// start up eloquent
 	require_once '_bids.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/email/_email.php';
-	require_once $_SERVER['DOCUMENT_ROOT'].'/app/src/profile/model.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/email/_email.php';
+	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/profile/model.php';
 
 	use Controllers\Bids;
 	use Controllers\Packages;
@@ -12,9 +12,11 @@
 	Class Create_Bids extends _Bids {
 		private $user_id;
 		private $bid;
+		private $itenary_file;
 
-		function __construct($bid) {
+		function __construct($bid, $itenary_file) {
 			$this->bid = $bid;
+			$this->itenary_file = $itenary_file;
 
 			start_session();
 
@@ -25,6 +27,7 @@
 			$package_id = $this->bid->get_package_id(); // get package id
 			$user_id = $this->user_id;
 			$offer = $this->bid->get_offer(); // get offer
+			$itenary_file = $this->itenary_file;
 
 			$deadline = $this->bid->get_deadline(); // get deadline
 			
@@ -35,11 +38,14 @@
 			
 			$bid = Bids::find_byuser($package_id, $user_id); // to check, if user has already placed a bid for this package
 
-			// if bid already exists & previous offer != current offer & previous deadline != current deadline, update bid, else create bid
+			// // if bid already exists & previous offer != current offer & previous deadline != current deadline, update bid, else create bid
 			if(isset($bid->bidder_id)){
-			    // if current offer, isn't different from previous offer... don't update   
-			    if($bid->offer!=$offer){
-    				$saved = Bids::update($bid->id, $package_id, $user_id, $offer, $deadline);
+			    // if current offer, isn't different from previous offer... don't update 
+
+			    if($bid->offer!=$offer || ($bid->offer==$offer && $itenary_file!=$bid->itenary_file)){
+			    	$itenary_file = empty($itenary_file) ? $bid->itenary_file : $itenary_file;
+
+    				$saved = Bids::update($bid->id, $package_id, $user_id, $offer, $deadline, $itenary_file);
     				
     				$is_success = $saved;
 			    }
@@ -47,7 +53,7 @@
 			else{
 				$status = $this->get_status('active');
 				
-				$bid = Bids::create($package_id, $user_id, $offer, $status->id, $deadline);
+				$bid = Bids::create($package_id, $user_id, $offer, $status->id, $deadline, $itenary_file);
 				
 				$is_success = isset($bid->id);
 			}
@@ -87,7 +93,7 @@
             
             $package_tag = $country.'-'.$state.'-'.$package->id;
             
-            $url = "https://travelpackagebids.com/package.php?package=".$package_tag;
+            $url = "/travelpackagebids/package.php?package=".$package_tag;
             
             // OWNER
             $owner = $this->owners_profile($package->user);
@@ -100,14 +106,14 @@
             
                 <p>
                     <span><b style="text-transform: capitalize">'.$bidder->name.'</b> just placed a Bid on your travel package <a href="'.$url.'" style="color: #03C6C1;text-transform: capitalize">'.$country.', '.$state.'</a> on</span> 
-                    <a href="https://travelpackagebids.com">TravelPackageBids</a>.
+                    <a href="/travelpackagebids">TravelPackageBids</a>.
                 </p>
 
                 <p style="margin-bottom: 15px;">
                  	You can <a href="tel:'.$bidder_phone.'" style="color: white;border: #03C6C1;background-color: #03C6C1;padding:5px 8px 5px 8px;text-decoration: none;border-radius: 6px;">Call '.$bidder->name.'</a>, to talk further about their offer of '.$offer.', which expires in '.$deadline.'
                 </p>
                 
-                <small style="font-size: 10px">NOTE: If you\'re not a Registered Travel Agent on <a href="https://travelpackagebids.com">TravelPackageBids</a>, Kindly Ignore this message. Thank you.</small>';
+                <small style="font-size: 10px">NOTE: If you\'re not a Registered Travel Agent on <a href="/travelpackagebids">TravelPackageBids</a>, Kindly Ignore this message. Thank you.</small>';
         }
         
 		function sendemail($package, $offer, $deadline){
@@ -171,7 +177,7 @@
             
             $package_tag = $country.'-'.$state.'-'.$package->id;
             
-            $url = "https://travelpackagebids.com/package.php?package=".$package_tag;
+            $url = "/travelpackagebids/package.php?package=".$package_tag;
 
             $offer = number_format($offer);
 			$outbid = number_format($outbid);
@@ -187,7 +193,7 @@
                  	You can <a href="'.$url.'" style="color: #03C6C1;text-transform: capitalize">Check out the package</a>, to change your previous offer of '.$offer.'.
                 </p>
                 
-                <small style="font-size: 10px">NOTE: If you\'re not a Registered Travel Agent on <a href="https://travelpackagebids.com">TravelPackageBids</a>, Kindly Ignore this message. Thank you.</small>';
+                <small style="font-size: 10px">NOTE: If you\'re not a Registered Travel Agent on <a href="/travelpackagebids">TravelPackageBids</a>, Kindly Ignore this message. Thank you.</small>';
 		}
 
 		private function send_outbidalert($package_id, $bidder_id, $offer){
