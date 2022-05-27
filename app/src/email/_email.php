@@ -22,12 +22,7 @@
             $mail = new PHPMailer(true);
             
             try {
-                // $mail->Host       = 'server111.verygoodserver.com';   ]
-                // $mail->Password   = 'Travel123!';
-                
-                // $mail->Host       = 'travelpackagebids.com';
-                // $mail->Password   = 'travelpackageauctionorbidding';
-                
+      
                 //Server settings
                 // $mail->SMTPDebug = 2;
 
@@ -43,7 +38,7 @@
                 // 'server111.verygoodserver.com'; // Specify main and backup SMTP servers
                 $mail->SMTPAuth   = true; // Enable SMTP authentication
                 $mail->Username   = 'travelpackagebids@gmail.com'; // SMTP username
-                $mail->Password   = 'Vasu91@Rajit88'; // SMTP password
+                $mail->Password   = ''; // SMTP password
                 $mail->SMTPSecure = 'ssl'; //Enable implicit TLS encryption
                 $mail->Port       = 465;
                 
