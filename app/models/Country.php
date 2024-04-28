@@ -8,7 +8,7 @@
 
 	    protected $fillable = ['name', 'phone_code'];
 
-	    // PARENT TO (states) 
+	    // PARENT TO (states)
 	    public function states()
 		{
 		    return $this->hasMany('\Models\State');

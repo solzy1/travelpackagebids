@@ -9,10 +9,10 @@
 	    protected $fillable = ['user_id', 'all_packages'];
 
 	    // PARENT TO (states)
-	    public function blocked_bidders()
-		{
-		    return $this->hasMany('\Models\Blocked_Bidder');
-		}
+	    // public function blocked_bidders()
+		// {
+		//     return $this->hasMany('\Models\Blocked_Bidder');
+		// }
 
 		public function user()
 		{
