@@ -4,7 +4,7 @@
 
 	use Controllers\Users;
 	use Controllers\Userroles;
-	use Controllers\Userconfirmations;
+	use Controllers\UserConfirmations;
 
 	class VerifyUser extends _User {
 		private $key;
@@ -19,7 +19,7 @@
 
 		function key_exists(){
 		    $key = $this->key;
-			$userconfirmation = Userconfirmations::find_bykey($key);
+			$userconfirmation = UserConfirmations::find_bykey($key);
 
 		    if(isset($userconfirmation->id)){
 		        $user = Users::find_byuser($userconfirmation->user_id);

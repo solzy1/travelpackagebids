@@ -11,7 +11,7 @@
         // PARENT TO (userconfirmation) 
 	    public function userconfirmations()
 		{
-		    return $this->hasMany('\Models\Userconfirmation');
+		    return $this->hasMany('\Models\UserConfirmation');
 		}
 		
 		public function packages()

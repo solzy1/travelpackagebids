@@ -5,7 +5,7 @@
 
 	use Controllers\Users;
 	use Controllers\Userroles;
-	use Controllers\Userconfirmations;
+	use Controllers\UserConfirmations;
 	
 	class Signup extends _User {
 		private $user;
@@ -39,7 +39,7 @@
         				if(isset($user->id)){
         				    // create the verification link key
         				    $key = $this->generateuser_key($user->id);
-        				    $userconfirmation = Userconfirmations::create($user->id, $key);
+        				    $userconfirmation = UserConfirmations::create($user->id, $key);
         				    
         				    if(isset($userconfirmation->id)){
             					$_SESSION['travelpackagebids.com']['new_email'] = $email;

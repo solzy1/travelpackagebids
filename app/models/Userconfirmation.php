@@ -3,7 +3,7 @@
 	 
 	use Illuminate\Database\Eloquent\Model;
 	 
-	class Userconfirmation extends Model {
+	class UserConfirmation extends Model {
 	    protected $table = 'userconfirmation';
 
 	    protected $fillable = ['user_id', 'confirmuser'];
