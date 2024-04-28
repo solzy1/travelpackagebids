@@ -1,4 +1,0 @@
-[23-Apr-2022 14:07:04 UTC] PHP Fatal error:  Uncaught Error: Class 'PHPUnit\Framework\TestCase' not found in /home/travelpa/public_html/vendor/symfony/translation/Tests/Extractor/PhpExtractorTest.php:18
-Stack trace:
-#0 {main}
-  thrown in /home/travelpa/public_html/vendor/symfony/translation/Tests/Extractor/PhpExtractorTest.php on line 18

@@ -1,4 +1,0 @@
-[19-Apr-2022 01:50:23 UTC] PHP Fatal error:  Uncaught Error: Interface 'Illuminate\Contracts\Support\MessageProvider' not found in /home/travelpa/public_html/vendor/illuminate/contracts/Validation/Validator.php:7
-Stack trace:
-#0 {main}
-  thrown in /home/travelpa/public_html/vendor/illuminate/contracts/Validation/Validator.php on line 7

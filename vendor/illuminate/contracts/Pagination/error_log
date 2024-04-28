@@ -1,4 +1,0 @@
-[19-Apr-2022 06:54:37 UTC] PHP Fatal error:  Uncaught Error: Interface 'Illuminate\Contracts\Pagination\Paginator' not found in /home/travelpa/public_html/vendor/illuminate/contracts/Pagination/LengthAwarePaginator.php:5
-Stack trace:
-#0 {main}
-  thrown in /home/travelpa/public_html/vendor/illuminate/contracts/Pagination/LengthAwarePaginator.php on line 5

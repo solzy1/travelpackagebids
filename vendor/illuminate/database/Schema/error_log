@@ -1,9 +1,0 @@
-[17-Apr-2022 13:50:43 UTC] PHP Fatal error:  Trait 'Illuminate\Support\Traits\Macroable' not found in /home/travelpa/public_html/vendor/illuminate/database/Schema/Blueprint.php on line 11
-[17-Apr-2022 13:50:57 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Schema\Builder' not found in /home/travelpa/public_html/vendor/illuminate/database/Schema/MySqlBuilder.php:5
-Stack trace:
-#0 {main}
-  thrown in /home/travelpa/public_html/vendor/illuminate/database/Schema/MySqlBuilder.php on line 5
-[17-Apr-2022 13:51:00 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Database\Schema\Builder' not found in /home/travelpa/public_html/vendor/illuminate/database/Schema/PostgresBuilder.php:5
-Stack trace:
-#0 {main}
-  thrown in /home/travelpa/public_html/vendor/illuminate/database/Schema/PostgresBuilder.php on line 5

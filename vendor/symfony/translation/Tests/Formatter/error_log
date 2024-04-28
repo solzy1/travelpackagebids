@@ -1,4 +1,0 @@
-[23-Apr-2022 14:10:25 UTC] PHP Fatal error:  Uncaught Error: Class 'PHPUnit\Framework\TestCase' not found in /home/travelpa/public_html/vendor/symfony/translation/Tests/Formatter/MessageFormatterTest.php:17
-Stack trace:
-#0 {main}
-  thrown in /home/travelpa/public_html/vendor/symfony/translation/Tests/Formatter/MessageFormatterTest.php on line 17

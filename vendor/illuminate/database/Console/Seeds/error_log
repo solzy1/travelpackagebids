@@ -1,8 +1,0 @@
-[17-Apr-2022 10:02:43 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Console\Command' not found in /home/travelpa/public_html/vendor/illuminate/database/Console/Seeds/SeedCommand.php:11
-Stack trace:
-#0 {main}
-  thrown in /home/travelpa/public_html/vendor/illuminate/database/Console/Seeds/SeedCommand.php on line 11
-[17-Apr-2022 10:04:55 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Console\GeneratorCommand' not found in /home/travelpa/public_html/vendor/illuminate/database/Console/Seeds/SeederMakeCommand.php:9
-Stack trace:
-#0 {main}
-  thrown in /home/travelpa/public_html/vendor/illuminate/database/Console/Seeds/SeederMakeCommand.php on line 9

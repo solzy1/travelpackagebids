@@ -1,4 +1,0 @@
-[16-Apr-2022 20:28:02 UTC] PHP Fatal error:  Uncaught Error: Interface 'Illuminate\Database\Migrations\MigrationRepositoryInterface' not found in /home/travelpa/public_html/vendor/illuminate/database/Migrations/DatabaseMigrationRepository.php:7
-Stack trace:
-#0 {main}
-  thrown in /home/travelpa/public_html/vendor/illuminate/database/Migrations/DatabaseMigrationRepository.php on line 7
