@@ -4,7 +4,7 @@
 
     require_once 'layout.php'; // require the layout file
 
-    function body($packages = []){
+    function body($packages){
         $page = isset($_GET['page']) ? $_GET['page'] : '';
 ?>
         <h2>Browse Latest Travel packages</h2>
@@ -12,7 +12,7 @@
         <br>
         
         <!-- main body -->
-        <div class="row" style="padding-left: 17px;">
+        <div class="row" style="padding-left: 17px; min-height: 38vh;">
             <?php 
                 $packages->show($page);
             ?>

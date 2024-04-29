@@ -5,25 +5,16 @@
 	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 
 	use Controllers\Packages;
-	use Controllers\Countries;
-	use Controllers\States; 
-	use Controllers\Profiles; 
-	use Controllers\Bids; 
 
 	Class Packages_List {
-		private $user_id;
 		private $noof_items = 21; // max no of packages per page
 		public $noofpackages;
 
 		function __construct() {
 			start_session();
-
-			$this->user_id = get_userid(); // get user id
 		}
 
 		public function show($page){
-			$user_id = $this->user_id;
-            
             // PACKAGES
 			$packages = $this->get_packages();
             
@@ -37,7 +28,12 @@
 			$start = ($page - 1) * $this->noof_items; // initializer
 			$countdown = 0;
 			
-	        $max_desclen = 220; // max length for description
+			if(count($packages) == 0){
+			?>
+				<tr colspan="7" class="text-center text-secondary">There are no available packages, at the moment.</tr>
+			<?php
+				return;
+			}
 
 			for ($i=$start; $i < count($packages); $i++) {  
 			    if($countdown >= $this->noof_items)

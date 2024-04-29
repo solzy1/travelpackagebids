@@ -5,9 +5,6 @@
 	require_once $_SERVER['DOCUMENT_ROOT'].'/travelpackagebids/app/src/_src.php';
 
 	use Controllers\Packages;
-	use Controllers\Countries;
-	use Controllers\States; 
-	use Controllers\Profiles; 
 	use Controllers\Bids; 
 	use Controllers\Users; 
 	use Controllers\Blocked_Bidders; 
@@ -70,6 +67,13 @@
 			$countdown = 0;
 			
 	        $max_desclen = 220; // max length for description
+
+			if(count($packages) == 0){
+				?>
+					<div class="text-start text-secondary">There are no available packages, at the moment.</div>
+				<?php
+				return;
+			}
 
 			for ($i=$start; $i < count($packages); $i++) { 
 			    if($countdown >= $this->noof_items)
@@ -200,11 +204,15 @@
 
 			return $profile->get_user($user_id);
 		}
-        
+
 		public function pagination($page){
             // packages	
             $packages = $this->get_packages();
             
+			if(count($packages) == 0){
+				return;
+			}
+
 			$base_url = '/travelpackagebids?';
 			
 			pagination($page, $packages, $base_url, $this->noof_items);
